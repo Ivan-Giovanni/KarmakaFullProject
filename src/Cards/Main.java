@@ -1,6 +1,7 @@
-package Cards.CardsSpecifiques64;
+package Cards;
 
 import Cards.Card;
+import Cards.CardsSpecifiques23.Longevite;
 
 import java.util.*;
 

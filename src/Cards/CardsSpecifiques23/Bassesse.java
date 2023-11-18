@@ -1,4 +1,4 @@
-package Cards.CardsSpecifiques64;
+package Cards.CardsSpecifiques23;
 
 import Cards.Card;
 import Cards.Couleur;

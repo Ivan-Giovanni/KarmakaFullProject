@@ -1,4 +1,4 @@
-package Cards.CardsSpecifiques64;
+package Cards.CardsSpecifiques23;
 
 import Cards.Card;
 import Cards.Couleur;
@@ -8,19 +8,16 @@ import Cards.Couleur;
  * @version 1.0
  *
  * <br>
- * Classe de la carte Semis
+ * Classe de la carte Duperie
  */
-public class Semis extends Card {
+public class Voyage extends Card {
 
-
-    // =========================================== LES ATTRIBUTS ========================================= //
-    private static Semis semis1 = new Semis();
-    private static Semis semis2 = new Semis();
-    private static Semis semis3 = new Semis();
+    private static Voyage voyage1 = new Voyage();
+    private static Voyage voyage2 = new Voyage();
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
-    private Semis() {
-        super("Semis", 2, Couleur.VERT);
+    private Voyage() {
+        super("Voyage", 3, Couleur.VERT);
     }
 
 
@@ -28,23 +25,23 @@ public class Semis extends Card {
      * Etant donne qu'on va creer une classe pour chacune des 23 cartes du jeu, alors les instances de ces classes
      * doivent etre unique: <b>SINGLETON PATTERN</b>
      *
-     * @return destinee1
+     * @return coupDOeil
      */
-    public static Semis getSemis1() {
-        if (semis1 == null) {
-            semis1 = new Semis();
-            return semis1;
+    public static Voyage getVoyage1() {
+        if (voyage1 == null) {
+            voyage1 = new Voyage();
+            return voyage1;
         } else {
-            return semis1;
+            return voyage1;
         }
     }
 
-    public static Semis getSemis1() {
-        if (semis1 == null) {
-            semis1 = new Semis();
-            return semis1;
+    public static Voyage getVoyage2() {
+        if (voyage2 == null) {
+            voyage2 = new Voyage();
+            return voyage2;
         } else {
-            return semis1;
+            return voyage2;
         }
     }
 
