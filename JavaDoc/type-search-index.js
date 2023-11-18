@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Cards","l":"Card"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Cards","l":"Card"},{"p":"Cards","l":"Couleur"},{"p":"Cards.CardsSpecifiques64","l":"Longevite1"},{"p":"Cards.CardsSpecifiques64","l":"Main"}];updateSearchResults();
