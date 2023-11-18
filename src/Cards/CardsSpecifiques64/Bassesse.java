@@ -8,17 +8,17 @@ import Cards.Couleur;
  * @version 1.0
  *
  * <br>
- * Classe de la 3e carte Longevite (il en exite 3)
+ * Classe de la 1e carte Basses (il en exite 2)
  */
-public class Longevite3 extends Card {
+public class Bassesse extends Card {
 
     // =========================================== LES ATTRIBUTS ========================================= //
-    private static Longevite3 longetvite3 = new Longevite3();
+    private static Bassesse bassesse1 = new Bassesse();
+    private static Bassesse bassesse2 = new Bassesse();
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
-    private Longevite3() {
-
-        super("Longevite", 2, Couleur.VERT);
+    private Bassesse() {
+        super("Bassesse", 3, Couleur.ROUGE);
     }
 
 
@@ -26,14 +26,23 @@ public class Longevite3 extends Card {
      * Etant donne qu'on va creer une classe pour chacune des 64 cartes du jeu, alors les instances de ces classes
      * doivent etre unique: <b>SINGLETON PATTERN</b>
      *
-     * @return longevite 2
+     * @return destinee1
      */
-    public static Longevite3 getLongetvite2() {
-        if (longetvite3 == null) {
-            longetvite3 = new Longevite3();
-            return longetvite3;
+    public static Bassesse getBassesse1() {
+        if (bassesse1 == null) {
+            bassesse1 = new Bassesse();
+            return bassesse1;
         } else {
-            return longetvite3;
+            return bassesse1;
+        }
+    }
+
+    public static Bassesse getBassesse2() {
+        if (bassesse2 == null) {
+            bassesse2 = new Bassesse();
+            return bassesse2;
+        } else {
+            return bassesse2;
         }
     }
 
@@ -45,5 +54,4 @@ public class Longevite3 extends Card {
     public void executerCapacite() {
 
     }
-
 }

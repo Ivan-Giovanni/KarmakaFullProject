@@ -8,32 +8,43 @@ import Cards.Couleur;
  * @version 1.0
  *
  * <br>
- * Classe de la 2e carte Longevite (il en exite 3)
+ * Classe de la carte Semis
  */
-public class Longevite2 extends Card {
+public class Semis extends Card {
+
 
     // =========================================== LES ATTRIBUTS ========================================= //
-    private static Longevite2 longetvite2 = new Longevite2();
+    private static Semis semis1 = new Semis();
+    private static Semis semis2 = new Semis();
+    private static Semis semis3 = new Semis();
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
-    private Longevite2() {
-
-        super("Longevite", 2, Couleur.VERT);
+    private Semis() {
+        super("Semis", 2, Couleur.VERT);
     }
 
 
     /**
-     * Etant donne qu'on va creer une classe pour chacune des 64 cartes du jeu, alors les instances de ces classes
+     * Etant donne qu'on va creer une classe pour chacune des 23 cartes du jeu, alors les instances de ces classes
      * doivent etre unique: <b>SINGLETON PATTERN</b>
      *
-     * @return longevite 2
+     * @return destinee1
      */
-    public static Longevite2 getLongetvite2() {
-        if (longetvite2 == null) {
-            longetvite2 = new Longevite2();
-            return longetvite2;
+    public static Semis getSemis1() {
+        if (semis1 == null) {
+            semis1 = new Semis();
+            return semis1;
         } else {
-            return longetvite2;
+            return semis1;
+        }
+    }
+
+    public static Semis getSemis1() {
+        if (semis1 == null) {
+            semis1 = new Semis();
+            return semis1;
+        } else {
+            return semis1;
         }
     }
 
@@ -45,5 +56,4 @@ public class Longevite2 extends Card {
     public void executerCapacite() {
 
     }
-
 }
