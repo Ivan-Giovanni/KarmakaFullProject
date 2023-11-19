@@ -1,7 +1,6 @@
-package Cards;
-
 import Cards.Card;
 import Cards.CardsSpecifiques23.Longevite;
+import Cards.CardsSpecifiques23.Vengeance;
 
 import java.util.*;
 
@@ -11,12 +10,13 @@ public class Main {
     public static void main(String[] args) {
 
 
-        List<Card> myCards = new ArrayList<Card>();
+        Queue<Card> myCards = new LinkedList<Card>();
+        List<Card> myCards2 = new LinkedList<Card>();
 
         myCards.add(Longevite.getLongevite1());
+        myCards.add(Vengeance.getVengeance1());
 
 
-        System.out.println(myCards.get(2).getNom());
 
     }
 
