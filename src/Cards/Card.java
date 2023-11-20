@@ -67,7 +67,7 @@ public abstract class Card {
         this.couleur = couleur;
     }
 
-    // ===========================================  TOSTRING ================================================ //
+    // =========================================== TOSTRING ================================================ //
     @Override
     public String toString() {
         return "Card{" +

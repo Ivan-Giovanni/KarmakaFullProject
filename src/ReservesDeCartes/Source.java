@@ -1,3 +1,5 @@
+package ReservesDeCartes;
+
 import Cards.Card;
 import Cards.CardsSpecifiques23.Fournaise;
 
@@ -22,7 +24,7 @@ public class Source extends ReserveDeCartes{
         this.reserve = reserve;
     }
 
-    public static Source Fosse() {
+    public static Source Source() {
         if (source == null) {
             source = new Source();
             return source;
@@ -41,6 +43,6 @@ public class Source extends ReserveDeCartes{
     // =========================================== DISTRIBUER ========================================= //
     public Card distribuer() {
 
-        return Fournaise.getFournaise1();
+        return Fournaise.getFournaise1();   // On va modifier apres
     }
 }

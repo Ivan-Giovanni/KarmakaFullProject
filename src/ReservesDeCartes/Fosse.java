@@ -1,6 +1,7 @@
+package ReservesDeCartes;
+
 import Cards.Card;
 
-import javax.tools.ForwardingFileObject;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * <br>
  * La fosse est l'endroit où seront jetées le cartes déja utilisée.
  * <br>
- * Etant donnée qu'il n'existe qu'une seule Fosse on va utiliser le <b>SINGLETON PATTERN</b>
+ * Etant donnée qu'il n'existe qu'une seule ReservesDeCartes.Fosse on va utiliser le <b>SINGLETON PATTERN</b>
  */
 public class Fosse extends ReserveDeCartes {
 
