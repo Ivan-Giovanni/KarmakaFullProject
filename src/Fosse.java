@@ -1,5 +1,6 @@
 import Cards.Card;
 
+import javax.tools.ForwardingFileObject;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,8 +19,25 @@ public class Fosse extends ReserveDeCartes {
 
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
-    public Fosse() {
+    private Fosse() {
         this.reserve = reserve;
     }
+
+    public static Fosse Fosse() {
+        if (fosse == null) {
+            fosse = new Fosse();
+            return fosse;
+        }
+        else {
+          return fosse;
+        }
+    }
+
+    // =========================================== LES METHODES ========================================= //
+    // =========================================== AJOUTER CARTE ========================================= //
+    public void addCard(Card card) {
+
+    }
+
 
 }
