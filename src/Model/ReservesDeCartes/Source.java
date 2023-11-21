@@ -17,8 +17,8 @@ import java.util.Random;
  */
 public class Source extends ReserveDeCartes {
 
-    private static Source source = new Source();
     // =============================================== LES ATTRIBUTS ============================================ //
+    private static Source source = new Source();
     List<Card> reserve = new LinkedList<Card>();
 
     // =========================================== LE CONSTRUCTEUR ========================================= //

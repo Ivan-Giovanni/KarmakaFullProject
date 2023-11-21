@@ -1,5 +1,7 @@
 package View;
 
+import Model.Cards.CardsSpecifiques23.DernierSouffle;
+import Model.Cards.CardsSpecifiques23.Fournaise;
 import Model.Joueur.CollectionsDeCartes.Main;
 import Model.ReservesDeCartes.Source;
 
@@ -23,9 +25,18 @@ public class GameView {
 
         System.out.println(Source.Source().disribuerPile());
         System.out.println(Source.Source().getSize());
+        System.out.println();
 
-        Main maMain = new Main();
-        System.out.println(maMain);
+        // =================================================================================================== //
+
+        Main main = new Main();
+        System.out.println(main.getMain());
+        System.out.println(main.getNombreDeCartes());
+
+        main.addCard(DernierSouffle.getDernierSouffle1());
+        System.out.println(main.getMain());
+        System.out.println(main.getNombreDeCartes());
+
 
     }
 }

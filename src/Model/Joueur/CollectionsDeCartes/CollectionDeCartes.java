@@ -4,6 +4,7 @@ import Model.Cards.Card;
 import Model.Cards.CardsSpecifiques23.Fournaise;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,26 +16,31 @@ import java.util.List;
 public abstract class CollectionDeCartes {
 
     // ====================================== LES ATTRIBUTS ============================================ //
-    private List<Card> listeDeCartes = new ArrayList<Card>();
+    private List<Card> listeDeCartes = new LinkedList<Card>();
     private static int nombreDeCartes;
 
     // ====================================== LES GETTERS ET SETTERS ========================================== //
+    public int getNombreDeCartes() {
+        return nombreDeCartes;
+    }
 
+    protected void setNombreDeCartes(int nbre) {
+        nombreDeCartes = nbre;
+    }
 
     // ========================================= LE CONSTRUCTEUR ============================================ //
 
 
     // ========================================= LES METHODES ============================================ //
+    public abstract void addCard(Card carte);
+    public abstract Card removeCard();
 
-    // ========================================= ADD_CARD ============================================ //
-    public void addCard(Card carte) {
-
+    protected void decrementNombreDeCartes() {
+        nombreDeCartes -= 1;
     }
 
-    // ========================================= REMOVE_CARD ============================================ //
-    public Card removeCard() {
-
-        return Fournaise.getFournaise1();  // On va modifier après
+    protected void incrementNombreDeCartes() {
+        nombreDeCartes += 1;
     }
 
 
