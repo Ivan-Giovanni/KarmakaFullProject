@@ -37,7 +37,7 @@ public class Longevite extends Card {
         }
     }
 
-    public static Longevite getLongetvite2() {
+    public static Longevite getLongevite2() {
         if (longevite2 == null) {
             longevite2 = new Longevite();
             return longevite2;
@@ -47,7 +47,7 @@ public class Longevite extends Card {
         }
     }
 
-    public static Longevite getLongetvite3() {
+    public static Longevite getLongevite3() {
         if (longevite3 == null) {
             longevite3 = new Longevite();
             return longevite3;
