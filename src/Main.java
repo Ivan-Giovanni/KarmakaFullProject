@@ -1,6 +1,6 @@
-import Cards.Card;
-import Cards.CardsSpecifiques23.Longevite;
-import Cards.CardsSpecifiques23.Vengeance;
+import Model.Cards.Card;
+import Model.Cards.CardsSpecifiques23.Longevite;
+import Model.Cards.CardsSpecifiques23.Vengeance;
 
 import java.util.*;
 
