@@ -1,6 +1,8 @@
-unnamed package
+Controller
+Model
 Model.Cards
 Model.Cards.CardsSpecifiques23
 Model.Joueur
 Model.Joueur.CollectionsDeCartes
 Model.ReservesDeCartes
+View

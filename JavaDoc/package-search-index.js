@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Cards"},{"l":"Cards.CardsSpecifiques23"},{"l":"Joueur"},{"l":"Joueur.CollectionsDeCartes"},{"l":"ReservesDeCartes"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Controller"},{"l":"Model"},{"l":"Model.Cards"},{"l":"Model.Cards.CardsSpecifiques23"},{"l":"Model.Joueur"},{"l":"Model.Joueur.CollectionsDeCartes"},{"l":"Model.ReservesDeCartes"},{"l":"View"}];updateSearchResults();
