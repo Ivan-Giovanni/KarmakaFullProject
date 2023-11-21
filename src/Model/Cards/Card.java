@@ -70,12 +70,7 @@ public abstract class Card {
     // =========================================== TOSTRING ================================================ //
     @Override
     public String toString() {
-        return "Card{" +
-                "nom='" + nom + '\'' +
-                ", point=" + point +
-                ", couleur=" + couleur +
-                ", estVisible=" + estVisible +
-                '}';
+        return "(" + nom + ", " + point + ", " + couleur + ", " + estVisible + ")";
     }
 
 

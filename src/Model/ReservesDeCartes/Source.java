@@ -93,8 +93,6 @@ public class Source extends ReserveDeCartes {
         reserve.add(Voyage.getVoyage1());
         reserve.add(Voyage.getVoyage2());
 
-
-
         this.reserve = reserve;
     }
 
@@ -107,13 +105,18 @@ public class Source extends ReserveDeCartes {
         }
     }
 
+    // =========================================== LES GETTERS ========================================= //
+
+    // =========================================== GET_SIZE ========================================= //
+    public int getSize() {
+        return reserve.size();
+    }
+
     // =========================================== TO_STRING ========================================= //
 
     @Override
     public String toString() {
-        return "Source{" +
-                "reserve=" + reserve +
-                '}';
+        return "" + reserve + "";
     }
 
     // =========================================== LES METHODES ========================================= //
@@ -127,7 +130,6 @@ public class Source extends ReserveDeCartes {
 
     // =========================================== DISTRIBUER ========================================= //
     public Card distribuer() {
-
-        return Fournaise.getFournaise1();   // On va modifier apres
+        return reserve.remove(0);
     }
 }
