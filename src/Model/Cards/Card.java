@@ -17,37 +17,21 @@ public abstract class Card {
     private Couleur couleur;
 
 
-    // =============================================== GETTERS & SETTERS ======================================= //
+    // =============================================== GETTERS  ======================================= //
     public String getNom() {
         return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
     }
 
     public boolean isEstVisible() {
         return estVisible;
     }
 
-    public void setEstVisible(boolean estVisible) {
-        this.estVisible = estVisible;
-    }
-
     public int getPoint() {
         return point;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
-    }
-
     public Couleur getCouleur() {
         return couleur;
-    }
-
-    public void setCouleur(Couleur couleur) {
-        this.couleur = couleur;
     }
 
 
