@@ -30,14 +30,12 @@ public class Main extends CollectionDeCartes {
     // =============================================== LES METHODES ============================================ //
 
 
-    // =============================================== ADD_CARD ============================================ //
+    // ========================================== ADD_CARD & REMOVE_CARD ========================================= //
     @Override
     public void addCard(Card carte) {
-
+        incrementNombreDeCartes();
         main.add(carte);
     }
-
-    // =============================================== LES METHODES ============================================ //
     @Override
     public Card removeCard() {
         decrementNombreDeCartes();
