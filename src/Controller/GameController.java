@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Partie;
-import View.GameView;
+import View.CommandeLineView;
 
 /**
  * @author giovannizangue
@@ -10,10 +10,10 @@ import View.GameView;
 public class GameController {
 
     // =============================================== LES ATTRIBUTS ========================================== //
-    GameView view;
+    CommandeLineView view;
 
     // ============================================ LE CONSTRUCTEUR ========================================= //
-    public GameController(GameView wiew, Partie partie) {
+    public GameController(CommandeLineView wiew, Partie partie) {
 
     }
 
@@ -27,16 +27,17 @@ public class GameController {
     public void creerLaPartie() {
         /* */
         view.doSomething();
+        view.promptForNouvellePartie();
     }
 
     public void ajouterLesJoueurs() {
         /* */
-        view.doSomething();
+        view.promptForNomDuJoueur();
     }
 
     public void commencerLaPartie() {
         /* */
-        view.doSomething();
+        view.afficherNomDuJoueur();
     }
 
     public void creerLaSource() {
@@ -61,12 +62,12 @@ public class GameController {
 
     public void distribuerLesCartesDeLaMain() {
         /* */
-        view.doSomething();
+        view.afficherLesCartesDeLaMain();
     }
 
     public void distribuerLesCartesDeLaPile() {
         /* */
-        view.doSomething();
+        view.afficherLesCartesDeLaPile();
     }
 
     public void nextAction() {
@@ -78,12 +79,13 @@ public class GameController {
     public void determinerLeGagnant() {
         /* */
         view.doSomething();
+        view.afficherLeNomDuGagnant();
     }
 
     public void terminerLaPartie() {
         /* Voulez vous rejouer une nouvelle partie? */
         /* */
-        view.doSomething();
+        view.promptForTerminerLaPartie();
     }
 
 
