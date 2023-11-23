@@ -1,11 +1,29 @@
 package View;
 
 import Model.Cards.CardsSpecifiques23.DernierSouffle;
-import Model.Cards.CardsSpecifiques23.Fournaise;
 import Model.Joueur.CollectionsDeCartes.Main;
 import Model.ReservesDeCartes.Source;
 
 public class GameView {
+
+    // ==================================== LES METHODES ============================================ //
+    public void doSomething() {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // =================================== PUBLIC STATIC VOID MAIN ========================================== //
 
     public static void main(String[] args) {
         System.out.println();
