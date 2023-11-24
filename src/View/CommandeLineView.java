@@ -11,34 +11,7 @@ public class CommandeLineView implements GameViewable{
     GameController controller;
 
     public static void main(String[] args) {
-        System.out.println();
 
-        Source.Source().melanger();
-        System.out.println(Source.Source());
-        System.out.println(Source.Source().getSize());
-
-        System.out.println(Source.Source().removeCard());
-        System.out.println(Source.Source().getSize());
-
-        System.out.println(Source.Source().removeCard());
-        System.out.println(Source.Source().getSize());
-
-        System.out.println(Source.Source().distribuerMain());
-        System.out.println(Source.Source().getSize());
-
-        System.out.println(Source.Source().distribuerPile());
-        System.out.println(Source.Source().getSize());
-        System.out.println();
-
-        // =================================================================================================== //
-
-        Main main = new Main();
-        System.out.println(main.getMain());
-        System.out.println(main.getNombreDeCartes());
-
-        main.addCard(DernierSouffle.getDernierSouffle1());
-        System.out.println(main.getMain());
-        System.out.println(main.getNombreDeCartes());
 
 
     }

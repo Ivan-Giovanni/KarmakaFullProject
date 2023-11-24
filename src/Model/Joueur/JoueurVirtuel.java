@@ -18,4 +18,6 @@ public class JoueurVirtuel extends Joueur{
                          Main main, Oeuvre ouevre, VieFuture vieFuture, Pile pile) {
         super(niveau, pseudo, strategie, main, ouevre, vieFuture, pile);
     }
+
+    // Strategie // Faire jouer 02 jouers virtuels en meme temps
 }
