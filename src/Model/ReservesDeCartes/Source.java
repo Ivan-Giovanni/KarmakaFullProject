@@ -23,7 +23,7 @@ public class Source extends ReserveDeCartes {
     // =========================================== LE CONSTRUCTEUR ========================================= //
 
     /**
-     * On initialise la source avec l'ensemble des 64 cartes du jeu
+     * On initialise La source avec l'ensemble des 64 cartes du jeu
      * <br>
      */
     private Source() {
