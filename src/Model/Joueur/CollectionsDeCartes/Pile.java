@@ -16,7 +16,7 @@ public class Pile extends CollectionDeCartes{
 
     // ============================================= LE CONSTRUCTEUR ============================================ //
     public Pile() {
-        pile = Source.Source().disribuerPile();
+        pile = Source.Source().distribuerPile();
     }
 
     // =============================================== LES GETTERS ============================================ //

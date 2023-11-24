@@ -26,7 +26,7 @@ public class CommandeLineView implements GameViewable{
         System.out.println(Source.Source().distribuerMain());
         System.out.println(Source.Source().getSize());
 
-        System.out.println(Source.Source().disribuerPile());
+        System.out.println(Source.Source().distribuerPile());
         System.out.println(Source.Source().getSize());
         System.out.println();
 
