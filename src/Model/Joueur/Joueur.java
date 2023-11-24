@@ -48,7 +48,7 @@ public abstract class Joueur {
         return main;
     }
 
-    public Oeuvre getOuevre() {
+    public Oeuvre getOeuvre() {
         return oeuvre;
     }
 
@@ -78,8 +78,8 @@ public abstract class Joueur {
         this.main = main;
     }
 
-    public void setOuevre(Oeuvre ouevre) {
-        this.oeuvre = ouevre;
+    public void setOeuvre(Oeuvre oeuvre) {
+        this.oeuvre = oeuvre;
     }
 
     public void setVieFuture(VieFuture vieFuture) {
