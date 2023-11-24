@@ -15,7 +15,6 @@ import java.util.List;
 public class Fosse extends ReserveDeCartes {
 
     // =============================================== LES ATTRIBUTS ============================================ //
-    List<Card> reserve = new LinkedList<Card>();
     private static Fosse fosse = new Fosse();
 
 

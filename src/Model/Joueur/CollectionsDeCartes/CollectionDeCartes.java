@@ -2,6 +2,7 @@ package Model.Joueur.CollectionsDeCartes;
 
 import Model.Cards.Card;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public abstract class CollectionDeCartes {
 
     private static int nombreDeCartes;
     // ====================================== LES ATTRIBUTS ============================================ //
-    private List<Card> listeDeCartes = new LinkedList<Card>();
+    private List<Card> listeDeCartes = new ArrayList<>();
 
     // ====================================== LES GETTERS ET SETTERS ========================================== //
     public int getNombreDeCartes() {
