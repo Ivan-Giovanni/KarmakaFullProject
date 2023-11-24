@@ -24,7 +24,7 @@ public abstract class Joueur {
     private String strategie; // Pour l'instant je met un String. On va modifier après
 
     private Main main;
-    private Oeuvre ouevre;
+    private Oeuvre oeuvre;
     private VieFuture vieFuture;
     private Pile pile;
 
