@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Partie {
 
-
+	//Freddy est passé par là
     // ====================================== LES ATTRIBUTS ============================================ //
     private static Partie partie;
     private Source source;
