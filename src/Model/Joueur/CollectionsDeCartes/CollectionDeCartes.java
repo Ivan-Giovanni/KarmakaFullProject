@@ -1,9 +1,7 @@
 package Model.Joueur.CollectionsDeCartes;
 
 import Model.Cards.Card;
-import Model.Cards.CardsSpecifiques23.Fournaise;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,9 +13,9 @@ import java.util.List;
  */
 public abstract class CollectionDeCartes {
 
+    private static int nombreDeCartes;
     // ====================================== LES ATTRIBUTS ============================================ //
     private List<Card> listeDeCartes = new LinkedList<Card>();
-    private static int nombreDeCartes;
 
     // ====================================== LES GETTERS ET SETTERS ========================================== //
     public int getNombreDeCartes() {
@@ -33,6 +31,7 @@ public abstract class CollectionDeCartes {
 
     // ========================================= LES METHODES ============================================ //
     public abstract void addCard(Card carte);
+
     public abstract Card removeCard();
 
     protected void decrementNombreDeCartes() {
@@ -42,7 +41,6 @@ public abstract class CollectionDeCartes {
     protected void incrementNombreDeCartes() {
         nombreDeCartes += 1;
     }
-
 
 
 }

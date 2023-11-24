@@ -49,7 +49,7 @@ public abstract class Joueur {
     }
 
     public Oeuvre getOuevre() {
-        return ouevre;
+        return oeuvre;
     }
 
     public VieFuture getVieFuture() {
@@ -79,7 +79,7 @@ public abstract class Joueur {
     }
 
     public void setOuevre(Oeuvre ouevre) {
-        this.ouevre = ouevre;
+        this.oeuvre = ouevre;
     }
 
     public void setVieFuture(VieFuture vieFuture) {
@@ -92,13 +92,13 @@ public abstract class Joueur {
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
 
-    public Joueur(Niveau niveau, String pseudo, String strategie, Main main, Oeuvre ouevre,
+    public Joueur(Niveau niveau, String pseudo, String strategie, Main main, Oeuvre oeuvre,
                   VieFuture vieFuture, Pile pile) {
         this.niveau = niveau;
         this.pseudo = pseudo;
         this.strategie = strategie;
         this.main = main;
-        this.ouevre = ouevre;
+        this.oeuvre = oeuvre;
         this.vieFuture = vieFuture;
         this.pile = pile;
     }
