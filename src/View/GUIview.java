@@ -1,11 +1,17 @@
 package View;
 
+import Controller.GameController;
+
 public class GUIview implements GameViewable{
 
     // =================================== LES ATTRIBUTS ========================================== //
 
 
     // =================================== LES METHODES ========================================== //
+    @Override
+    public void setController(GameController gameController) {
+
+    }
     @Override
     public void doSomething() {
 

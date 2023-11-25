@@ -1,9 +1,9 @@
 package Controller;
 
+import Model.Joueur.JoueurReel;
+import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
-import View.CommandeLineView;
 import View.GameViewable;
-import View.GameViewables;
 
 /**
  * @author giovannizangue
@@ -19,26 +19,23 @@ public class GameController {
     public GameController(GameViewable view, Partie partie) {
         this.view = view;
         this.partie = partie;
+        view.setController(this);
     }
 
     // =============================================== LES METHODES ========================================== //
 
+    // ================================================= RUN ================================================ //
     public void run() {
-        /* */
-        creerLaPartie();
-        view.doSomething();
+        while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+            view.promptForNomDuJoueur();
+        }
     }
 
-    public void creerLaPartie() {
-        /* */
-        System.out.println("\nCREATION DE LA PARTIE...");
-        view.doSomething();
-        view.promptForNouvellePartie();
-    }
-
-    public void ajouterLesJoueurs() {
-        /* */
-        view.promptForNomDuJoueur();
+    // ======================================== AJOUTER LES JOUEURS ======================================== //
+    public void ajouterLesJoueurs(String name) {
+        if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+            partie.ajouterJoueur(new JoueurReel(name));
+        }
     }
 
     public void commencerLaPartie() {

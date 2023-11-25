@@ -1,5 +1,7 @@
 package View;
 
+import Controller.GameController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,12 @@ public class GameViewables implements GameViewable{
         views.add(view);
     }
 
+
     // =================================== LES AUTRES METHODES ========================================== //
+    @Override
+    public void setController(GameController gameController) {
+
+    }
     @Override
     public void doSomething() {
 

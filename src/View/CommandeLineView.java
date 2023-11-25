@@ -20,9 +20,9 @@ public class CommandeLineView implements GameViewable {
 
         Partie partie = Partie.getPartie();
 
-        GameController gameController = new GameController(views, partie);
+        GameController gameController = new GameController(myView, partie);
         gameController.run();
-        //
+
     }
 
 
@@ -38,21 +38,18 @@ public class CommandeLineView implements GameViewable {
     public void promptForNomDuJoueur() {
         System.out.println("Enter Player Name:");
         String name = keyboard.nextLine();
-        if (name.isEmpty()) {
-            controller.creerLaPartie();
-        }
+        controller.ajouterLesJoueurs(name);
     }
 
     @Override
     public void doSomething() {
-
+        System.out.println("\nCREATION DE LA PARTIE...");
     }
 
     @Override
     public void promptForNouvellePartie() {
 
     }
-
 
 
     @Override

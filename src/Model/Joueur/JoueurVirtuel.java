@@ -14,9 +14,7 @@ public class JoueurVirtuel extends Joueur{
 
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
-    public JoueurVirtuel(Niveau niveau, String pseudo, String strategie,
-                         Main main, Oeuvre ouevre, VieFuture vieFuture, Pile pile) {
-        super(niveau, pseudo, strategie, main, ouevre, vieFuture, pile);
+    public JoueurVirtuel(String strategie) {
     }
 
     // Strategie // Faire jouer 02 jouers virtuels en meme temps
