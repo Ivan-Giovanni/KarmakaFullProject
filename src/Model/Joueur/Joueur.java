@@ -92,23 +92,13 @@ public abstract class Joueur {
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
 
-    public Joueur(Niveau niveau, String pseudo, String strategie, Main main, Oeuvre oeuvre,
-                  VieFuture vieFuture, Pile pile) {
-        this.niveau = niveau;
-        this.pseudo = pseudo;
-        this.strategie = strategie;
-        this.main = main;
-        this.oeuvre = oeuvre;
-        this.vieFuture = vieFuture;
-        this.pile = pile;
-    }
 
 
     // ====================================== LES METHODES ============================================ //
 
     // ====================================== PIOCHER ============================================ //
     public Card piocher() {
-        return Fournaise.getFournaise1();   // On va modifier apres
+        return new Fournaise();   // On va modifier apres
     }
 
     // ====================================== JOUER ============================================ //

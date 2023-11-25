@@ -15,9 +15,12 @@ public class JoueurReel extends Joueur{
 
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
+    public JoueurReel(String pseudo) {
+        super.setPseudo(pseudo);
+    }
 
-    public JoueurReel(Niveau niveau, String pseudo, String strategie, Main main,
-                      Oeuvre ouevre, VieFuture vieFuture, Pile pile) {
-        super(niveau, pseudo, strategie, main, ouevre, vieFuture, pile);
+    @Override
+    public String toString() {
+        return "JoueurReel{" + super.getPseudo() + "}";
     }
 }

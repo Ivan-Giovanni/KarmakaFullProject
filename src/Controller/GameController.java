@@ -1,7 +1,10 @@
 package Controller;
 
-import Model.Partie;
-import View.CommandeLineView;
+import Model.Joueur.JoueurReel;
+import Model.Partie.EtatDeLaPartie;
+import Model.Partie.Partie;
+import Model.Partie.TypeDePartie;
+import View.GameViewable;
 
 /**
  * @author giovannizangue
@@ -10,31 +13,55 @@ import View.CommandeLineView;
 public class GameController {
 
     // =============================================== LES ATTRIBUTS ========================================== //
-    CommandeLineView view;
+    GameViewable view;
+    Partie partie = Partie.getPartie();
 
     // ============================================ LE CONSTRUCTEUR ========================================= //
-    public GameController(CommandeLineView wiew, Partie partie) {
-
+    public GameController(GameViewable view, Partie partie) {
+        this.view = view;
+        this.partie = partie;
+        view.setController(this);
     }
 
     // =============================================== LES METHODES ========================================== //
 
+    // ================================================= RUN ================================================ //
     public void run() {
-        /* */
-        view.doSomething();
+        view.promptForTypeDePartie();
+
+        if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
+            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+                view.promptForNomDuJoueur();
+                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
+                afficherListeDesJoueurs();
+
+
+
+            }
+        } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
+
+        }
     }
 
-    public void creerLaPartie() {
-        /* */
-        view.doSomething();
-        view.promptForNouvellePartie();
+    // ======================================== AJOUTER_LES_JOUEURS ======================================== //
+    public void ajouterLesJoueurs(String name) {
+        partie.ajouterJoueurReelVsCPU(new JoueurReel(name));
     }
 
-    public void ajouterLesJoueurs() {
-        /* */
-        view.promptForNomDuJoueur();
+    public void afficherListeDesJoueurs() {
+        System.out.println(partie.getListeDeJoueurs());
     }
 
+    // ======================================== SET_TYPE_PARTIE ======================================== //
+    public void setTypeDePartie(int typeDePartie) {
+        if (typeDePartie == 0) {
+            partie.setTypeDePartie(TypeDePartie.JOUEUR_REEL_VS_CPU);
+        } else if (typeDePartie == 1) {
+            partie.setTypeDePartie(TypeDePartie.CPU_VS_CPU);
+        }
+    }
+
+    // ======================================= COMMENCER_LA_PARTIE ======================================== //
     public void commencerLaPartie() {
         /* */
         view.afficherNomDuJoueur();
