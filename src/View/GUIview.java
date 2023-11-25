@@ -12,6 +12,12 @@ public class GUIview implements GameViewable{
     public void setController(GameController gameController) {
 
     }
+
+    @Override
+    public void promptForTypeDePartie() {
+
+    }
+
     @Override
     public void doSomething() {
 

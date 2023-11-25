@@ -17,5 +17,10 @@ public class JoueurVirtuel extends Joueur{
     public JoueurVirtuel(String strategie) {
     }
 
+    @Override
+    public String toString() {
+        return "JoueurVirtuel{CPU}";
+    }
+
     // Strategie // Faire jouer 02 jouers virtuels en meme temps
 }

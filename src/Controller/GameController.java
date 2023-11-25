@@ -3,6 +3,7 @@ package Controller;
 import Model.Joueur.JoueurReel;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
+import Model.Partie.TypeDePartie;
 import View.GameViewable;
 
 /**
@@ -26,18 +27,41 @@ public class GameController {
 
     // ================================================= RUN ================================================ //
     public void run() {
-        while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
-            view.promptForNomDuJoueur();
+        view.promptForTypeDePartie();
+
+        if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
+            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+                view.promptForNomDuJoueur();
+                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
+                afficherListeDesJoueurs();
+
+
+
+            }
+        } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
+
         }
     }
 
-    // ======================================== AJOUTER LES JOUEURS ======================================== //
+    // ======================================== AJOUTER_LES_JOUEURS ======================================== //
     public void ajouterLesJoueurs(String name) {
-        if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
-            partie.ajouterJoueur(new JoueurReel(name));
+        partie.ajouterJoueurReelVsCPU(new JoueurReel(name));
+    }
+
+    public void afficherListeDesJoueurs() {
+        System.out.println(partie.getListeDeJoueurs());
+    }
+
+    // ======================================== SET_TYPE_PARTIE ======================================== //
+    public void setTypeDePartie(int typeDePartie) {
+        if (typeDePartie == 0) {
+            partie.setTypeDePartie(TypeDePartie.JOUEUR_REEL_VS_CPU);
+        } else if (typeDePartie == 1) {
+            partie.setTypeDePartie(TypeDePartie.CPU_VS_CPU);
         }
     }
 
+    // ======================================= COMMENCER_LA_PARTIE ======================================== //
     public void commencerLaPartie() {
         /* */
         view.afficherNomDuJoueur();

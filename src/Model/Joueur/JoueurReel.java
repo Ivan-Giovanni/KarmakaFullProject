@@ -16,6 +16,11 @@ public class JoueurReel extends Joueur{
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
     public JoueurReel(String pseudo) {
+        super.setPseudo(pseudo);
+    }
 
+    @Override
+    public String toString() {
+        return "JoueurReel{" + super.getPseudo() + "}";
     }
 }
