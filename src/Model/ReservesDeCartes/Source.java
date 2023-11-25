@@ -158,7 +158,7 @@ public class Source extends ReserveDeCartes {
      * de sa pile
      * @return
      */
-    public List<Card> disribuerPile() {
+    public List<Card> distribuerPile() {
         List<Card> cartesDeLaPile = new LinkedList<Card>();
 
         cartesDeLaPile.add(reserve.remove(0));

@@ -58,6 +58,14 @@ public class Partie {
     public String designerGagnant() {
         return "CPU";    // On va modifier apres.
     }
+    // ====================================== SAUVEGARDER PARTIE ========================================//
+    public void sauvegarderPartie() {
+    	
+    }
+    // ===================================== CHARGER PARTIE =============================================//
+    public void chargerPartie() {
+    	
+    }
 
 
 }
