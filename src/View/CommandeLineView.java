@@ -22,6 +22,7 @@ public class CommandeLineView implements GameViewable {
 
         GameController gameController = new GameController(views, partie);
         gameController.run();
+        //
     }
 
 
