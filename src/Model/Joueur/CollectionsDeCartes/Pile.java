@@ -3,6 +3,7 @@ package Model.Joueur.CollectionsDeCartes;
 import Model.Cards.Card;
 import Model.ReservesDeCartes.Source;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,17 +13,17 @@ import java.util.List;
 public class Pile extends CollectionDeCartes{
 
     // =============================================== LES ATTRIBUTS ============================================ //
-    private List<Card> pile;
+    private List<Card> cartesDeLaPile;
 
     // ============================================= LE CONSTRUCTEUR ============================================ //
     public Pile() {
-        pile = Source.Source().distribuerPile();
+        cartesDeLaPile = new ArrayList<Card>();
     }
 
     // =============================================== LES GETTERS ============================================ //
-    public List<Card> getPile() {
+    public List<Card> getCartesDeLaPile() {
         setNombreDeCartes(2);
-        return pile;
+        return cartesDeLaPile;
     }
 
 
@@ -30,11 +31,11 @@ public class Pile extends CollectionDeCartes{
     @Override
     public void addCard(Card carte) {
         incrementNombreDeCartes();
-        pile.add(carte);
+        cartesDeLaPile.add(carte);
     }
     @Override
     public Card removeCard() {
         decrementNombreDeCartes();
-        return pile.remove(0);
+        return cartesDeLaPile.remove(0);
     }
 }

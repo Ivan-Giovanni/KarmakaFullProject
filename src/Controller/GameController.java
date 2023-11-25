@@ -13,7 +13,7 @@ import View.GameViewable;
  */
 public class GameController {
 
-    // =============================================== LES ATTRIBUTS ========================================== //
+    // =============================================== LES ATTRIBUTS ======================================== //
     GameViewable view;
     Partie partie = Partie.getPartie();
 
@@ -42,6 +42,15 @@ public class GameController {
             // MELANGER LA SOURCE
             melangerLaSource();
 
+            // DISTRIBUER LA MAIN
+            distribuerLesCartesDeLaMain();
+            afficherListeDesJoueurs();
+
+            // DISTRIBUER LA PILE
+            distribuerLesCartesDeLaPile();
+            afficherListeDesJoueurs();
+
+
 
 
         } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
@@ -67,33 +76,50 @@ public class GameController {
         }
     }
 
-    // ======================================= COMMENCER_LA_PARTIE ======================================== //
+    // ======================================= MELANGER_LA_SOURCE ======================================== //
+    public void melangerLaSource() {
+        System.out.println("\nSHUFFLING LA SOURCE...\n");
+        try {
+            Thread.sleep(2000);
+            partie.getSource().melanger();
+            System.out.println(partie.getSource());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ================================= DISTIBUER_LES_CARTES_DE_LA_MAIN ================================== //
+    public void distribuerLesCartesDeLaMain() {
+        System.out.println("\nDISTRIBUTION DES CARTES DE LA MAIN...\n");
+        try {
+            Thread.sleep(2000);
+            for(int i=0; i<5; i++) {
+                partie.getListeDeJoueurs().get(0).getMain().addCard(partie.getSource().removeCard());
+                partie.getListeDeJoueurs().get(1).getMain().addCard(partie.getSource().removeCard());
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ================================= DISTIBUER_LES_CARTES_DE_LA_PILE ================================== //
+    public void distribuerLesCartesDeLaPile() {
+        System.out.println("\nDISTRIBUTION DES CARTES DE LA PILE...\n");
+        try {
+            Thread.sleep(2000);
+            for (int i=0; i<2; i++) {
+                partie.getListeDeJoueurs().get(0).getPile().addCard(partie.getSource().removeCard());
+                partie.getListeDeJoueurs().get(1).getPile().addCard(partie.getSource().removeCard());
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public void commencerLaPartie() {
         /* */
         view.afficherNomDuJoueur();
-    }
-
-    // ======================================= CREER_LA_SOURCE ======================================== //
-    public void melangerLaSource() {
-        System.out.println("\nSHUFFLING LA SOURCE...\n");
-        partie.getSource().melanger();
-        System.out.println(partie.getSource());
-    }
-
-
-    public void creerLesAnneauxKarmiques() {
-        /* */
-        view.doSomething();
-    }
-
-    public void distribuerLesCartesDeLaMain() {
-        /* */
-        view.afficherLesCartesDeLaMain();
-    }
-
-    public void distribuerLesCartesDeLaPile() {
-        /* */
-        view.afficherLesCartesDeLaPile();
     }
 
     public void nextAction() {

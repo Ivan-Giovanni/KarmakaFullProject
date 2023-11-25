@@ -23,11 +23,11 @@ public class JoueurVirtuel extends Joueur{
         return "JoueurVirtuel{" +
                 "•Pseudo = " + "CPU"+
                 "  •Niveau = " + super.getNiveau() +
-                "  •Main = " + super.getMain() +
-                "  •Oeuvre = " + super.getOeuvre() +
-                "  •Pile = " + super.getPile() +
-                "  •Vie Future = " + super.getVieFuture() +
-                "  •Reserve d'Anneaux Karmique = " + super.getReserveDAnneauxKarmique() +
+                "  •Main = " + super.getMain().getCartesDeLaMain() +
+                "  •Oeuvre = " + super.getOeuvre().getCartesDeLOeuvre() +
+                "  •Pile = " + super.getPile().getCartesDeLaPile() +
+                "  •Vie Future = " + super.getVieFuture().getCartesDeLaVieFuture() +
+                "  •Reserve d'Anneaux Karmique = " + super.getReserveDAnneauxKarmique().getReserveDAnneaux() +
                 "}";
     }
 

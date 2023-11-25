@@ -8,19 +8,20 @@ import java.util.List;
 public class ReserveDAnneauxKarmique {
 
     // =============================================== LES ATTRIBUTS ============================================ //
-    List<AnneauKarmique> reserve = new ArrayList<AnneauKarmique>();
+    List<AnneauKarmique> reserveDAnneaux;
 
     // ============================================ LE CONSTRUCTEUR ============================================ //
     public ReserveDAnneauxKarmique() {
+        reserveDAnneaux = new ArrayList<AnneauKarmique>();
     }
 
     // =============================================== LES GETTERS ============================================ //
-    public List<AnneauKarmique> getReserve() {
-        return reserve;
+    public List<AnneauKarmique> getReserveDAnneaux() {
+        return reserveDAnneaux;
     }
 
     public int getNombreDAnneaux() {
-        return reserve.size();
+        return reserveDAnneaux.size();
     }
 
     // =============================================== LES METHODES ============================================ //
@@ -28,10 +29,10 @@ public class ReserveDAnneauxKarmique {
 
     // ========================================== ADD & REMOVE ========================================= //
     public void addAnneauKarmique(AnneauKarmique anneauKarmique) {
-        reserve.add(anneauKarmique);
+        reserveDAnneaux.add(anneauKarmique);
     }
 
     public void removeAnneauKarmique() {
-        reserve.remove(0);
+        reserveDAnneaux.remove(0);
     }
 }

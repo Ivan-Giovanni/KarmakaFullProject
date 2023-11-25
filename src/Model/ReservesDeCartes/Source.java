@@ -132,38 +132,4 @@ public class Source extends ReserveDeCartes {
         return reserve.remove(0);
     }
 
-    // =========================================== DISTRIBUER_MAIN ========================================= //
-
-    /**
-     * Cette methode est appelée au debut de la partie. Elle permet de distribuer à chaque Joueur les 05 cartes
-     * de sa main
-     * @return cartesDeLaMain
-     */
-    public List<Card> distribuerMain() {
-        List<Card> cartesDeLaMain = new LinkedList<Card>();
-
-        cartesDeLaMain.add(reserve.remove(0));
-        cartesDeLaMain.add(reserve.remove(1));
-        cartesDeLaMain.add(reserve.remove(2));
-        cartesDeLaMain.add(reserve.remove(3));
-        cartesDeLaMain.add(reserve.remove(4));
-
-        return cartesDeLaMain;
-    }
-
-    // =========================================== DISTRIBUER_PILE ========================================= //
-
-    /**
-     * Cette methode est appelee au debut de la partie. Elle permet de distribuer à chaque Joueur les 02 cartes
-     * de sa pile
-     * @return
-     */
-    public List<Card> distribuerPile() {
-        List<Card> cartesDeLaPile = new LinkedList<Card>();
-
-        cartesDeLaPile.add(reserve.remove(0));
-        cartesDeLaPile.add(reserve.remove(1));
-
-        return cartesDeLaPile;
-    }
 }

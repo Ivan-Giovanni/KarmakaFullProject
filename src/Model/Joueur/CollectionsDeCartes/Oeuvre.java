@@ -2,6 +2,7 @@ package Model.Joueur.CollectionsDeCartes;
 
 import Model.Cards.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,17 +11,17 @@ import java.util.List;
  */
 public class Oeuvre extends CollectionDeCartes{
 
-    // =============================================== LES ATTRIBUTS ============================================ //
-    private List<Card> oeuvre;
+    // =============================================== LES ATTRIBUTS ========================================= //
+    private List<Card> cartesDeLOeuvre;
 
-    // ============================================= LE CONSTRUCTEUR ============================================ //
+    // ============================================= LE CONSTRUCTEUR ========================================= //
     public Oeuvre() {
-
+        cartesDeLOeuvre = new ArrayList<Card>();
     }
 
     // =============================================== LES GETTERS ============================================ //
-    public List<Card> getOeuvre() {
-        return oeuvre;
+    public List<Card> getCartesDeLOeuvre() {
+        return cartesDeLOeuvre;
     }
 
 
@@ -29,12 +30,12 @@ public class Oeuvre extends CollectionDeCartes{
     // ========================================= ADD & REMOVE ============================================ //
     @Override
     public void addCard(Card carte) {
-        oeuvre.add(carte);
+        cartesDeLOeuvre.add(carte);
     }
 
     @Override
     public Card removeCard() {
-        return oeuvre.remove(0);
+        return cartesDeLOeuvre.remove(0);
     }
 
     // ================================= CALCULER NOMBRE DE POINTS ======================================= //

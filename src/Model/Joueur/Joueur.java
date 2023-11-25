@@ -22,11 +22,11 @@ public abstract class Joueur {
     private Niveau niveau;
     private String pseudo;
 
-    private Main main;
-    private Oeuvre oeuvre;
-    private VieFuture vieFuture;
-    private Pile pile;
-    private ReserveDAnneauxKarmique reserveDAnneauxKarmique;
+    private Main main = new Main();
+    private Oeuvre oeuvre = new Oeuvre();
+    private VieFuture vieFuture = new VieFuture();
+    private Pile pile = new Pile();
+    private ReserveDAnneauxKarmique reserveDAnneauxKarmique = new ReserveDAnneauxKarmique();
 
     // ====================================== LES GETTERS ET SETTERS ============================================ //
 
@@ -52,40 +52,20 @@ public abstract class Joueur {
         return main;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
-    }
-
     public Oeuvre getOeuvre() {
         return oeuvre;
-    }
-
-    public void setOeuvre(Oeuvre oeuvre) {
-        this.oeuvre = oeuvre;
     }
 
     public VieFuture getVieFuture() {
         return vieFuture;
     }
 
-    public void setVieFuture(VieFuture vieFuture) {
-        this.vieFuture = vieFuture;
-    }
-
     public Pile getPile() {
         return pile;
     }
 
-    public void setPile(Pile pile) {
-        this.pile = pile;
-    }
-
     public ReserveDAnneauxKarmique getReserveDAnneauxKarmique() {
         return reserveDAnneauxKarmique;
-    }
-
-    public void setReserveDAnneauxKarmique(ReserveDAnneauxKarmique reserveDAnneauxKarmique) {
-        this.reserveDAnneauxKarmique = reserveDAnneauxKarmique;
     }
 
     // ====================================== LE CONSTRUCTEUR ============================================ //

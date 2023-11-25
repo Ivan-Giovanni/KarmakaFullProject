@@ -23,13 +23,13 @@ public class CommandeLineView implements GameViewable {
 
     }
 
-
-    // ==================================== LES METHODES ================================================= //
-
     // ==================================== SET_CONTROLLER ============================================ //
     public void setController(GameController gameController) {
         this.controller = gameController;
     }
+
+
+    // ==================================== LES METHODES ================================================= //
 
     // ==================================== PROMPT_FOR_NOM_DU_JOUEUR ========================================= //
     @Override
