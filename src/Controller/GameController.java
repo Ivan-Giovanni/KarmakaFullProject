@@ -42,9 +42,6 @@ public class GameController {
             // MELANGER LA SOURCE
             melangerLaSource();
 
-            // CREER LA FOSSE
-
-
 
 
         } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
@@ -78,16 +75,11 @@ public class GameController {
 
     // ======================================= CREER_LA_SOURCE ======================================== //
     public void melangerLaSource() {
-        System.out.println("\nSHUFFLING THE SOURCE...\n");
+        System.out.println("\nSHUFFLING LA SOURCE...\n");
         partie.getSource().melanger();
         System.out.println(partie.getSource());
     }
 
-    // ======================================= CREER_LA_SOURCE ======================================== //
-    public void creerLaFosse() {
-        /* */
-        view.doSomething();
-    }
 
     public void creerLesAnneauxKarmiques() {
         /* */

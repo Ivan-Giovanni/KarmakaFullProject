@@ -27,6 +27,7 @@ public class JoueurVirtuel extends Joueur{
                 "  •Oeuvre = " + super.getOeuvre() +
                 "  •Pile = " + super.getPile() +
                 "  •Vie Future = " + super.getVieFuture() +
+                "  •Reserve d'Anneaux Karmique = " + super.getReserveDAnneauxKarmique() +
                 "}";
     }
 
