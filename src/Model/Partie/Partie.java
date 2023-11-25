@@ -1,4 +1,4 @@
-package Model;
+package Model.Partie;
 
 import Model.Joueur.Joueur;
 import Model.ReservesDeCartes.Fosse;
@@ -15,62 +15,39 @@ import java.util.List;
  */
 public class Partie {
 
-	//Giovanni est passe par la
     // ====================================== LES ATTRIBUTS ============================================ //
     private static Partie partie;
-    private Source source;
-    private Fosse fosse;
-    private List<Joueur> listeDeJouers;
+    Source source;
+
 
     // ====================================== LES GETTERS ET SETTERS =========================================== //
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
-    private Partie(Source source, Fosse fosse, List<Joueur> listeDeJouers) {
-        this.source = source;
-        this.fosse = fosse;
-        listeDeJouers = listeDeJouers;
+    private Partie() {
+       source = Source.Source();
     }
 
-    // ====================================== LES GETTERS =========================================== //
-    public Source getSource() {
-        return source;
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
-    }
-
-    public Fosse getFosse() {
-        return fosse;
-    }
-
-    public void setFosse(Fosse fosse) {
-        this.fosse = fosse;
-    }
-
-    public List<Joueur> getListeDeJouers() {
-        return listeDeJouers;
-    }
-
-    public void setListeDeJouers(List<Joueur> listeDeJouers) {
-        this.listeDeJouers = listeDeJouers;
-    }
-
-    public Partie getPartie() {
+    public static Partie getPartie() {
         if (partie == null) {
-            partie = new Partie(source, fosse, listeDeJouers);
+            partie = new Partie();
             return partie;
         } else {
             return partie;
         }
     }
 
-    // ====================================== LES METHODES ============================================ //
+    // ====================================== LES GETTERS =========================================== //
+
+
+
 
     // ====================================== LES SETTERS =========================================== //
     public static void setPartie(Partie partie) {
         Partie.partie = partie;
     }
+
+
+    // ====================================== LES METHODES ============================================ //
 
     // ====================================== EST_GAGNEE ============================================ //
     public boolean estGagne() {

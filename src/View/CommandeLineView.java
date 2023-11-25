@@ -1,28 +1,46 @@
 package View;
 
 import Controller.GameController;
-import Model.Cards.CardsSpecifiques23.DernierSouffle;
-import Model.Joueur.CollectionsDeCartes.Main;
-import Model.ReservesDeCartes.Source;
+import Model.Partie.Partie;
+
+import java.util.Scanner;
 
 public class CommandeLineView implements GameViewable {
 
     // ==================================== LES ATTRIBUTS ============================================ //
     GameController controller;
+    Scanner keyboard = new Scanner(System.in);
 
 
     // =================================== PUBLIC STATIC VOID MAIN ========================================== //
     public static void main(String[] args) {
+        GameViewables views = new GameViewables();
+        CommandeLineView myView = new CommandeLineView();
+        views.addViewable(myView);
 
+        Partie partie = Partie.getPartie();
 
+        GameController gameController = new GameController(views, partie);
+        gameController.run();
     }
 
 
-
-
-
-
     // ==================================== LES METHODES ============================================ //
+
+    // ==================================== SET_CONTROLLER ============================================ //
+    public void setController(GameController gameController) {
+        this.controller = gameController;
+    }
+
+    // ==================================== PROMPT_FOR_NOM_DU_JOUEUR ========================================= //
+    @Override
+    public void promptForNomDuJoueur() {
+        System.out.println("Enter Player Name:");
+        String name = keyboard.nextLine();
+        if (name.isEmpty()) {
+            controller.creerLaPartie();
+        }
+    }
 
     @Override
     public void doSomething() {
@@ -34,10 +52,7 @@ public class CommandeLineView implements GameViewable {
 
     }
 
-    @Override
-    public void promptForNomDuJoueur() {
 
-    }
 
     @Override
     public void afficherNomDuJoueur() {

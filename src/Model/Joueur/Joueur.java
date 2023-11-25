@@ -108,7 +108,7 @@ public abstract class Joueur {
 
     // ====================================== PIOCHER ============================================ //
     public Card piocher() {
-        return Fournaise.getFournaise1();   // On va modifier apres
+        return new Fournaise();   // On va modifier apres
     }
 
     // ====================================== JOUER ============================================ //

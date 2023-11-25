@@ -1,7 +1,9 @@
 package Controller;
 
-import Model.Partie;
+import Model.Partie.Partie;
 import View.CommandeLineView;
+import View.GameViewable;
+import View.GameViewables;
 
 /**
  * @author giovannizangue
@@ -10,22 +12,26 @@ import View.CommandeLineView;
 public class GameController {
 
     // =============================================== LES ATTRIBUTS ========================================== //
-    CommandeLineView view;
+    GameViewable view;
+    Partie partie = Partie.getPartie();
 
     // ============================================ LE CONSTRUCTEUR ========================================= //
-    public GameController(CommandeLineView wiew, Partie partie) {
-
+    public GameController(GameViewable view, Partie partie) {
+        this.view = view;
+        this.partie = partie;
     }
 
     // =============================================== LES METHODES ========================================== //
 
     public void run() {
         /* */
+        creerLaPartie();
         view.doSomething();
     }
 
     public void creerLaPartie() {
         /* */
+        System.out.println("\nCREATION DE LA PARTIE...");
         view.doSomething();
         view.promptForNouvellePartie();
     }
