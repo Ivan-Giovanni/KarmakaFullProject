@@ -15,11 +15,19 @@ public class JoueurVirtuel extends Joueur{
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
     public JoueurVirtuel(String strategie) {
+        super.setNiveau(Niveau.BOUSIER);
     }
 
     @Override
     public String toString() {
-        return "JoueurVirtuel{CPU}";
+        return "JoueurVirtuel{" +
+                "•Pseudo = " + "CPU"+
+                "  •Niveau = " + super.getNiveau() +
+                "  •Main = " + super.getMain() +
+                "  •Oeuvre = " + super.getOeuvre() +
+                "  •Pile = " + super.getPile() +
+                "  •Vie Future = " + super.getVieFuture() +
+                "}";
     }
 
     // Strategie // Faire jouer 02 jouers virtuels en meme temps

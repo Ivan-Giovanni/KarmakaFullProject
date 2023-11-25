@@ -21,7 +21,6 @@ public abstract class Joueur {
     // ====================================== LES ATTRIBUTS ============================================ //
     private Niveau niveau;
     private String pseudo;
-    private String strategie; // Pour l'instant je met un String. On va modifier après
 
     private Main main;
     private Oeuvre oeuvre;
@@ -36,54 +35,46 @@ public abstract class Joueur {
         return niveau;
     }
 
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public String getStrategie() {
-        return strategie;
-    }
-
-    public Main getMain() {
-        return main;
-    }
-
-    public Oeuvre getOeuvre() {
-        return oeuvre;
-    }
-
-    public VieFuture getVieFuture() {
-        return vieFuture;
-    }
-
-    public Pile getPile() {
-        return pile;
-    }
-
-    // ====================================== LES SETTERS ============================================ //
-
     public void setNiveau(Niveau niveau) {
         this.niveau = niveau;
+    }
+
+    public String getPseudo() {
+        return pseudo;
     }
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
 
-    public void setStrategie(String strategie) {
-        this.strategie = strategie;
+    public Main getMain() {
+        return main;
     }
 
     public void setMain(Main main) {
         this.main = main;
     }
 
+    // ====================================== LES SETTERS ============================================ //
+
+    public Oeuvre getOeuvre() {
+        return oeuvre;
+    }
+
     public void setOeuvre(Oeuvre oeuvre) {
         this.oeuvre = oeuvre;
     }
 
+    public VieFuture getVieFuture() {
+        return vieFuture;
+    }
+
     public void setVieFuture(VieFuture vieFuture) {
         this.vieFuture = vieFuture;
+    }
+
+    public Pile getPile() {
+        return pile;
     }
 
     public void setPile(Pile pile) {
@@ -91,7 +82,6 @@ public abstract class Joueur {
     }
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
-
 
 
     // ====================================== LES METHODES ============================================ //
@@ -102,13 +92,28 @@ public abstract class Joueur {
     }
 
     // ====================================== JOUER ============================================ //
-    public void jouer() {
-        /* Je met void car je ne connais pas encore comment implementer cette methode */
+    public void jouer(Card carte, OptionDeJeu optionDeJeu) {
+        switch (optionDeJeu) {
+            case POUR_SES_POINTS:
+                jouerPourSesPoints(carte);
+            case POUR_SON_POUVOIR:
+                jouerPourSonPouvoir(carte);
+            case POUR_LA_VIE_FUTURE:
+                jouerPourLaVieFuture(carte);
+        }
     }
 
+    private void jouerPourSesPoints(Card carte) {
 
+    }
 
-    // AZERTY
+    private void jouerPourSonPouvoir(Card carte) {
+
+    }
+
+    private void jouerPourLaVieFuture(Card carte) {
+
+    }
 
 
 }

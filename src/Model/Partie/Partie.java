@@ -65,6 +65,10 @@ public class Partie {
         return listeDeJoueurs;
     }
 
+    public Source getSource() {
+        return source;
+    }
+
     // ====================================== LES SETTERS =========================================== //
 
 

@@ -4,6 +4,7 @@ import Model.Joueur.JoueurReel;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
 import Model.Partie.TypeDePartie;
+import Model.ReservesDeCartes.Source;
 import View.GameViewable;
 
 /**
@@ -30,14 +31,22 @@ public class GameController {
         view.promptForTypeDePartie();
 
         if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
+
+            // CREER LE JOUEUR
             while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
                 view.promptForNomDuJoueur();
                 partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
                 afficherListeDesJoueurs();
-
-
-
             }
+
+            // MELANGER LA SOURCE
+            melangerLaSource();
+
+            // CREER LA FOSSE
+
+
+
+
         } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
 
         }
@@ -67,16 +76,14 @@ public class GameController {
         view.afficherNomDuJoueur();
     }
 
-    public void creerLaSource() {
-        /* */
-        view.doSomething();
+    // ======================================= CREER_LA_SOURCE ======================================== //
+    public void melangerLaSource() {
+        System.out.println("\nSHUFFLING THE SOURCE...\n");
+        partie.getSource().melanger();
+        System.out.println(partie.getSource());
     }
 
-    public void shuffleLaSource() {
-        /* */
-        view.doSomething();
-    }
-
+    // ======================================= CREER_LA_SOURCE ======================================== //
     public void creerLaFosse() {
         /* */
         view.doSomething();
