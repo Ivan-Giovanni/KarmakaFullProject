@@ -1,11 +1,13 @@
 package Controller;
 
+import Model.Joueur.Joueur;
 import Model.Joueur.JoueurReel;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
 import Model.Partie.TypeDePartie;
-import Model.ReservesDeCartes.Source;
 import View.GameViewable;
+
+import java.util.Random;
 
 /**
  * @author giovannizangue
@@ -23,6 +25,7 @@ public class GameController {
         this.partie = partie;
         view.setController(this);
     }
+
 
     // =============================================== LES METHODES ========================================== //
 
@@ -50,6 +53,8 @@ public class GameController {
             distribuerLesCartesDeLaPile();
             afficherListeDesJoueurs();
 
+            // WHO START
+            whoStarts(partie.getListeDeJoueurs().get(0), partie.getListeDeJoueurs().get(1));
 
 
 
@@ -57,6 +62,9 @@ public class GameController {
 
         }
     }
+
+
+
 
     // ======================================== AJOUTER_LES_JOUEURS ======================================== //
     public void ajouterLesJoueurs(String name) {
@@ -93,7 +101,7 @@ public class GameController {
         System.out.println("\nDISTRIBUTION DES CARTES DE LA MAIN...\n");
         try {
             Thread.sleep(2000);
-            for(int i=0; i<5; i++) {
+            for (int i = 0; i < 4; i++) {
                 partie.getListeDeJoueurs().get(0).getMain().addCard(partie.getSource().removeCard());
                 partie.getListeDeJoueurs().get(1).getMain().addCard(partie.getSource().removeCard());
             }
@@ -107,13 +115,43 @@ public class GameController {
         System.out.println("\nDISTRIBUTION DES CARTES DE LA PILE...\n");
         try {
             Thread.sleep(2000);
-            for (int i=0; i<2; i++) {
+            for (int i = 0; i < 2; i++) {
                 partie.getListeDeJoueurs().get(0).getPile().addCard(partie.getSource().removeCard());
                 partie.getListeDeJoueurs().get(1).getPile().addCard(partie.getSource().removeCard());
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // ====================================== WHO_STARTS ============================================ //
+    public void whoStarts(Joueur joueur1, Joueur joueur2) {
+        System.out.println("\nCHOOSING WHO START...\n");
+        try {
+            Thread.sleep(3000);
+            Random random = new Random();
+
+            if (random.nextInt(2) == 0) {
+                partie.setActivePlayer(joueur1);
+                partie.setOpponentPlayer(joueur2);
+            } else {
+                partie.setActivePlayer(joueur2);
+                partie.setOpponentPlayer(joueur1);
+            }
+
+            System.out.println("•ACTIVE PLAYER: " + partie.getActivePlayer());
+            System.out.println("•OPPONENT PLAYER: " + partie.getOpponentPlayer());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    // ====================================== NEXT_PLAYER ============================================ //
+    public void nextPlayer() {
+        Joueur temp = partie.getActivePlayer();
+        partie.setActivePlayer(partie.getOpponentPlayer());
+        partie.setOpponentPlayer(temp);
     }
 
 

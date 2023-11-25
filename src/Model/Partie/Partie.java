@@ -7,6 +7,7 @@ import Model.ReservesDeCartes.Source;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author giovannizangue
@@ -24,6 +25,9 @@ public class Partie {
     List<Joueur> listeDeJoueurs = new ArrayList<Joueur>();
     private EtatDeLaPartie etatDeLaPartie;
     private TypeDePartie typeDePartie;
+
+    private Joueur activePlayer;
+    private Joueur opponentPlayer;
 
 
     // ====================================== LES GETTERS ET SETTERS =========================================== //
@@ -69,6 +73,22 @@ public class Partie {
         return source;
     }
 
+    public Joueur getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(Joueur activePlayer) {
+        this.activePlayer = activePlayer;
+    }
+
+    public Joueur getOpponentPlayer() {
+        return opponentPlayer;
+    }
+
+    public void setOpponentPlayer(Joueur opponentPlayer) {
+        this.opponentPlayer = opponentPlayer;
+    }
+
     // ====================================== LES SETTERS =========================================== //
 
 
@@ -85,6 +105,7 @@ public class Partie {
         listeDeJoueurs.add(new JoueurVirtuel("Strategie1")); // On va modifier apres
         listeDeJoueurs.add(new JoueurVirtuel("Strategie2")); // On va modifier apres
     }
+
 
     // ====================================== EST_GAGNEE ============================================ //
     public boolean estGagne() {

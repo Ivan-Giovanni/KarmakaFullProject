@@ -68,14 +68,17 @@ public abstract class Joueur {
         return reserveDAnneauxKarmique;
     }
 
-    // ====================================== LE CONSTRUCTEUR ============================================ //
-
 
     // ====================================== LES METHODES ============================================ //
 
     // ====================================== PIOCHER ============================================ //
-    public Card piocher() {
-        return new Fournaise();   // On va modifier apres
+    public void piocher(Card carte) {
+        main.addCard(carte);
+    }
+
+    // ====================================== PASSER ============================================ //
+    public void passer() {
+
     }
 
     // ====================================== JOUER ============================================ //
