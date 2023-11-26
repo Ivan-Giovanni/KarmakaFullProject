@@ -38,11 +38,7 @@ public class GameController {
         if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
 
             // CREER LE JOUEUR
-            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
-                view.promptForNomDuJoueur();
-                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
-                afficherListeDesJoueurs();
-            }
+            creerLeJoueur();
 
             // MELANGER LA SOURCE
             melangerLaSource();
@@ -81,6 +77,20 @@ public class GameController {
 
     public void afficherListeDesJoueurs() {
         System.out.println(partie.getListeDeJoueurs());
+    }
+
+    public void creerLeJoueur() {
+        while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+            view.promptForNomDuJoueur();
+            System.out.println("\nADDING PLAYERS...\n");
+            try {
+                Thread.sleep(2000);
+                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
+                afficherListeDesJoueurs();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     // ======================================== SET_TYPE_PARTIE ======================================== //

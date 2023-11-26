@@ -1,7 +1,6 @@
 package Model.Joueur;
 
 import Model.Cards.Card;
-import Model.Cards.CardsSpecifiques23.Fournaise;
 import Model.Joueur.CollectionsDeCartes.Main;
 import Model.Joueur.CollectionsDeCartes.Oeuvre;
 import Model.Joueur.CollectionsDeCartes.Pile;
@@ -70,11 +69,12 @@ public abstract class Joueur {
         return reserveDAnneauxKarmique;
     }
 
-    public void setOptionDeJeu(OptionDeJeu optionDeJeu) {
-        this.optionDeJeu = optionDeJeu;
-    }
     public OptionDeJeu getOptionDeJeu() {
         return optionDeJeu;
+    }
+
+    public void setOptionDeJeu(OptionDeJeu optionDeJeu) {
+        this.optionDeJeu = optionDeJeu;
     }
 
     // ====================================== LES METHODES ============================================ //
@@ -94,16 +94,19 @@ public abstract class Joueur {
         switch (optionDeJeu) {
             case POUR_SES_POINTS:
                 jouerPourSesPoints(carte);
+                break;
             case POUR_SON_POUVOIR:
                 jouerPourSonPouvoir(carte);
+                break;
             case POUR_LA_VIE_FUTURE:
                 jouerPourLaVieFuture(carte);
+                break;
         }
         getMain().getCartesDeLaMain().remove(carte);
     }
 
     private void jouerPourSesPoints(Card carte) {
-
+        System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SES POINTS...\n");
     }
 
     private void jouerPourSonPouvoir(Card carte) {
@@ -112,7 +115,7 @@ public abstract class Joueur {
     }
 
     private void jouerPourLaVieFuture(Card carte) {
-
+        System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR LA VIE FUTURE...\n");
     }
 
 
