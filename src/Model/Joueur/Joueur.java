@@ -94,15 +94,17 @@ public abstract class Joueur {
         switch (optionDeJeu) {
             case POUR_SES_POINTS:
                 jouerPourSesPoints(carte);
+                getMain().getCartesDeLaMain().remove(carte);
                 break;
             case POUR_SON_POUVOIR:
                 jouerPourSonPouvoir(carte);
+                getMain().getCartesDeLaMain().remove(carte);
                 break;
             case POUR_LA_VIE_FUTURE:
                 jouerPourLaVieFuture(carte);
+                getMain().getCartesDeLaMain().remove(carte);
                 break;
         }
-        getMain().getCartesDeLaMain().remove(carte);
     }
 
     private void jouerPourSesPoints(Card carte) {

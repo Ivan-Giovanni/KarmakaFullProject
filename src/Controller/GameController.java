@@ -199,6 +199,7 @@ public class GameController {
             Thread.sleep(2000);
 
             System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
+
             int index = view.promptForIndexDeLaCarteDeLaMainAJouer();
             Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
 

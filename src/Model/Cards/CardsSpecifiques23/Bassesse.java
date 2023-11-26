@@ -30,6 +30,7 @@ public class Bassesse extends Card {
     @Override
     public void executerCapacite(Partie partie) {
         /* Defausser 02 cartes au hasard de la main de votre rival */
+        System.out.println("EXECUTION DE LA CAPCITE DE LA CARTE 'BASSESSE'...\n");
 
         int tailleDeLaMain = partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() - 1;
         Random random = new Random();
@@ -38,7 +39,6 @@ public class Bassesse extends Card {
         tailleDeLaMain -= 1;
         partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(tailleDeLaMain));
 
-        System.out.println("RESULTAT:\n");
         System.out.println(partie.getOpponentPlayer());
 
     }
