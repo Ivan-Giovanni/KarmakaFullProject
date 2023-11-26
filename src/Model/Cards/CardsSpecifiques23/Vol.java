@@ -2,6 +2,7 @@ package Model.Cards.CardsSpecifiques23;
 
 import Model.Cards.Card;
 import Model.Cards.Couleur;
+import Model.Partie.Partie;
 
 /**
  * @author giovannizangue
@@ -23,7 +24,7 @@ public class Vol extends Card {
 
     // =========================================== EXECUTER CAPACITE ========================================= //
     @Override
-    public void executerCapacite() {
+    public void executerCapacite(Partie partie) {
 
     }
 }

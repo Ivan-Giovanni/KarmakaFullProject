@@ -38,5 +38,8 @@ public class Bassesse extends Card {
         tailleDeLaMain -= 1;
         partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(tailleDeLaMain));
 
+        System.out.println("RESULTAT:\n");
+        System.out.println(partie.getOpponentPlayer());
+
     }
 }

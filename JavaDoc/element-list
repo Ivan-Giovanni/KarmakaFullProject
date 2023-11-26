@@ -1,8 +1,9 @@
 Controller
-Model
+Exceptions
 Model.Cards
 Model.Cards.CardsSpecifiques23
 Model.Joueur
 Model.Joueur.CollectionsDeCartes
+Model.Partie
 Model.ReservesDeCartes
 View

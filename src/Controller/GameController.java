@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.Cards.Card;
 import Model.Joueur.Joueur;
 import Model.Joueur.JoueurReel;
+import Model.Joueur.OptionDeJeu;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
 import Model.Partie.TypeDePartie;
@@ -66,13 +68,10 @@ public class GameController {
             }
 
 
-
         } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
 
         }
     }
-
-
 
 
     // ======================================== AJOUTER_LES_JOUEURS ======================================== //
@@ -137,7 +136,7 @@ public class GameController {
     public void whoStarts(Joueur joueur1, Joueur joueur2) {
         System.out.println("\nCHOOSING WHO START...\n");
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             Random random = new Random();
 
             if (random.nextInt(2) == 0) {
@@ -147,6 +146,10 @@ public class GameController {
                 partie.setActivePlayer(joueur2);
                 partie.setOpponentPlayer(joueur1);
             }
+
+            // Ici je set ActivePlayer a joueurReel pour effectuer les teste. On va modifier apres
+            partie.setActivePlayer(joueur1);
+            partie.setOpponentPlayer(joueur2);
 
             System.out.println("•ACTIVE PLAYER: " + partie.getActivePlayer());
             System.out.println("•OPPONENT PLAYER: " + partie.getOpponentPlayer());
@@ -165,21 +168,61 @@ public class GameController {
 
     // ====================================== PIOCHER ============================================ //
     public void piocher() {
-
+        System.out.println("\nACTIVE PLAYER PIOCHE UNE CARTE...\n");
+        try {
+            Thread.sleep(2000);
+            partie.getActivePlayer().getMain().getCartesDeLaMain().add(partie.getSource().removeCard());
+            System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // ====================================== JOUER ============================================ //
     public void jouer() {
         // Le joueur peut decider de jouer une carte, ou bien de passer son tour
+        // Pour jouer, le Joueur choisit d'abord l'index de la carte a jouer
+        // Puis il choisit l'option de jeu (points, pouvoir, vieFuture)
+
+        System.out.println("\nPHASE DE JEU DE ACTIVE PLAYER...\n");
+        try {
+            Thread.sleep(2000);
+
+            System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
+            int index = view.promptForIndexDeLaCarteDeLaMainAJouer();
+            Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+
+            Thread.sleep(2000);
+
+            int index2 = view.promptForOptionDeJeu();
+            setOptionDeJeu(index2);
+            OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
+            System.out.println("\nOption de jeu = " + optionDeJeu);
+
+            Thread.sleep(2000);
+
+            partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
+            System.out.println(partie.getActivePlayer());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // ==================================== VERIFIER_ETAT_DE_LA_PARTIE ==================================== //
     public void verifierEtatDeLaPartie() {
-
+        partie.setEtatDeLaPartie(EtatDeLaPartie.FINISHED);
     }
 
-
-
+    // ==================================== SET_OPTION_DE_JEU ==================================== //
+    public void setOptionDeJeu(int index) {
+        if (index == 0) {
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
+        } else if (index == 1) {
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
+        } else if (index == 2) {
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+        }
+    }
 
 
     public void commencerLaPartie() {

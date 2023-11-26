@@ -2,6 +2,7 @@ package Model.Cards.CardsSpecifiques23;
 
 import Model.Cards.Card;
 import Model.Cards.Couleur;
+import Model.Partie.Partie;
 
 /**
  * @author giovannizangue
@@ -24,7 +25,11 @@ public class CoupDOeil extends Card {
 
     // =========================================== EXECUTER CAPACITE ========================================= //
     @Override
-    public void executerCapacite() {
+    public void executerCapacite(Partie partie) {
+        /* Regarder la main du rival. Vous pouvez ensuite jouer une autre carte */
+        System.out.println("EXECUTION DE LA CAPCITE DE LA CARTE 'COUP D'OEIL'...");
 
+        System.out.println(partie.getOpponentPlayer().getMain().getCartesDeLaMain());
+        // Jouer une autre carte
     }
 }

@@ -6,6 +6,7 @@ import Model.Joueur.CollectionsDeCartes.Main;
 import Model.Joueur.CollectionsDeCartes.Oeuvre;
 import Model.Joueur.CollectionsDeCartes.Pile;
 import Model.Joueur.CollectionsDeCartes.VieFuture;
+import Model.Partie.Partie;
 
 /**
  * @author giovannizangue
@@ -21,6 +22,7 @@ public abstract class Joueur {
     // ====================================== LES ATTRIBUTS ============================================ //
     private Niveau niveau;
     private String pseudo;
+    private OptionDeJeu optionDeJeu;
 
     private Main main = new Main();
     private Oeuvre oeuvre = new Oeuvre();
@@ -68,6 +70,12 @@ public abstract class Joueur {
         return reserveDAnneauxKarmique;
     }
 
+    public void setOptionDeJeu(OptionDeJeu optionDeJeu) {
+        this.optionDeJeu = optionDeJeu;
+    }
+    public OptionDeJeu getOptionDeJeu() {
+        return optionDeJeu;
+    }
 
     // ====================================== LES METHODES ============================================ //
 
@@ -91,6 +99,7 @@ public abstract class Joueur {
             case POUR_LA_VIE_FUTURE:
                 jouerPourLaVieFuture(carte);
         }
+        getMain().getCartesDeLaMain().remove(carte);
     }
 
     private void jouerPourSesPoints(Card carte) {
@@ -98,7 +107,8 @@ public abstract class Joueur {
     }
 
     private void jouerPourSonPouvoir(Card carte) {
-
+        System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SON POUVOIR...\n");
+        carte.executerCapacite(Partie.getPartie());
     }
 
     private void jouerPourLaVieFuture(Card carte) {
