@@ -55,6 +55,15 @@ public class GameController {
 
             // WHO START
             whoStarts(partie.getListeDeJoueurs().get(0), partie.getListeDeJoueurs().get(1));
+            partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYING);
+
+            // NEXT ACTION
+            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.PLAYING) {
+                piocher();
+                jouer();
+                verifierEtatDeLaPartie();
+                endTurn();
+            }
 
 
 
@@ -148,11 +157,29 @@ public class GameController {
     }
 
     // ====================================== NEXT_PLAYER ============================================ //
-    public void nextPlayer() {
+    public void endTurn() {
         Joueur temp = partie.getActivePlayer();
         partie.setActivePlayer(partie.getOpponentPlayer());
         partie.setOpponentPlayer(temp);
     }
+
+    // ====================================== PIOCHER ============================================ //
+    public void piocher() {
+
+    }
+
+    // ====================================== JOUER ============================================ //
+    public void jouer() {
+        // Le joueur peut decider de jouer une carte, ou bien de passer son tour
+    }
+
+    // ==================================== VERIFIER_ETAT_DE_LA_PARTIE ==================================== //
+    public void verifierEtatDeLaPartie() {
+
+    }
+
+
+
 
 
     public void commencerLaPartie() {

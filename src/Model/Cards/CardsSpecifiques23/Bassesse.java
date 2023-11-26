@@ -2,6 +2,9 @@ package Model.Cards.CardsSpecifiques23;
 
 import Model.Cards.Card;
 import Model.Cards.Couleur;
+import Model.Partie.Partie;
+
+import java.util.Random;
 
 /**
  * @author giovannizangue
@@ -25,7 +28,15 @@ public class Bassesse extends Card {
 
     // =========================================== EXECUTER CAPACITE ========================================= //
     @Override
-    public void executerCapacite() {
+    public void executerCapacite(Partie partie) {
+        /* Defausser 02 cartes au hasard de la main de votre rival */
+
+        int tailleDeLaMain = partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() - 1;
+        Random random = new Random();
+
+        partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(tailleDeLaMain));
+        tailleDeLaMain -= 1;
+        partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(tailleDeLaMain));
 
     }
 }

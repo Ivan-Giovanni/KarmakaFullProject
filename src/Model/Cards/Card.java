@@ -1,5 +1,7 @@
 package Model.Cards;
 
+import Model.Partie.Partie;
+
 /**
  * @author giovannizangue
  * @version 1.0
@@ -65,6 +67,6 @@ public abstract class Card {
      * <br>
      * Executer la capacite d'une carte
      */
-    public abstract void executerCapacite();
+    public abstract void executerCapacite(Partie partie);
 
 }
