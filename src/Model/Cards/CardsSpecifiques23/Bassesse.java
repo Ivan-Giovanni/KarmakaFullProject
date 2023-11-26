@@ -32,6 +32,8 @@ public class Bassesse extends Card {
         /* Defausser 02 cartes au hasard de la main de votre rival */
         System.out.println("EXECUTION DE LA CAPCITE DE LA CARTE 'BASSESSE'...\n");
 
+        partie.getActivePlayer().getMain().getCartesDeLaMain().remove(this);
+
         int tailleDeLaMain = partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() - 1;
         Random random = new Random();
 

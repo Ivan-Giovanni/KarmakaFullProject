@@ -4,6 +4,7 @@ import Model.Cards.Card;
 import Model.Cards.Couleur;
 import Model.Partie.Partie;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -30,10 +31,13 @@ public class Crise extends Card {
     @Override
     public void executerCapacite(Partie partie) {
         /* Le joueur de votre choix defausse une de ses oeuvres */
+        System.out.println("EXECUTION DE LA CAPCITE DE LA CARTE 'CRISE'...\n");
+
+        partie.getActivePlayer().getMain().getCartesDeLaMain().remove(this);
 
         if (!partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().isEmpty()) {
-            System.out.println("\nChoisir l'index de la carte a defausser: ");
-            int index = keyboard.nextInt();
+            Random random = new Random();
+            int index = random.nextInt();
             partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().remove(index);
         }
     }
