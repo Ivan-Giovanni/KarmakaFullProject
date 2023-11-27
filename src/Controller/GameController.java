@@ -221,7 +221,8 @@ public class GameController {
 
     // ==================================== VERIFIER_ETAT_DE_LA_PARTIE ==================================== //
     public void verifierEtatDeLaPartie() {
-        partie.setEtatDeLaPartie(EtatDeLaPartie.FINISHED);
+
+        partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYING);
     }
 
     // ==================================== SET_OPTION_DE_JEU ==================================== //

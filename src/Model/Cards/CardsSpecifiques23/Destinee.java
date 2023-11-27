@@ -48,12 +48,12 @@ public class Destinee extends Card {
         int nbreDeCarte = keyboard.nextInt();
 
         if (nbreDeCarte == 2) {
-            System.out.println("\nEntrez l'index de la 1ere carte a ajouter: ");
+            System.out.println("\nEntrez l'index de la 1ere carte a ajouter: (Le plus grand index) ");
             int index1 = keyboard.nextInt();
             Card carte1 = partie.getSource().getCartes().remove(index1);
             partie.getActivePlayer().getVieFuture().addCard(carte1);
 
-            System.out.println("\nEntrez l'index de la 2eme carte a ajouter: ");
+            System.out.println("\nEntrez l'index de la 2eme carte a ajouter: (Le plus petit index) ");
             int index2 = keyboard.nextInt();
             if (index1 == 0) {
                 Card carte2 = partie.getSource().getCartes().remove(index2 - 1);
