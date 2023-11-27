@@ -35,6 +35,7 @@ public class Fosse extends ReserveDeCartes {
 
     // =========================================== LES METHODES ========================================= //
     // =========================================== AJOUTER CARTE ========================================= //
+    
     public void addCard(Card carte) {
         reserve.add(carte);
     }
