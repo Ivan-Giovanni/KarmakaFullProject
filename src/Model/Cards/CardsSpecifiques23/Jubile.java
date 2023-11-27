@@ -96,10 +96,6 @@ public class Jubile extends Card {
 
 
 
-
-
-
-
         System.out.println("\nOPPONENT PLAYER's Oeuvre: " +
                 partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre());
         System.out.println("FOSSE: " +

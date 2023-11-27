@@ -56,7 +56,7 @@ public class Deni extends Card {
 
                 partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
             } else {
-                System.out.println("Vous n'avez pas assez de cartes dans votre main!w");
+                System.out.println("\nVous n'avez pas assez de cartes dans votre main!");
             }
 
         } catch (InterruptedException e) {

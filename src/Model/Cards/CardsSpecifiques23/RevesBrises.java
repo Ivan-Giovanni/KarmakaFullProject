@@ -29,6 +29,6 @@ public class RevesBrises extends Card {
     // =========================================== EXECUTER CAPACITE ========================================= //
     @Override
     public void executerCapacite(Partie partie) {
-
+        /*  */
     }
 }
