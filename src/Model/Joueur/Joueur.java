@@ -1,11 +1,11 @@
 package Model.Joueur;
 
 import Model.Cards.Card;
-import Model.Cards.CardsSpecifiques23.Fournaise;
 import Model.Joueur.CollectionsDeCartes.Main;
 import Model.Joueur.CollectionsDeCartes.Oeuvre;
 import Model.Joueur.CollectionsDeCartes.Pile;
 import Model.Joueur.CollectionsDeCartes.VieFuture;
+import Model.Partie.Partie;
 
 /**
  * @author giovannizangue
@@ -21,27 +21,32 @@ public abstract class Joueur {
     // ====================================== LES ATTRIBUTS ============================================ //
     private Niveau niveau;
     private String pseudo;
-    private String strategie; // Pour l'instant je met un String. On va modifier après
+    private OptionDeJeu optionDeJeu;
 
-    private Main main;
-    private Oeuvre oeuvre;
-    private VieFuture vieFuture;
-    private Pile pile;
+    private Main main = new Main();
+    private Oeuvre oeuvre = new Oeuvre();
+    private VieFuture vieFuture = new VieFuture();
+    private Pile pile = new Pile();
+    private ReserveDAnneauxKarmique reserveDAnneauxKarmique = new ReserveDAnneauxKarmique();
 
     // ====================================== LES GETTERS ET SETTERS ============================================ //
 
-    // ====================================== LES GETTERS ============================================ //
+    // ==================================== LES GETTERS & SETTERS ========================================== //
 
     public Niveau getNiveau() {
         return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
     }
 
     public String getPseudo() {
         return pseudo;
     }
 
-    public String getStrategie() {
-        return strategie;
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 
     public Main getMain() {
@@ -60,55 +65,57 @@ public abstract class Joueur {
         return pile;
     }
 
-    // ====================================== LES SETTERS ============================================ //
-
-    public void setNiveau(Niveau niveau) {
-        this.niveau = niveau;
+    public ReserveDAnneauxKarmique getReserveDAnneauxKarmique() {
+        return reserveDAnneauxKarmique;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public OptionDeJeu getOptionDeJeu() {
+        return optionDeJeu;
     }
 
-    public void setStrategie(String strategie) {
-        this.strategie = strategie;
+    public void setOptionDeJeu(OptionDeJeu optionDeJeu) {
+        this.optionDeJeu = optionDeJeu;
     }
-
-    public void setMain(Main main) {
-        this.main = main;
-    }
-
-    public void setOeuvre(Oeuvre oeuvre) {
-        this.oeuvre = oeuvre;
-    }
-
-    public void setVieFuture(VieFuture vieFuture) {
-        this.vieFuture = vieFuture;
-    }
-
-    public void setPile(Pile pile) {
-        this.pile = pile;
-    }
-
-    // ====================================== LE CONSTRUCTEUR ============================================ //
-
-
 
     // ====================================== LES METHODES ============================================ //
 
     // ====================================== PIOCHER ============================================ //
-    public Card piocher() {
-        return new Fournaise();   // On va modifier apres
+    public void piocher(Card carte) {
+        main.addCard(carte);
+    }
+
+    // ====================================== PASSER ============================================ //
+    public void passer() {
+
     }
 
     // ====================================== JOUER ============================================ //
-    public void jouer() {
-        /* Je met void car je ne connais pas encore comment implementer cette methode */
+    public void jouer(Card carte, OptionDeJeu optionDeJeu) {
+        switch (optionDeJeu) {
+            case POUR_SES_POINTS:
+                jouerPourSesPoints(carte);
+                break;
+            case POUR_SON_POUVOIR:
+                jouerPourSonPouvoir(carte);
+                break;
+            case POUR_LA_VIE_FUTURE:
+                jouerPourLaVieFuture(carte);
+                break;
+        }
     }
 
+    private void jouerPourSesPoints(Card carte) {
+        System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SES POINTS...\n");
+    }
 
+    private void jouerPourSonPouvoir(Card carte) {
+        System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SON POUVOIR...\n");
+        carte.executerCapacite(Partie.getPartie());
+    }
 
-    // AZERTY
+    private void jouerPourLaVieFuture(Card carte) {
+        System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR LA VIE FUTURE...\n");
+    }
 
 
 }

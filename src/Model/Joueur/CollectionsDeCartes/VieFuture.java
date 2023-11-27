@@ -2,6 +2,7 @@ package Model.Joueur.CollectionsDeCartes;
 
 import Model.Cards.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,11 +13,16 @@ import java.util.List;
 public class VieFuture extends CollectionDeCartes {
 
     // =============================================== LES ATTRIBUTS ============================================ //
-    private List<Card> vieFuture;
+    private List<Card> cartesDeLaVieFuture;
+
+    // ============================================= LE CONSTRUCTEUR ========================================= //
+    public VieFuture() {
+        cartesDeLaVieFuture = new ArrayList<Card>();
+    }
 
     // =============================================== LES GETTERS ============================================ //
-    private List<Card> getVieFuture() {
-        return vieFuture;
+    public List<Card> getCartesDeLaVieFuture() {
+        return cartesDeLaVieFuture;
     }
 
 
@@ -25,11 +31,11 @@ public class VieFuture extends CollectionDeCartes {
     // ============================================= ADD & REMOVE ============================================ //
     @Override
     public void addCard(Card carte) {
-
+        cartesDeLaVieFuture.add(carte);
     }
 
     @Override
     public Card removeCard() {
-        return null;
+        return cartesDeLaVieFuture.remove(0);
     }
 }

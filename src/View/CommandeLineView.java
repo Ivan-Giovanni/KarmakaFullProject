@@ -23,13 +23,13 @@ public class CommandeLineView implements GameViewable {
 
     }
 
-
-    // ==================================== LES METHODES ================================================= //
-
     // ==================================== SET_CONTROLLER ============================================ //
     public void setController(GameController gameController) {
         this.controller = gameController;
     }
+
+
+    // ==================================== LES METHODES ================================================= //
 
     // ==================================== PROMPT_FOR_NOM_DU_JOUEUR ========================================= //
     @Override
@@ -48,6 +48,24 @@ public class CommandeLineView implements GameViewable {
         controller.setTypeDePartie(typeDePartie);
     }
 
+    // ============================ PROMPT_FOR_INDEX_DE_CARTE_DE_LA_MAIN_A_JOUER ============================= //
+    @Override
+    public int promptForIndexDeLaCarteDeLaMainAJouer() {
+        System.out.println("Entrez l'index de la carte de la main a jouer: ");
+        return keyboard.nextInt();
+    }
+
+    // ========================================== PROMPT_FOR_OPTION_DE_JEU ================================== //
+    @Override
+    public int promptForOptionDeJeu() {
+        System.out.println("""
+                Choisir l'option de jeu:\s
+                •0 = Jouer pour ses points
+                •1 = Jouer pour ses pouvoirs
+                •2 = Jouer pour la vie future""");
+        return keyboard.nextInt();
+    }
+
     @Override
     public void doSomething() {
     }
@@ -60,16 +78,6 @@ public class CommandeLineView implements GameViewable {
 
     @Override
     public void afficherNomDuJoueur() {
-
-    }
-
-    @Override
-    public void afficherLesCartesDeLaMain() {
-
-    }
-
-    @Override
-    public void afficherLesCartesDeLaPile() {
 
     }
 

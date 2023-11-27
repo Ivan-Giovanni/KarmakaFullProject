@@ -8,4 +8,16 @@ package Model.Joueur;
 public enum Niveau {
 
     BOUSIER, SERPENT, LOUP, PRIMATE, TRANSCENDANCE;
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case BOUSIER -> "BOUSIER";
+            case SERPENT -> "SERPENT";
+            case LOUP -> "LOUP";
+            case PRIMATE -> "PRIMATE";
+            case TRANSCENDANCE -> "TRANSCENDANCE";
+            default -> "<Niveau non determine>";
+        };
+    }
 }

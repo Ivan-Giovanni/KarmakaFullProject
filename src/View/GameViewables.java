@@ -62,16 +62,6 @@ public class GameViewables implements GameViewable{
     }
 
     @Override
-    public void afficherLesCartesDeLaMain() {
-
-    }
-
-    @Override
-    public void afficherLesCartesDeLaPile() {
-
-    }
-
-    @Override
     public void afficherLeNomDuGagnant() {
 
     }
@@ -79,5 +69,15 @@ public class GameViewables implements GameViewable{
     @Override
     public void promptForTerminerLaPartie() {
 
+    }
+
+    @Override
+    public int promptForIndexDeLaCarteDeLaMainAJouer() {
+        return 0;
+    }
+
+    @Override
+    public int promptForOptionDeJeu() {
+        return 0;
     }
 }

@@ -19,10 +19,6 @@ public abstract class CollectionDeCartes {
     private List<Card> listeDeCartes = new ArrayList<>();
 
     // ====================================== LES GETTERS ET SETTERS ========================================== //
-    public int getNombreDeCartes() {
-        return nombreDeCartes;
-    }
-
     protected void setNombreDeCartes(int nbre) {
         nombreDeCartes = nbre;
     }
@@ -34,7 +30,6 @@ public abstract class CollectionDeCartes {
     public abstract void addCard(Card carte);
 
     public abstract Card removeCard();
-
     protected void decrementNombreDeCartes() {
         nombreDeCartes -= 1;
     }

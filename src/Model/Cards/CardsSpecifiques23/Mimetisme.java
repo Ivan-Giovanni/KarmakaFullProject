@@ -2,6 +2,10 @@ package Model.Cards.CardsSpecifiques23;
 
 import Model.Cards.Card;
 import Model.Cards.Couleur;
+import Model.Joueur.OptionDeJeu;
+import Model.Partie.Partie;
+
+import java.util.Scanner;
 
 /**
  * @author giovannizangue
@@ -11,6 +15,8 @@ import Model.Cards.Couleur;
  * Classe de la carte Duperie
  */
 public class Mimetisme extends Card {
+
+    Scanner keyboard = new Scanner(System.in);
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
     public Mimetisme() {
@@ -22,7 +28,41 @@ public class Mimetisme extends Card {
 
     // =========================================== EXECUTER CAPACITE ========================================= //
     @Override
-    public void executerCapacite() {
+    public void executerCapacite(Partie partie) {
+        /* Copiez le pouvoir de l'Oeuvre exposee de votre rival */
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'MIMETISME'...\n");
+
+        if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
+            int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
+            partie.getFosse().addCard(
+                    partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexOfThis)
+            );
+        }
+
+        try {
+            Thread.sleep(2000);
+
+            System.out.println(partie.getActivePlayer() + "\n");
+
+            if (!partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().isEmpty()) {
+                Card carteAcopier = partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().get(0);
+
+                System.out.println("\nCOPIE DU POUVOIR...");
+                Thread.sleep(1000);
+
+                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
+                OptionDeJeu optionDeJeu = OptionDeJeu.POUR_SON_POUVOIR;
+
+                partie.getActivePlayer().jouer(carteAcopier, optionDeJeu);
+
+            } else {
+                System.out.println("\nOPPONENT PLAYER n'a aucune carte dans ses Oeuvres!");
+            }
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }

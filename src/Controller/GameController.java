@@ -1,10 +1,15 @@
 package Controller;
 
+import Model.Cards.Card;
+import Model.Joueur.Joueur;
 import Model.Joueur.JoueurReel;
+import Model.Joueur.OptionDeJeu;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
 import Model.Partie.TypeDePartie;
 import View.GameViewable;
+
+import java.util.Random;
 
 /**
  * @author giovannizangue
@@ -12,7 +17,7 @@ import View.GameViewable;
  */
 public class GameController {
 
-    // =============================================== LES ATTRIBUTS ========================================== //
+    // =============================================== LES ATTRIBUTS ======================================== //
     GameViewable view;
     Partie partie = Partie.getPartie();
 
@@ -23,6 +28,7 @@ public class GameController {
         view.setController(this);
     }
 
+
     // =============================================== LES METHODES ========================================== //
 
     // ================================================= RUN ================================================ //
@@ -30,18 +36,39 @@ public class GameController {
         view.promptForTypeDePartie();
 
         if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
-            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
-                view.promptForNomDuJoueur();
-                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
-                afficherListeDesJoueurs();
 
+            // CREER LE JOUEUR
+            creerLeJoueur();
 
+            // MELANGER LA SOURCE
+            melangerLaSource();
 
+            // DISTRIBUER LA MAIN
+            distribuerLesCartesDeLaMain();
+            afficherListeDesJoueurs();
+
+            // DISTRIBUER LA PILE
+            distribuerLesCartesDeLaPile();
+            afficherListeDesJoueurs();
+
+            // WHO START
+            whoStarts(partie.getListeDeJoueurs().get(0), partie.getListeDeJoueurs().get(1));
+            partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYING);
+
+            // NEXT ACTION
+            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.PLAYING) {
+                piocher();
+                jouer();
+                verifierEtatDeLaPartie();
+                endTurn();
             }
+
+
         } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
 
         }
     }
+
 
     // ======================================== AJOUTER_LES_JOUEURS ======================================== //
     public void ajouterLesJoueurs(String name) {
@@ -50,6 +77,20 @@ public class GameController {
 
     public void afficherListeDesJoueurs() {
         System.out.println(partie.getListeDeJoueurs());
+    }
+
+    public void creerLeJoueur() {
+        while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+            view.promptForNomDuJoueur();
+            System.out.println("\nADDING PLAYERS...\n");
+            try {
+                Thread.sleep(2000);
+                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
+                afficherListeDesJoueurs();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     // ======================================== SET_TYPE_PARTIE ======================================== //
@@ -61,40 +102,143 @@ public class GameController {
         }
     }
 
-    // ======================================= COMMENCER_LA_PARTIE ======================================== //
+    // ======================================= MELANGER_LA_SOURCE ======================================== //
+    public void melangerLaSource() {
+        System.out.println("\nSHUFFLING LA SOURCE...\n");
+        try {
+            Thread.sleep(2000);
+            partie.getSource().melanger();
+            System.out.println(partie.getSource());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ================================= DISTIBUER_LES_CARTES_DE_LA_MAIN ================================== //
+    public void distribuerLesCartesDeLaMain() {
+        System.out.println("\nDISTRIBUTION DES CARTES DE LA MAIN...\n");
+        try {
+            Thread.sleep(2000);
+            for (int i = 0; i < 4; i++) {
+                partie.getListeDeJoueurs().get(0).getMain().addCard(partie.getSource().removeCard());
+                partie.getListeDeJoueurs().get(1).getMain().addCard(partie.getSource().removeCard());
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ================================= DISTIBUER_LES_CARTES_DE_LA_PILE ================================== //
+    public void distribuerLesCartesDeLaPile() {
+        System.out.println("\nDISTRIBUTION DES CARTES DE LA PILE...\n");
+        try {
+            Thread.sleep(2000);
+            for (int i = 0; i < 2; i++) {
+                partie.getListeDeJoueurs().get(0).getPile().addCard(partie.getSource().removeCard());
+                partie.getListeDeJoueurs().get(1).getPile().addCard(partie.getSource().removeCard());
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ====================================== WHO_STARTS ============================================ //
+    public void whoStarts(Joueur joueur1, Joueur joueur2) {
+        System.out.println("\nCHOOSING WHO START...\n");
+        try {
+            Thread.sleep(2000);
+            Random random = new Random();
+
+            if (random.nextInt(2) == 0) {
+                partie.setActivePlayer(joueur1);
+                partie.setOpponentPlayer(joueur2);
+            } else {
+                partie.setActivePlayer(joueur2);
+                partie.setOpponentPlayer(joueur1);
+            }
+
+            // Ici je set ActivePlayer a joueurReel pour effectuer les teste. On va modifier apres
+            partie.setActivePlayer(joueur1);
+            partie.setOpponentPlayer(joueur2);
+
+            System.out.println("•ACTIVE PLAYER: " + partie.getActivePlayer());
+            System.out.println("•OPPONENT PLAYER: " + partie.getOpponentPlayer());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    // ====================================== NEXT_PLAYER ============================================ //
+    public void endTurn() {
+        Joueur temp = partie.getActivePlayer();
+        partie.setActivePlayer(partie.getOpponentPlayer());
+        partie.setOpponentPlayer(temp);
+    }
+
+    // ====================================== PIOCHER ============================================ //
+    public void piocher() {
+        System.out.println("\nACTIVE PLAYER PIOCHE UNE CARTE...\n");
+        try {
+            Thread.sleep(2000);
+            partie.getActivePlayer().getMain().getCartesDeLaMain().add(partie.getSource().removeCard());
+            System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ====================================== JOUER ============================================ //
+    public void jouer() {
+        // Le joueur peut decider de jouer une carte, ou bien de passer son tour
+        // Pour jouer, le Joueur choisit d'abord l'index de la carte a jouer
+        // Puis il choisit l'option de jeu (points, pouvoir, vieFuture)
+
+        System.out.println("\nPHASE DE JEU DE ACTIVE PLAYER...\n");
+        try {
+            Thread.sleep(2000);
+
+            System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
+
+            int index = view.promptForIndexDeLaCarteDeLaMainAJouer();
+            Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+
+            Thread.sleep(2000);
+
+            int index2 = view.promptForOptionDeJeu();
+            setOptionDeJeu(index2);
+            OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
+            System.out.println("\nOption de jeu = " + optionDeJeu);
+
+            Thread.sleep(2000);
+
+            partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
+            System.out.println(partie.getActivePlayer());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ==================================== VERIFIER_ETAT_DE_LA_PARTIE ==================================== //
+    public void verifierEtatDeLaPartie() {
+        partie.setEtatDeLaPartie(EtatDeLaPartie.FINISHED);
+    }
+
+    // ==================================== SET_OPTION_DE_JEU ==================================== //
+    public void setOptionDeJeu(int index) {
+        if (index == 0) {
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
+        } else if (index == 1) {
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
+        } else if (index == 2) {
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+        }
+    }
+
+
     public void commencerLaPartie() {
         /* */
         view.afficherNomDuJoueur();
-    }
-
-    public void creerLaSource() {
-        /* */
-        view.doSomething();
-    }
-
-    public void shuffleLaSource() {
-        /* */
-        view.doSomething();
-    }
-
-    public void creerLaFosse() {
-        /* */
-        view.doSomething();
-    }
-
-    public void creerLesAnneauxKarmiques() {
-        /* */
-        view.doSomething();
-    }
-
-    public void distribuerLesCartesDeLaMain() {
-        /* */
-        view.afficherLesCartesDeLaMain();
-    }
-
-    public void distribuerLesCartesDeLaPile() {
-        /* */
-        view.afficherLesCartesDeLaPile();
     }
 
     public void nextAction() {

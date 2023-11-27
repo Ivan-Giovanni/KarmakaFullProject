@@ -5,6 +5,7 @@ import Model.Cards.Card;
 import Model.Cards.CardsSpecifiques23.Fournaise;
 import Model.ReservesDeCartes.Source;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,17 +15,17 @@ import java.util.List;
 public class Main extends CollectionDeCartes {
 
     // =============================================== LES ATTRIBUTS ============================================ //
-    private List<Card> main;
+    private List<Card> cartesDeLaMain;
 
     // ============================================ LE CONSTRUCTEUR ============================================ //
     public Main() {
-        main = Source.Source().distribuerMain();
+        cartesDeLaMain = new ArrayList<Card>();
     }
 
     // =============================================== LES GETTERS ============================================ //
-    public List<Card> getMain() {
+    public List<Card> getCartesDeLaMain() {
         setNombreDeCartes(5);
-        return main;
+        return cartesDeLaMain;
     }
 
     // =============================================== LES METHODES ============================================ //
@@ -33,13 +34,11 @@ public class Main extends CollectionDeCartes {
     // ========================================== ADD_CARD & REMOVE_CARD ========================================= //
     @Override
     public void addCard(Card carte) {
-        incrementNombreDeCartes();
-        main.add(carte);
+        cartesDeLaMain.add(carte);
     }
     @Override
     public Card removeCard() {
-        decrementNombreDeCartes();
-        return main.remove(0);
+        return cartesDeLaMain.remove(0);
     }
 
 
