@@ -29,7 +29,7 @@ public class Duperie extends Card {
     @Override
     public void executerCapacite(Partie partie) {
         /* Regardez 03 cartes de la main du rival. Ajoutez en une a votre main */
-        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'BASSESSE'...\n");
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'DUPERIE'...\n");
 
         if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
             int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
