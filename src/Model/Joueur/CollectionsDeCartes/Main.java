@@ -34,12 +34,10 @@ public class Main extends CollectionDeCartes {
     // ========================================== ADD_CARD & REMOVE_CARD ========================================= //
     @Override
     public void addCard(Card carte) {
-        incrementNombreDeCartes();
         cartesDeLaMain.add(carte);
     }
     @Override
     public Card removeCard() {
-        decrementNombreDeCartes();
         return cartesDeLaMain.remove(0);
     }
 

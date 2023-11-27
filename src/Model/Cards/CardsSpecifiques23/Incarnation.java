@@ -2,7 +2,10 @@ package Model.Cards.CardsSpecifiques23;
 
 import Model.Cards.Card;
 import Model.Cards.Couleur;
+import Model.Joueur.OptionDeJeu;
 import Model.Partie.Partie;
+
+import java.util.Scanner;
 
 /**
  * @author giovannizangue
@@ -13,6 +16,7 @@ import Model.Partie.Partie;
  */
 public class Incarnation extends Card {
 
+    Scanner keyboard = new Scanner(System.in);
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
     public Incarnation() {
@@ -20,11 +24,46 @@ public class Incarnation extends Card {
     }
 
 
-    // ================================================= METHODES ============================================== //
+    // ================================================= METHODES ========================================== //
 
-    // =========================================== EXECUTER CAPACITE ========================================= //
+    // =========================================== EXECUTER CAPACITE ====================================== //
     @Override
     public void executerCapacite(Partie partie) {
+        /* Choisissez une de vos Oeuvres. Copier son pouvoir */
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'INCARNATION'...\n");
 
+        if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
+            int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
+            partie.getFosse().addCard(
+                    partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexOfThis)
+            );
+        }
+
+        if (partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().isEmpty()) {
+            System.out.println("\nVous n'avez aucune carte dans votre Oeuvre");
+        }
+        else {
+            System.out.println("\nACTIVE PLAYER's Oeuvre: " +
+                    partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre());
+
+            System.out.println("\nChoisissez l'index de la carte a copier: ");
+            int indexACopier = keyboard.nextInt();
+            Card carteACopier = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().remove(indexACopier);
+
+            partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
+            OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
+            partie.getActivePlayer().jouer(carteACopier, optionDeJeu);
+        }
+
+
+
+        System.out.println("\nOPPONENT PLAYER's Oeuvre: " +
+                partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre());
+        System.out.println("FOSSE: " +
+                partie.getFosse().getCartes());
+        System.out.println("•Nombre de cartes de la Fosse = " +
+                partie.getFosse().getCartes().size());
+        System.out.println("•Nombre de cartes de la Source = " +
+                partie.getSource().getCartes().size());
     }
 }

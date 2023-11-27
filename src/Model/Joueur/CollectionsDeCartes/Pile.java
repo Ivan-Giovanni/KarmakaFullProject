@@ -30,12 +30,10 @@ public class Pile extends CollectionDeCartes{
     // =============================================== LES METHODES ============================================ //
     @Override
     public void addCard(Card carte) {
-        incrementNombreDeCartes();
         cartesDeLaPile.add(carte);
     }
     @Override
     public Card removeCard() {
-        decrementNombreDeCartes();
         return cartesDeLaPile.remove(0);
     }
 }

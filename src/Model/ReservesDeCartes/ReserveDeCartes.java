@@ -7,17 +7,19 @@ import java.util.*;
 
 public abstract class ReserveDeCartes {
 
-    // =============================================== LES ATTRIBUTS ============================================== //
+    // =============================================== LES ATTRIBUTS ========================================== //
 
     protected List<Card> reserve = new LinkedList<Card>();
     private static int nombreDeCartes;
 
-    // =============================================== LE CONSTRUCTEUR =========================================== //
-    public ReserveDeCartes() {
 
+    // ============================================ LES GETTRES & SETTRES ===================================== //
+    public List<Card> getCartes() {
+        return reserve;
     }
 
     // =============================================== LES METHODES =========================================== //
+
 
     //ArrayDeque
 }

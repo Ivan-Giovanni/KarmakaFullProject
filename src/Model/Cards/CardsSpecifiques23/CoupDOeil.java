@@ -31,10 +31,17 @@ public class CoupDOeil extends Card {
     @Override
     public void executerCapacite(Partie partie) {
         /* Regarder la main du rival. Vous pouvez ensuite jouer une autre carte */
-        System.out.println("EXECUTION DE LA CAPCITE DE LA CARTE 'COUP D'OEIL'...\n");
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'COUP D'OEIL'...\n");
 
-        System.out.println(partie.getOpponentPlayer() + "\n");
-        partie.getActivePlayer().getMain().getCartesDeLaMain().remove(this);
+        if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
+            int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
+            partie.getFosse().addCard(
+                    partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexOfThis)
+            );
+        }
+
+        System.out.println("OPPONENT PLAYER'S Main: " +
+                partie.getOpponentPlayer().getMain().getCartesDeLaMain() + "\n");
 
         try {
             Thread.sleep(2000);
@@ -66,7 +73,6 @@ public class CoupDOeil extends Card {
             Thread.sleep(2000);
 
             partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
-            System.out.println(partie.getActivePlayer());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

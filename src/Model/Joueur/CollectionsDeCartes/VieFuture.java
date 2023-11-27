@@ -31,11 +31,11 @@ public class VieFuture extends CollectionDeCartes {
     // ============================================= ADD & REMOVE ============================================ //
     @Override
     public void addCard(Card carte) {
-
+        cartesDeLaVieFuture.add(carte);
     }
 
     @Override
     public Card removeCard() {
-        return null;
+        return cartesDeLaVieFuture.remove(0);
     }
 }

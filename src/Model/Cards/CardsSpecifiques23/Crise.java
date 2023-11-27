@@ -31,14 +31,35 @@ public class Crise extends Card {
     @Override
     public void executerCapacite(Partie partie) {
         /* Le joueur de votre choix defausse une de ses oeuvres */
-        System.out.println("EXECUTION DE LA CAPCITE DE LA CARTE 'CRISE'...\n");
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'CRISE'...\n");
 
-        partie.getActivePlayer().getMain().getCartesDeLaMain().remove(this);
+        if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
+            int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
+            partie.getFosse().addCard(
+                    partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexOfThis)
+            );
+        }
 
         if (!partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().isEmpty()) {
+            int taille = partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().size() - 1;
             Random random = new Random();
-            int index = random.nextInt();
-            partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().remove(index);
+            int index = random.nextInt(taille);
+
+            partie.getFosse().addCard(
+                    partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().remove(index)
+            );
         }
+        else {
+            System.out.println("OPPONENT PLAYER n'a pas assez de cartes dans son Oeuvre!");
+        }
+
+        System.out.println("\nOPPONENT PLAYER's Oeuvre: " +
+                partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre());
+        System.out.println("FOSSE: " +
+                partie.getFosse().getCartes());
+        System.out.println("•Nombre de cartes de la Fosse = " +
+                partie.getFosse().getCartes().size());
+        System.out.println("•Nombre de cartes de la Source = " +
+                partie.getSource().getCartes().size());
     }
 }

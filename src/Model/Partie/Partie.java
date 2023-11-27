@@ -73,6 +73,10 @@ public class Partie {
         return source;
     }
 
+    public Fosse getFosse() {
+        return fosse;
+    }
+
     public Joueur getActivePlayer() {
         return activePlayer;
     }
