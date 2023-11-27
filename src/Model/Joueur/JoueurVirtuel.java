@@ -12,24 +12,27 @@ import Model.Joueur.CollectionsDeCartes.VieFuture;
  */
 public class JoueurVirtuel extends Joueur{
 
-
+	private String strategie;
+	
     // ====================================== LE CONSTRUCTEUR ============================================ //
-    public JoueurVirtuel(String strategie) {
-        super.setNiveau(Niveau.BOUSIER);
-    }
+	public JoueurVirtuel(String pseudo, OptionDeJeu optionDeJeu, Main main, Oeuvre oeuvre, VieFuture vieFuture,
+			Pile pile, String strategie) {
+		super(pseudo, optionDeJeu, main, oeuvre, vieFuture, pile);
+		this.strategie = strategie;
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
-    public String toString() {
-        return "JoueurVirtuel{" +
-                "•Pseudo = " + "CPU"+
-                "  •Niveau = " + super.getNiveau() +
-                "  •Main = " + super.getMain().getCartesDeLaMain() +
-                "  •Oeuvre = " + super.getOeuvre().getCartesDeLOeuvre() +
-                "  •Pile = " + super.getPile().getCartesDeLaPile() +
-                "  •Vie Future = " + super.getVieFuture().getCartesDeLaVieFuture() +
-                "  •Reserve d'Anneaux Karmique = " + super.getReserveDAnneauxKarmique().getReserveDAnneaux() +
-                "}";
-    }
+	@Override
+	public String toString() {
+		return "JoueurVirtuel [strategie=" + strategie + ", niveau=" + niveau + ", pseudo=" + pseudo + ", optionDeJeu="
+				+ optionDeJeu + ", main=" + main + ", oeuvre=" + oeuvre + ", vieFuture=" + vieFuture + ", pile=" + pile
+				+ ", reserveDAnneauxKarmique=" + reserveDAnneauxKarmique + "]";
+	}
+
+	
+    
+
+	
 
     // Strategie // Faire jouer 02 jouers virtuels en meme temps
 }
