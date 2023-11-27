@@ -21,7 +21,7 @@ public class Roulette extends Card {
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
     public Roulette() {
-        super("Deni", 2, Couleur.ROUGE);
+        super("Roulette", 2, Couleur.ROUGE);
     }
 
 
@@ -31,7 +31,7 @@ public class Roulette extends Card {
     @Override
     public void executerCapacite(Partie partie) {
         /* Defaussez jusqu'a 02 cartes de votre main. Vous pouvez ensuite puiser a la source autant de cartes + 1 */
-        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'ROULETTES'...\n");
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'ROULETTE'...\n");
 
         if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
             int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
@@ -87,9 +87,9 @@ public class Roulette extends Card {
 
                     }
                     else if (nbreDeCartes == 2) {
-                        System.out.println("\nEntrez l'index de la 1ere carte a defausser: ");
+                        System.out.println("\nEntrez l'index de la 1ere carte a defausser(le plus grand index): ");
                         int indexAdefausser1 = keyboard.nextInt();
-                        System.out.println("\nEntrez l'index de la 2eme carte a defausser: ");
+                        System.out.println("\nEntrez l'index de la 2eme carte a defausser(le plus petit index): ");
                         int indexAdefausser2 = keyboard.nextInt();
 
                         System.out.println("\nLES CARTES DE VOTRE MAIN SONT DEFAUSSEE...");
@@ -98,7 +98,7 @@ public class Roulette extends Card {
                         partie.getFosse().addCard(
                                 partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexAdefausser1));
                         partie.getFosse().addCard(
-                                partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexAdefausser2));
+                                partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexAdefausser2 -1));
 
                         System.out.println("\nVOUS PUISEZ ENSUITE 03 CARTES A LA SOURCE...");
                         Thread.sleep(1000);
