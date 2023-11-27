@@ -98,7 +98,7 @@ public class Roulette extends Card {
                         partie.getFosse().addCard(
                                 partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexAdefausser1));
                         partie.getFosse().addCard(
-                                partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexAdefausser2 -1));
+                                partie.getActivePlayer().getMain().getCartesDeLaMain().remove(indexAdefausser2));
 
                         System.out.println("\nVOUS PUISEZ ENSUITE 03 CARTES A LA SOURCE...");
                         Thread.sleep(1000);
