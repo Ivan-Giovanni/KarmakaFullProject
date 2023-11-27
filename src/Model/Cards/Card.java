@@ -69,4 +69,32 @@ public abstract class Card {
      */
     public abstract void executerCapacite(Partie partie);
 
+    // ====================================== UTILISER POUR SES POINTS ===================================== //
+    public void utiliserPourSesPoints(Partie partie) {
+        try {
+
+            System.out.println("\nAJOUT DE LA CARTE A VOS OEUVRES...");
+            Thread.sleep(1000);
+
+            partie.getActivePlayer().getOeuvre().addCard(this);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ================================== UTILISER POUR LA VIE FUTURE ===================================== //
+    public void utiliserPourLaVieFuture(Partie partie) {
+        try {
+
+            System.out.println("\nAJOUT DE LA CARTE A VOTRE VIE FUTURE...");
+            Thread.sleep(1000);
+
+            partie.getActivePlayer().getVieFuture().addCard(this);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

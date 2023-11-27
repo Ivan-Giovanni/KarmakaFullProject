@@ -106,6 +106,7 @@ public abstract class Joueur {
 
     private void jouerPourSesPoints(Card carte) {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SES POINTS...\n");
+        carte.utiliserPourSesPoints(Partie.getPartie());
     }
 
     private void jouerPourSonPouvoir(Card carte) {
@@ -115,6 +116,7 @@ public abstract class Joueur {
 
     private void jouerPourLaVieFuture(Card carte) {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR LA VIE FUTURE...\n");
+        carte.utiliserPourLaVieFuture(Partie.getPartie());
     }
 
 
