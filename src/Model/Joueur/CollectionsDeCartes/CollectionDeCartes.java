@@ -14,44 +14,29 @@ import java.util.List;
  */
 public abstract class CollectionDeCartes {
 
-    //private static int nombreDeCartes;
+    private static int nombreDeCartes;
+    // ====================================== LES ATTRIBUTS ============================================ //
+    private List<Card> listeDeCartes = new ArrayList<>();
 
-    protected ArrayList<Card> listeDeCartes;
-        
     // ====================================== LES GETTERS ET SETTERS ========================================== //
-    /*protected void setNombreDeCartes(int nbre) {
+    protected void setNombreDeCartes(int nbre) {
         nombreDeCartes = nbre;
-    }*/
+    }
 
     // ========================================= LE CONSTRUCTEUR ============================================ //
-    public CollectionDeCartes() {
-		this.listeDeCartes = new ArrayList<Card>();
-	}
-    
-
-    @Override
-	public String toString() {
-		return "CollectionDeCartes [listeDeCartes=" + listeDeCartes + "]";
-	}
 
 
-	// ========================================= LES METHODES ============================================ //
-    //permet d'ajouter une carte à la collection 
+    // ========================================= LES METHODES ============================================ //
     public abstract void addCard(Card carte);
 
-	//permet de retirer une carte à la collection
     public abstract Card removeCard();
-    
-    //permet de retirer une carte spécifique de la liste
-    public abstract Card removeCard(int index);
-    
-   /* protected void decrementNombreDeCartes() {
+    protected void decrementNombreDeCartes() {
         nombreDeCartes -= 1;
     }
 
     protected void incrementNombreDeCartes() {
         nombreDeCartes += 1;
-    }*/
+    }
 
 
 }

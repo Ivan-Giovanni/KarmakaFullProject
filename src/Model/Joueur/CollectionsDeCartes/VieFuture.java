@@ -13,33 +13,29 @@ import java.util.List;
 public class VieFuture extends CollectionDeCartes {
 
     // =============================================== LES ATTRIBUTS ============================================ //
- 
+    private List<Card> cartesDeLaVieFuture;
 
     // ============================================= LE CONSTRUCTEUR ========================================= //
     public VieFuture() {
-        super();
+        cartesDeLaVieFuture = new ArrayList<Card>();
     }
 
     // =============================================== LES GETTERS ============================================ //
-    /*public List<Card> getCartesDeLaVieFuture() {
-        return th;
-    }*/
+    public List<Card> getCartesDeLaVieFuture() {
+        return cartesDeLaVieFuture;
+    }
 
 
     // ============================================= LES METHODES ============================================ //
 
     // ============================================= ADD & REMOVE ============================================ //
- // =============================================== LES METHODES ============================================ //
     @Override
     public void addCard(Card carte) {
-        this.listeDeCartes.add(carte);
+        cartesDeLaVieFuture.add(carte);
     }
+
     @Override
     public Card removeCard() {
-        return this.listeDeCartes.remove(0);
-    }
-    
-    public Card removeCard(int index) {
-        return this.listeDeCartes.remove(index);
+        return cartesDeLaVieFuture.remove(0);
     }
 }

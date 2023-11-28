@@ -32,6 +32,8 @@ public class Bassesse extends Card {
         /* Defausser 02 cartes au hasard de la main de votre rival */
         System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'BASSESSE'...\n");
 
+
+        // permet de defausser la carte en cours
         if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
             int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
             partie.getFosse().addCard(
@@ -39,6 +41,7 @@ public class Bassesse extends Card {
             );
         }
 
+        // Execution de la capacite
         if (partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() >= 2) {
             int tailleDeLaMain = partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() - 1;
             Random random = new Random();

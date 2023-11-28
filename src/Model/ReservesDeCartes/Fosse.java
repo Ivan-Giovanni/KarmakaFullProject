@@ -29,13 +29,13 @@ public class Fosse extends ReserveDeCartes {
             return fosse;
         }
         else {
-          return fosse;
+            return fosse;
         }
     }
 
     // =========================================== LES METHODES ========================================= //
     // =========================================== AJOUTER CARTE ========================================= //
-    
+
     public void addCard(Card carte) {
         reserve.add(carte);
     }

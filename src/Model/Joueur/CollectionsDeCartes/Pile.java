@@ -12,28 +12,28 @@ import java.util.List;
  */
 public class Pile extends CollectionDeCartes{
 
-    // =============================================== LES ATTRIBUTS ============================================ 
+    // =============================================== LES ATTRIBUTS ============================================ //
+    private List<Card> cartesDeLaPile;
 
     // ============================================= LE CONSTRUCTEUR ============================================ //
     public Pile() {
-        super();
+        cartesDeLaPile = new ArrayList<Card>();
     }
 
     // =============================================== LES GETTERS ============================================ //
-  
+    public List<Card> getCartesDeLaPile() {
+        setNombreDeCartes(2);
+        return cartesDeLaPile;
+    }
 
 
     // =============================================== LES METHODES ============================================ //
     @Override
     public void addCard(Card carte) {
-        this.listeDeCartes.add(carte);
+        cartesDeLaPile.add(carte);
     }
     @Override
     public Card removeCard() {
-        return this.listeDeCartes.remove(0);
-    }
-    
-    public Card removeCard(int index) {
-        return this.listeDeCartes.remove(index);
+        return cartesDeLaPile.remove(0);
     }
 }

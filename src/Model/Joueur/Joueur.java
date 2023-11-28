@@ -19,28 +19,17 @@ import Model.Partie.Partie;
 public abstract class Joueur {
 
     // ====================================== LES ATTRIBUTS ============================================ //
-    protected Niveau niveau;
-    protected String pseudo;
-    protected OptionDeJeu optionDeJeu;
-    protected Main main;
-    protected Oeuvre oeuvre;
-    protected VieFuture vieFuture;
-    protected Pile pile;
-    protected ReserveDAnneauxKarmique reserveDAnneauxKarmique;
+    private Niveau niveau;
+    private String pseudo;
+    private OptionDeJeu optionDeJeu;
 
-    // ====================================== CONSTRUCTEUR DE JOUEUR============================================ //
-    
-    public Joueur(String pseudo, OptionDeJeu optionDeJeu, Main main, Oeuvre oeuvre, VieFuture vieFuture,
-			Pile pile) {
-		this.niveau = Niveau.BOUSIER;
-		this.pseudo = pseudo;
-		this.optionDeJeu = optionDeJeu;
-		this.main = main;
-		this.oeuvre = oeuvre;
-		this.vieFuture = vieFuture;
-		this.pile = pile;
-		this.reserveDAnneauxKarmique = null;
-	}
+    private Main main = new Main();
+    private Oeuvre oeuvre = new Oeuvre();
+    private VieFuture vieFuture = new VieFuture();
+    private Pile pile = new Pile();
+    private ReserveDAnneauxKarmique reserveDAnneauxKarmique = new ReserveDAnneauxKarmique();
+
+    // ====================================== LES GETTERS ET SETTERS ============================================ //
 
     // ==================================== LES GETTERS & SETTERS ========================================== //
 
@@ -48,8 +37,7 @@ public abstract class Joueur {
         return niveau;
     }
 
-
-	public void setNiveau(Niveau niveau) {
+    public void setNiveau(Niveau niveau) {
         this.niveau = niveau;
     }
 
@@ -92,15 +80,9 @@ public abstract class Joueur {
     // ====================================== LES METHODES ============================================ //
 
     // ====================================== PIOCHER ============================================ //
-    /**
-     * Cette Methode permet au joueur de tirer une carte de sa pile pour l'ajoouter à la main
-     * @param carte
-     */
-    public void piocher() {
-        main.addCard(pile.removeCard());
+    public void piocher(Card carte) {
+        main.addCard(carte);
     }
-    
-    
 
     // ====================================== PASSER ============================================ //
     public void passer() {
@@ -136,7 +118,6 @@ public abstract class Joueur {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR LA VIE FUTURE...\n");
         carte.utiliserPourLaVieFuture(Partie.getPartie());
     }
-    
-    
+
 
 }
