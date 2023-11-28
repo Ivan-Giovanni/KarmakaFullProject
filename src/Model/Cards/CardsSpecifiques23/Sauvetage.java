@@ -155,7 +155,7 @@ public class Sauvetage extends Card {
                     System.out.println("\nAJOUT DE LA CARTE A VOTRE MAIN...");
                     Thread.sleep(1000);
 
-                    Card carteAajouter = partie.getFosse().getCartes().remove(partie.getFosse().getCartes().size() -1 - indexAajouter);
+                    Card carteAajouter = partie.getFosse().getCartes().remove(partie.getFosse().getCartes().size() - indexAajouter);
                     partie.getActivePlayer().getMain().addCard(carteAajouter);
 
                 }

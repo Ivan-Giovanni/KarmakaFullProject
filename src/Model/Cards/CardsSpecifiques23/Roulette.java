@@ -203,7 +203,7 @@ public class Roulette extends Card {
                         System.out.println(indexAdefausser1);
 
                         System.out.println("\nEntrez l'index de la 2eme carte a defausser(le plus petit index): ");
-                        int indexAdefausser2 = random.nextInt(0, partie.getActivePlayer().getMain().getCartesDeLaMain().size());
+                        int indexAdefausser2 = random.nextInt(0, partie.getActivePlayer().getMain().getCartesDeLaMain().size() - 1);
                         System.out.println(indexAdefausser2);
 
                         System.out.println("\nLES CARTES DE VOTRE MAIN SONT DEFAUSSEE...");

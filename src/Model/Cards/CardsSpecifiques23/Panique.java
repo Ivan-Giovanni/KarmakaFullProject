@@ -121,7 +121,11 @@ public class Panique extends Card {
             System.out.println(partie.getActivePlayer() + "\n");
 
             System.out.println("Entrez l'index de la carte de la main a jouer: ");
-            int index = keyboard.nextInt();
+
+            Random random2 = new Random();
+            int index = random2.nextInt(partie.getActivePlayer().getMain().getCartesDeLaMain().size());
+            System.out.println(index);
+
             Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
 
             Thread.sleep(2000);
@@ -131,7 +135,7 @@ public class Panique extends Card {
                     •0 = Jouer pour ses points
                     •1 = Jouer pour ses pouvoirs
                     •2 = Jouer pour la vie future""");
-            int index2 = keyboard.nextInt();
+            int index2 = random.nextInt(0, 3);
             if (index2 == 0) {
                 partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
             } else if (index2 == 1) {

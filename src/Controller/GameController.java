@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Cards.Card;
+import Model.Cards.CardsSpecifiques23.Sauvetage;
 import Model.Joueur.Joueur;
 import Model.Joueur.JoueurReel;
 import Model.Joueur.JoueurVirtuel;
@@ -11,6 +12,7 @@ import Model.Partie.TypeDePartie;
 import View.GameViewable;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * @author giovannizangue
@@ -21,6 +23,9 @@ public class GameController {
     // =============================================== LES ATTRIBUTS ======================================== //
     GameViewable view;
     Partie partie = Partie.getPartie();
+
+    Scanner keyboard = new Scanner(System.in);
+    Random random = new Random();
 
     // ============================================ LE CONSTRUCTEUR ========================================= //
     public GameController(GameViewable view, Partie partie) {
@@ -59,13 +64,40 @@ public class GameController {
             while (partie.getEtatDeLaPartie() != EtatDeLaPartie.FINISHED) {
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.JOUEUR_REEL_PLAYING) {
                     piocher();
-                    jouer();
-                    endTurn();
+
+                    System.out.println("""
+                            
+                            VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
+                            •0 = Jouer
+                            •1 = Passer""");
+                    int reponse = keyboard.nextInt();
+                    if (reponse == 0) {
+                        jouer();
+                        endTurn();
+                    }
+                    else if(reponse == 1)
+                        endTurn();
+                    else
+                        System.out.println("Invalid Entry");
+
                 }
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     piocher();
-                    jouerCPU();
-                    endTurn();
+
+                    System.out.println("""
+
+                            VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
+                            •0 = Jouer
+                            •1 = Passer""");
+
+                    int reponse = random.nextInt();
+                    if (reponse % 5 != 0) {
+                        jouerCPU();
+                        endTurn();
+                    }
+                    else
+                        endTurn();
+
                 }
 
             }
@@ -94,13 +126,39 @@ public class GameController {
             while (partie.getEtatDeLaPartie() != EtatDeLaPartie.FINISHED) {
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_2_PLAYING) {
                     piocher();
-                    jouerCPU();
-                    endTurn();
+
+                    System.out.println("""
+
+                            VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
+                            •0 = Jouer
+                            •1 = Passer""");
+
+                    int reponse = random.nextInt();
+                    if (reponse % 5 != 0) {
+                        jouerCPU();
+                        endTurn();
+                    }
+                    else
+                        endTurn();
+
                 }
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     piocher();
-                    jouerCPU();
-                    endTurn();
+
+                    System.out.println("""
+
+                            VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
+                            •0 = Jouer
+                            •1 = Passer""");
+
+                    int reponse = random.nextInt();
+                    if (reponse % 5 != 0) {
+                        jouerCPU();
+                        endTurn();
+                    }
+                    else
+                        endTurn();
+
                 }
 
             }
@@ -257,14 +315,25 @@ public class GameController {
 
     // ====================================== PIOCHER ============================================ //
     public void piocher() {
-        System.out.println("\nACTIVE PLAYER PIOCHE UNE CARTE...\n");
+
         try {
+            System.out.println("\nPHASE DE PIOCHE...\n");
             Thread.sleep(1500);
-            partie.getActivePlayer().getMain().getCartesDeLaMain().add(partie.getSource().removeCard());
-            System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain());
+
+            if (partie.getActivePlayer().getMain().getCartesDeLaMain().size() >= 6) {
+                System.out.println("\nVOUS AVEZ DEJA ASSEZ DE CARTES DANS LA MAIN");
+                Thread.sleep(500);
+            }
+            else {
+                System.out.println("\nACTIVE PLAYER PIOCHE UNE CARTE...\n");
+                Thread.sleep(1500);
+                partie.getActivePlayer().getMain().getCartesDeLaMain().add(partie.getSource().removeCard());
+                System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain());
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     // ====================================== JOUER ============================================ //
@@ -346,11 +415,6 @@ public class GameController {
     }
 
 
-    // ==================================== VERIFIER_ETAT_DE_LA_PARTIE ==================================== //
-    public void verifierEtatDeLaPartie() {
-
-        //partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
-    }
 
     // ==================================== SET_OPTION_DE_JEU ==================================== //
     public void setOptionDeJeu(int index) {
@@ -364,16 +428,6 @@ public class GameController {
     }
 
 
-    public void commencerLaPartie() {
-        /* */
-        view.afficherNomDuJoueur();
-    }
-
-    public void nextAction() {
-        /* Sucession de switch case, d'action performed, etc... */
-        /* */
-        view.doSomething();
-    }
 
     public void determinerLeGagnant() {
         /* */
