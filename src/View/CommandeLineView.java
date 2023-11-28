@@ -14,6 +14,7 @@ public class CommandeLineView implements GameViewable {
 
     // =================================== PUBLIC STATIC VOID MAIN ========================================== //
     public static void main(String[] args) {
+
         //GameViewables views = new GameViewables();
         CommandeLineView myView = new CommandeLineView();
         //views.addViewable(myView);
