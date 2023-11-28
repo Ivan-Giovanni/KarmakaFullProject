@@ -3,6 +3,7 @@ package Controller;
 import Model.Cards.Card;
 import Model.Joueur.Joueur;
 import Model.Joueur.JoueurReel;
+import Model.Joueur.JoueurVirtuel;
 import Model.Joueur.OptionDeJeu;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
@@ -61,17 +62,48 @@ public class GameController {
                     jouer();
                     endTurn();
                 }
-                while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_PLAYING) {
+                while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     piocher();
                     jouerCPU();
                     endTurn();
                 }
 
-
             }
 
 
         } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
+
+            // CREER LE JOUEUR
+            creerLeJoueur();
+
+            // MELANGER LA SOURCE
+            melangerLaSource();
+
+            // DISTRIBUER LA MAIN
+            distribuerLesCartesDeLaMain();
+            afficherListeDesJoueurs();
+
+            // DISTRIBUER LA PILE
+            distribuerLesCartesDeLaPile();
+            afficherListeDesJoueurs();
+
+            // WHO START
+            whoStarts(partie.getListeDeJoueurs().get(0), partie.getListeDeJoueurs().get(1));
+
+            // NEXT ACTION
+            while (partie.getEtatDeLaPartie() != EtatDeLaPartie.FINISHED) {
+                while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_2_PLAYING) {
+                    piocher();
+                    jouerCPU();
+                    endTurn();
+                }
+                while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
+                    piocher();
+                    jouerCPU();
+                    endTurn();
+                }
+
+            }
 
         }
     }
@@ -87,16 +119,23 @@ public class GameController {
     }
 
     public void creerLeJoueur() {
-        while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
-            view.promptForNomDuJoueur();
-            System.out.println("\nADDING PLAYERS...\n");
-            try {
-                Thread.sleep(1500);
-                partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
-                afficherListeDesJoueurs();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
+
+            while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CREATING) {
+                view.promptForNomDuJoueur();
+                System.out.println("\nADDING PLAYERS...\n");
+                try {
+                    Thread.sleep(1500);
+                    partie.setEtatDeLaPartie(EtatDeLaPartie.PLAYERS_ADDED);
+                    afficherListeDesJoueurs();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
+        }
+       else {
+            partie.ajouterJoueurCPUvsCPU();
         }
     }
 
@@ -164,13 +203,14 @@ public class GameController {
                 partie.setOpponentPlayer(joueur1);
             }
 
-            // Ici je set ActivePlayer a joueurReel pour effectuer les tests. On va modifier apres
-            partie.setActivePlayer(joueur1);
-            partie.setOpponentPlayer(joueur2);
-            partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
-
             System.out.println("•ACTIVE PLAYER: " + partie.getActivePlayer());
             System.out.println("•OPPONENT PLAYER: " + partie.getOpponentPlayer());
+
+            if (partie.getActivePlayer() instanceof JoueurReel)
+                partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
+            else if(partie.getActivePlayer() instanceof JoueurVirtuel)
+                partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -185,16 +225,30 @@ public class GameController {
 
         try {
 
-            if (partie.getEtatDeLaPartie() == EtatDeLaPartie.JOUEUR_REEL_PLAYING) {
-                partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_PLAYING);
-                System.out.println("\nC'EST AU TOUR DU CPU DE JOUER!\n");
-                Thread.sleep(3000);
+            if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
+                if (partie.getEtatDeLaPartie() == EtatDeLaPartie.JOUEUR_REEL_PLAYING) {
+                    partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
+                    System.out.println("\n****************************** C'EST AU TOUR DU CPU DE JOUER! ******************************\n");
+                    Thread.sleep(3000);
+                } else if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
+                    partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
+                    System.out.println("\n****************************** C'EST A VOTRE TOUR DE JOUER! ******************************\n");
+                    Thread.sleep(3000);
+                }
             }
-            else if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_PLAYING) {
-                partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
-                System.out.println("\nC'EST A VOTRE TOUR DE JOUER!\n");
-                Thread.sleep(3000);
+            else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
+                if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
+                    partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_2_PLAYING);
+                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_2 DE JOUER! ******************************\n");
+                    Thread.sleep(3000);
+                } else if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_2_PLAYING) {
+                    partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
+                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_1 DE JOUER! ******************************\n");
+                    Thread.sleep(3000);
+                }
             }
+
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -242,7 +296,7 @@ public class GameController {
             partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
             System.out.println(partie.getActivePlayer());
 
-            System.out.println("\nACTIVE PLAYER'S TOUR EST TERMINE!\n");
+            System.out.println("\n****************************** ACTIVE PLAYER'S TOUR EST TERMINE! ******************************\n");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -256,13 +310,26 @@ public class GameController {
 
             System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
 
+            System.out.println("\nEntrez l'index de la carte de la main a jouer: ");
+
             Random random = new Random();
-            int index = random.nextInt(4);
+            int index = random.nextInt(0, partie.getActivePlayer().getMain().getCartesDeLaMain().size());
+
+            System.out.println(index);
+
             Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
 
             Thread.sleep(1500);
 
-            int index2 = random.nextInt(3);
+            System.out.println("""
+                    Choisir l'option de jeu:\s
+                    •0 = Jouer pour ses points
+                    •1 = Jouer pour ses pouvoirs
+                    •2 = Jouer pour la vie future""");
+
+            int index2 = random.nextInt(0, 3);
+            System.out.println(index2);
+
             setOptionDeJeu(index2);
             OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
             System.out.println("\nOption de jeu = " + optionDeJeu);
@@ -272,12 +339,11 @@ public class GameController {
             partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
             System.out.println(partie.getActivePlayer());
 
-            System.out.println("\nACTIVE PLAYER'S TOUR EST TERMINE!\n");
+            System.out.println("\n****************************** ACTIVE PLAYER'S TOUR EST TERMINE! ******************************\n");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-
 
 
     // ==================================== VERIFIER_ETAT_DE_LA_PARTIE ==================================== //

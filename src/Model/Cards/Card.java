@@ -14,7 +14,6 @@ public abstract class Card {
 
     // ====================================== LES ATTRIBUTS ============================================ //
     private String nom;
-    private boolean estVisible = false;
     private int point;
     private Couleur couleur;
 
@@ -22,10 +21,6 @@ public abstract class Card {
     // =============================================== GETTERS  ======================================= //
     public String getNom() {
         return nom;
-    }
-
-    public boolean isEstVisible() {
-        return estVisible;
     }
 
     public int getPoint() {
@@ -56,7 +51,7 @@ public abstract class Card {
     // =========================================== TOSTRING ================================================ //
     @Override
     public String toString() {
-        return "(" + nom + ", " + point + ", " + couleur + ", " + estVisible + ")";
+        return "(" + nom + ", " + point + ", " + couleur +  ")";
     }
 
 
@@ -68,6 +63,7 @@ public abstract class Card {
      * Executer la capacite d'une carte
      */
     public abstract void executerCapacite(Partie partie);
+    public abstract void executerCapaciteCPU(Partie partie, int strategie);
 
     // ====================================== UTILISER POUR SES POINTS ===================================== //
     public void utiliserPourSesPoints(Partie partie) {

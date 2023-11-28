@@ -3,7 +3,7 @@ package Model.Partie;
 public enum EtatDeLaPartie {
 
     CREATING, PLAYERS_ADDED,
-    JOUEUR_REEL_PLAYING, CPU_PLAYING, FINISHED;
+    JOUEUR_REEL_PLAYING, CPU_1_PLAYING, CPU_2_PLAYING, FINISHED;
 
     @Override
     public String toString() {
@@ -16,8 +16,11 @@ public enum EtatDeLaPartie {
         else if (this == JOUEUR_REEL_PLAYING) {
             return "JOUEUR_REEL_PLAYING...";
         }
-        else if (this == CPU_PLAYING) {
-            return "CPU_PLAYING";
+        else if (this == CPU_1_PLAYING) {
+            return "CPU_1_PLAYING";
+        }
+        else if (this == CPU_2_PLAYING) {
+            return "CPU_2_PLAYING";
         }
         else {
             return "FINISHED...";

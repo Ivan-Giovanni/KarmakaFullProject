@@ -96,7 +96,7 @@ public abstract class Joueur {
                 jouerPourSesPoints(carte);
                 break;
             case POUR_SON_POUVOIR:
-                jouerPourSonPouvoir(carte);
+                jouerPourSonPouvoir(carte, Partie.getPartie());
                 break;
             case POUR_LA_VIE_FUTURE:
                 jouerPourLaVieFuture(carte);
@@ -109,9 +109,15 @@ public abstract class Joueur {
         carte.utiliserPourSesPoints(Partie.getPartie());
     }
 
-    private void jouerPourSonPouvoir(Card carte) {
+    private void jouerPourSonPouvoir(Card carte, Partie partie) {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SON POUVOIR...\n");
-        carte.executerCapacite(Partie.getPartie());
+
+        if(partie.getActivePlayer() instanceof JoueurVirtuel) {
+            carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
+        }
+        else {
+            carte.executerCapacite(Partie.getPartie());
+        }
     }
 
     private void jouerPourLaVieFuture(Card carte) {
