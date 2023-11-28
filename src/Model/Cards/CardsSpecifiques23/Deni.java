@@ -5,6 +5,7 @@ import Model.Cards.Couleur;
 import Model.Joueur.OptionDeJeu;
 import Model.Partie.Partie;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,7 @@ import java.util.Scanner;
 public class Deni extends Card {
 
     Scanner keyboard = new Scanner(System.in);
+    Random random = new Random(2);
 
     // =========================================== LE CONSTRUCTEUR ========================================= //
     public Deni() {

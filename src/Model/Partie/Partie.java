@@ -101,13 +101,13 @@ public class Partie {
     // ================================== AJOUTER_JOUEURS_REEL_VS_CPU ======================================= //
     public void ajouterJoueurReelVsCPU(Joueur joueur) {
         listeDeJoueurs.add(joueur);
-        listeDeJoueurs.add(new JoueurVirtuel("strategie1")); // On va modifier apres
+        listeDeJoueurs.add(new JoueurVirtuel(1)); // On va modifier apres
     }
 
     // ================================== AJOUTER_JOUEURS_CPU_VS_CPU ======================================= //
     public void ajouterJoueurCPUvsCPU() {
-        listeDeJoueurs.add(new JoueurVirtuel("Strategie1")); // On va modifier apres
-        listeDeJoueurs.add(new JoueurVirtuel("Strategie2")); // On va modifier apres
+        listeDeJoueurs.add(new JoueurVirtuel(1)); // On va modifier apres
+        listeDeJoueurs.add(new JoueurVirtuel(2)); // On va modifier apres
     }
 
 

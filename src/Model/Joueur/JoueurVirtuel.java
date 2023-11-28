@@ -12,12 +12,26 @@ import Model.Joueur.CollectionsDeCartes.VieFuture;
  */
 public class JoueurVirtuel extends Joueur{
 
+    private int strategie;
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
-    public JoueurVirtuel(String strategie) {
+    public JoueurVirtuel(int strategie) {
         super.setNiveau(Niveau.BOUSIER);
+        this.strategie = strategie;
     }
 
+    // ===================================== GETTERS & SETTERS ======================================= //
+    public int getStrategie() {
+        return strategie;
+    }
+
+    public void setStrategie(int strategie) {
+        this.strategie = strategie;
+    }
+
+
+
+    // ===================================== TO_STRING ======================================= //
     @Override
     public String toString() {
         return "JoueurVirtuel{" +

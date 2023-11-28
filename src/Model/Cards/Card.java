@@ -71,12 +71,23 @@ public abstract class Card {
 
     // ====================================== UTILISER POUR SES POINTS ===================================== //
     public void utiliserPourSesPoints(Partie partie) {
+
         try {
 
-            System.out.println("\nAJOUT DE LA CARTE A VOS OEUVRES...");
+            System.out.println("\nAJOUT DE LA CARTE A VOS OEUVRES...\n");
             Thread.sleep(1000);
 
             partie.getActivePlayer().getOeuvre().addCard(this);
+            partie.getActivePlayer().getMain().getCartesDeLaMain().remove(this);
+
+            System.out.println("\nOPPONENT PLAYER's Oeuvre: " +
+                    partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre());
+            System.out.println("FOSSE: " +
+                    partie.getFosse().getCartes());
+            System.out.println("•Nombre de cartes de la Fosse = " +
+                    partie.getFosse().getCartes().size());
+            System.out.println("•Nombre de cartes de la Source = " +
+                    partie.getSource().getCartes().size());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -85,12 +96,23 @@ public abstract class Card {
 
     // ================================== UTILISER POUR LA VIE FUTURE ===================================== //
     public void utiliserPourLaVieFuture(Partie partie) {
+
         try {
 
-            System.out.println("\nAJOUT DE LA CARTE A VOTRE VIE FUTURE...");
+            System.out.println("\nAJOUT DE LA CARTE A VOTRE VIE FUTURE...\n");
             Thread.sleep(1000);
 
             partie.getActivePlayer().getVieFuture().addCard(this);
+            partie.getActivePlayer().getMain().getCartesDeLaMain().remove(this);
+
+            System.out.println("\nOPPONENT PLAYER's Oeuvre: " +
+                    partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre());
+            System.out.println("FOSSE: " +
+                    partie.getFosse().getCartes());
+            System.out.println("•Nombre de cartes de la Fosse = " +
+                    partie.getFosse().getCartes().size());
+            System.out.println("•Nombre de cartes de la Source = " +
+                    partie.getSource().getCartes().size());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
