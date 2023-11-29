@@ -106,44 +106,45 @@ public class Lendemain extends Card {
 
             System.out.println(partie.getActivePlayer() + "\n");
 
-            System.out.println("Entrez l'index de la carte de la main a jouer: ");
-            int index = random.nextInt(0, partie.getActivePlayer().getMain().getCartesDeLaMain().size());
-            System.out.println(index);
+            if (partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty()) {
+                System.out.println("\nVous n'avez plus aucune carte dans votre Main\n");
+            }
+            else {
 
-            Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+                System.out.println("Entrez l'index de la carte de la main a jouer: ");
 
-            Thread.sleep(2000);
+                Random random2 = new Random();
+                int index = random2.nextInt(partie.getActivePlayer().getMain().getCartesDeLaMain().size());
+                System.out.println(index);
 
-            System.out.println("""
+                Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+
+                Thread.sleep(2000);
+
+                System.out.println("""
                     Choisir l'option de jeu:\s
                     •0 = Jouer pour ses points
                     •1 = Jouer pour ses pouvoirs
                     •2 = Jouer pour la vie future""");
 
-            int index2;
+                int index2 = random.nextInt(0, 3);
 
-            if (random.nextInt() % 10 == 0)
-                index2 = 0;
-            else if (random.nextInt() % 12 == 0)
-                index2 = 2;
-            else
-                index2 = 1;
+                if (index2 == 0) {
+                    partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
+                } else if (index2 == 1) {
+                    partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
+                } else {
+                    partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+                }
+                OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
+                System.out.println("\nOption de jeu = " + optionDeJeu);
 
-            System.out.println(index2);
+                Thread.sleep(2000);
 
-            if (index2 == 0) {
-                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
-            } else if (index2 == 1) {
-                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
-            } else {
-                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+                partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
+
             }
-            OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
-            System.out.println("\nOption de jeu = " + optionDeJeu);
 
-            Thread.sleep(2000);
-
-            partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

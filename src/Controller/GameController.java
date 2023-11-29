@@ -63,6 +63,7 @@ public class GameController {
             // NEXT ACTION
             while (partie.getEtatDeLaPartie() != EtatDeLaPartie.FINISHED) {
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.JOUEUR_REEL_PLAYING) {
+                    compterLesPoints();
                     piocher();
 
                     System.out.println("""
@@ -73,11 +74,9 @@ public class GameController {
                     int reponse = keyboard.nextInt();
                     if (reponse == 0) {
                         jouer();
-                        compterLesPoints();
                         endTurn();
                     }
                     else if(reponse == 1) {
-                        compterLesPoints();
                         endTurn();
                     }
 
@@ -89,6 +88,7 @@ public class GameController {
 
                 }
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
+                    compterLesPoints();
                     piocher();
 
                     System.out.println("""
@@ -100,11 +100,9 @@ public class GameController {
                     int reponse = random.nextInt();
                     if (reponse % 5 != 0) {
                         jouerCPU();
-                        compterLesPoints();
                         endTurn();
                     }
                     else {
-                        compterLesPoints();
                         endTurn();
                     }
 
@@ -135,6 +133,7 @@ public class GameController {
             // NEXT ACTION
             while (partie.getEtatDeLaPartie() != EtatDeLaPartie.FINISHED) {
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_2_PLAYING) {
+                    compterLesPoints();
                     piocher();
 
                     System.out.println("""
@@ -146,16 +145,15 @@ public class GameController {
                     int reponse = random.nextInt();
                     if (reponse % 5 != 0) {
                         jouerCPU();
-                        compterLesPoints();
                         endTurn();
                     }
                     else {
-                        compterLesPoints();
                         endTurn();
                     }
 
                 }
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
+                    compterLesPoints();
                     piocher();
 
                     System.out.println("""
@@ -167,11 +165,9 @@ public class GameController {
                     int reponse = random.nextInt();
                     if (reponse % 5 != 0) {
                         jouerCPU();
-                        compterLesPoints();
                         endTurn();
                     }
                     else {
-                        compterLesPoints();
                         endTurn();
                     }
 
@@ -304,22 +300,26 @@ public class GameController {
             if (partie.getTypeDePartie() == TypeDePartie.JOUEUR_REEL_VS_CPU) {
                 if (partie.getEtatDeLaPartie() == EtatDeLaPartie.JOUEUR_REEL_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
-                    System.out.println("\n****************************** C'EST AU TOUR DU CPU DE JOUER! ******************************\n");
+                    System.out.println("\n****************************** C'EST AU TOUR DU CPU DE JOUER! " +
+                            "******************************\n");
                     Thread.sleep(3000);
                 } else if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
-                    System.out.println("\n****************************** C'EST A VOTRE TOUR DE JOUER! ******************************\n");
+                    System.out.println("\n****************************** C'EST A VOTRE TOUR DE JOUER! " +
+                            "******************************\n");
                     Thread.sleep(3000);
                 }
             }
             else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
                 if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_2_PLAYING);
-                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_2 DE JOUER! ******************************\n");
+                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_2 DE JOUER! " +
+                            "******************************\n");
                     Thread.sleep(3000);
                 } else if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_2_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
-                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_1 DE JOUER! ******************************\n");
+                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_1 DE JOUER! " +
+                            "******************************\n");
                     Thread.sleep(3000);
                 }
             }
@@ -338,14 +338,16 @@ public class GameController {
             System.out.println("\nPHASE DE PIOCHE...\n");
             Thread.sleep(1500);
 
-            if (partie.getActivePlayer().getMain().getCartesDeLaMain().size() >= 6) {
-                System.out.println("\nVOUS AVEZ DEJA ASSEZ DE CARTES DANS LA MAIN");
+            if (partie.getActivePlayer().getPile().getCartesDeLaPile().isEmpty()) {
+                System.out.println("\nVOUS N'AVEZ AUCUNE CARTE DANS VOTRE PILE");
                 Thread.sleep(500);
             }
             else {
                 System.out.println("\nACTIVE PLAYER PIOCHE UNE CARTE...\n");
                 Thread.sleep(1500);
-                partie.getActivePlayer().getMain().getCartesDeLaMain().add(partie.getSource().removeCard());
+                partie.getActivePlayer().getMain().getCartesDeLaMain().add(
+                        partie.getActivePlayer().getPile().removeCard()
+                );
                 System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain());
             }
         } catch (InterruptedException e) {
@@ -383,7 +385,8 @@ public class GameController {
             partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
             System.out.println(partie.getActivePlayer());
 
-            System.out.println("\n****************************** ACTIVE PLAYER'S TOUR EST TERMINE! ******************************\n");
+            System.out.println("\n****************************** ACTIVE PLAYER'S TOUR EST TERMINE! " +
+                    "******************************\n");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -397,44 +400,47 @@ public class GameController {
 
             System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
 
-            System.out.println("\nEntrez l'index de la carte de la main a jouer: ");
+            if(partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty())
+                System.out.println("\nVous n'avez plus aucune carte dans votre Main\n");
 
-            Random random = new Random();
-            int index = random.nextInt(0, partie.getActivePlayer().getMain().getCartesDeLaMain().size());
+            else {
 
-            System.out.println(index);
+                System.out.println("\nEntrez l'index de la carte de la main a jouer: ");
 
-            Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+                Random random = new Random();
+                int index = random.nextInt(0, partie.getActivePlayer().getMain().getCartesDeLaMain().size());
 
-            Thread.sleep(1500);
+                System.out.println(index);
 
-            System.out.println("""
+                Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+
+                Thread.sleep(1500);
+
+                System.out.println("""
                     Choisir l'option de jeu:\s
                     •0 = Jouer pour ses points
                     •1 = Jouer pour ses pouvoirs
                     •2 = Jouer pour la vie future""");
 
-            int index2;
+                int index2 = random.nextInt(0, 3);
 
-            if (random.nextInt() % 10 == 0)
-                index2 = 0;
-            else if (random.nextInt() % 12 == 0)
-                index2 = 2;
-            else
-                index2 = 1;
+                System.out.println(index2);
 
-            System.out.println(index2);
+                setOptionDeJeu(index2);
+                OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
+                System.out.println("\nOption de jeu = " + optionDeJeu);
 
-            setOptionDeJeu(index2);
-            OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
-            System.out.println("\nOption de jeu = " + optionDeJeu);
+                Thread.sleep(1500);
 
-            Thread.sleep(1500);
+                partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
+                System.out.println(partie.getActivePlayer());
 
-            partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
-            System.out.println(partie.getActivePlayer());
+                System.out.println("\n****************************** ACTIVE PLAYER'S TOUR EST TERMINE! ********" +
+                        "**********************\n");
 
-            System.out.println("\n****************************** ACTIVE PLAYER'S TOUR EST TERMINE! ******************************\n");
+            }
+
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -458,7 +464,8 @@ public class GameController {
     public void compterLesPoints() {
         try {
 
-            if (partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty()) {
+            if (partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty() &&
+                    partie.getActivePlayer().getPile().getCartesDeLaPile().isEmpty()) {
                 int nombreDePointsTotal = partie.getActivePlayer().getOeuvre().CalculerNombreDePoints();
                 int nbreDePointsMosaique = 0;
                 int nombreDAnneauxKarmiques = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
@@ -471,49 +478,132 @@ public class GameController {
 
                 if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 4 &&
                 partie.getActivePlayer().getNiveau() == Niveau.BOUSIER) {
-                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN SERPENT 🥳🥳🥳🥳🥳🥳🥳\n");
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN SERPENT " +
+                            "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
                     partie.getActivePlayer().setNiveau(Niveau.SERPENT);
 
-                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                    // On defausse les Oeuvres
+                    int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
+                    for (int i=0; i<tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
+
+                    // Vider la reserve d'anneaux karmique
+                    int tailleDeLaReserve = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
+                    for (int i=0; i<tailleDeLaReserve; i++) {
+                        partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().remove(0);
+                    }
+
+                    // On prend toutes les cartes de la Vie Future pour composer une nouvelle main
+                    int tailleDeLaVieFuture = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size();
+                    for(int i=0; i<tailleDeLaVieFuture; i++) {
+                        partie.getActivePlayer().getMain().addCard(partie.getActivePlayer().getVieFuture().removeCard());
+                    }
+
+                    // Creer une nouvelle Pile
+                    int tailleDeLaMain = partie.getActivePlayer().getMain().getCartesDeLaMain().size();
+                    if (tailleDeLaMain <= 6 ) {
+                        while (partie.getActivePlayer().getMain().getCartesDeLaMain().size() +
+                        partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
+                            partie.getActivePlayer().getPile().addCard(partie.getSource().removeCard());
+                        }
+                    }
+
+                    endTurn();
 
                 }
                 else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 5 &&
                         partie.getActivePlayer().getNiveau() == Niveau.SERPENT) {
-                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN LOUP 🥳🥳🥳🥳🥳🥳🥳\n");
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN LOUP" +
+                            " 🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
                     partie.getActivePlayer().setNiveau(Niveau.LOUP);
 
-                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                    // On defausse les Oeuvres
+                    int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
+                    for (int i=0; i<tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
+
+                    // Vider la reserve d'anneaux karmique
+                    int tailleDeLaReserve = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
+                    for (int i=0; i<tailleDeLaReserve; i++) {
+                        partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().remove(0);
+                    }
+
+                    // On prend toutes les cartes de la Vie Future pour composer une nouvelle main
+                    int tailleDeLaVieFuture = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size();
+                    for(int i=0; i<tailleDeLaVieFuture; i++) {
+                        partie.getActivePlayer().getMain().addCard(partie.getActivePlayer().getVieFuture().removeCard());
+                    }
+
+                    // Creer une nouvelle Pile
+                    int tailleDeLaMain = partie.getActivePlayer().getMain().getCartesDeLaMain().size();
+                    if (tailleDeLaMain <= 6 ) {
+                        while (partie.getActivePlayer().getMain().getCartesDeLaMain().size() +
+                                partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
+                            partie.getActivePlayer().getPile().addCard(partie.getSource().removeCard());
+                        }
+                    }
+
+                    endTurn();
 
                 }
                 else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 6 &&
                         partie.getActivePlayer().getNiveau() == Niveau.LOUP) {
-                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN PRIMATE 🥳🥳🥳🥳🥳🥳🥳\n");
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN PRIMATE " +
+                            "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
                     partie.getActivePlayer().setNiveau(Niveau.PRIMATE);
 
-                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                    // On defausse les Oeuvres
+                    int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
+                    for (int i=0; i<tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
+
+                    // Vider la reserve d'anneaux karmique
+                    int tailleDeLaReserve = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
+                    for (int i=0; i<tailleDeLaReserve; i++) {
+                        partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().remove(0);
+                    }
+
+                    // On prend toutes les cartes de la Vie Future pour composer une nouvelle main
+                    int tailleDeLaVieFuture = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size();
+                    for(int i=0; i<tailleDeLaVieFuture; i++) {
+                        partie.getActivePlayer().getMain().addCard(partie.getActivePlayer().getVieFuture().removeCard());
+                    }
+
+                    // Creer une nouvelle Pile
+                    int tailleDeLaMain = partie.getActivePlayer().getMain().getCartesDeLaMain().size();
+                    if (tailleDeLaMain <= 6 ) {
+                        while (partie.getActivePlayer().getMain().getCartesDeLaMain().size() +
+                                partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
+                            partie.getActivePlayer().getPile().addCard(partie.getSource().removeCard());
+                        }
+                    }
+
+                    endTurn();
 
                 }
                 else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 7 &&
                         partie.getActivePlayer().getNiveau() == Niveau.PRIMATE) {
-                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS AVEZ ATTEINT LA TRANSCENDANCE 🥳🥳🥳🥳🥳🥳🥳\n");
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS AVEZ ATTEINT LA TRANSCENDANCE " +
+                            "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
                     partie.getActivePlayer().setNiveau(Niveau.TRANSCENDANCE);
 
-                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                    int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
+                    for (int i=0; i<tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
 
-                    System.out.println("\n🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆 VOUS AVEZ GAGNE 🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n");
+                    System.out.println("\n🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆 VOUS AVEZ GAGNE " +
+                            "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n");
                     partie.setEtatDeLaPartie(EtatDeLaPartie.FINISHED);
+                    System.exit(0);
 
                 }
                 else {
                     partie.getActivePlayer().getReserveDAnneauxKarmique().addAnneauKarmique(new AnneauKarmique());
+                    partie.getActivePlayer().getMain().addCard(partie.getSource().removeCard());
                 }
 
 
@@ -536,7 +626,7 @@ public class GameController {
                 int tailleDeLaFosse = partie.getFosse().getCartes().size();
 
                 for (int i=0; i<tailleDeLaFosse; i++) {
-                    partie.getSource().addCard(partie.getFosse().getCartes().remove(0));
+                    partie.getSource().getCartes().add(partie.getFosse().getCartes().remove(0));
                 }
 
                 partie.getSource().melanger();

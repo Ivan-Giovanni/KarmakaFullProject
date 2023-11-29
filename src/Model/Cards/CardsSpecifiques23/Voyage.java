@@ -106,44 +106,52 @@ public class Voyage extends Card {
 
             System.out.println(partie.getActivePlayer() + "\n");
 
-            System.out.println("Entrez l'index de la carte de la main a jouer: ");
+            if (partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty()) {
+                System.out.println("\nVous n'avez plus aucune carte dans votre Main\n");
+            }
+            else {
 
-            Random random = new Random();
-            int index = random.nextInt(partie.getActivePlayer().getMain().getCartesDeLaMain().size());
-            System.out.println(index);
+                System.out.println("Entrez l'index de la carte de la main a jouer: ");
 
-            Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+                Random random2 = new Random();
+                int index = random2.nextInt(partie.getActivePlayer().getMain().getCartesDeLaMain().size());
+                System.out.println(index);
 
-            Thread.sleep(2000);
+                Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
 
-            System.out.println("""
+                Thread.sleep(2000);
+
+                System.out.println("""
                     Choisir l'option de jeu:\s
                     •0 = Jouer pour ses points
                     •1 = Jouer pour ses pouvoirs
                     •2 = Jouer pour la vie future""");
 
-            int index2;
+                int index2;
 
-            if (random.nextInt() % 10 == 0)
-                index2 = 0;
-            else if (random.nextInt() % 12 == 0)
-                index2 = 2;
-            else
-                index2 = 1;
+                if (random2.nextInt() % 10 == 0)
+                    index2 = 0;
+                else if (random2.nextInt() % 12 == 0)
+                    index2 = 2;
+                else
+                    index2 = 1;
 
-            if (index2 == 0) {
-                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
-            } else if (index2 == 1) {
-                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
-            } else {
-                partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+                if (index2 == 0) {
+                    partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
+                } else if (index2 == 1) {
+                    partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
+                } else {
+                    partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+                }
+                OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
+                System.out.println("\nOption de jeu = " + optionDeJeu);
+
+                Thread.sleep(2000);
+
+                partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
+
             }
-            OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();
-            System.out.println("\nOption de jeu = " + optionDeJeu);
 
-            Thread.sleep(2000);
-
-            partie.getActivePlayer().jouer(carteAJouer, optionDeJeu);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

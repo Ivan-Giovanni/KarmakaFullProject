@@ -94,15 +94,15 @@ public class Bassesse extends Card {
 
         // Execution de la capacite
         if (partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() >= 2) {
-            int tailleDeLaMain = partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() - 1;
+            int tailleDeLaMain = partie.getOpponentPlayer().getMain().getCartesDeLaMain().size();
             Random random = new Random();
 
             partie.getFosse().addCard(
-                    partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(tailleDeLaMain))
+                    partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(0, tailleDeLaMain))
             );
             tailleDeLaMain -= 1;
             partie.getFosse().addCard(
-                    partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(tailleDeLaMain))
+                    partie.getOpponentPlayer().getMain().getCartesDeLaMain().remove(random.nextInt(0, tailleDeLaMain))
             );
 
         } else if (partie.getOpponentPlayer().getMain().getCartesDeLaMain().size() == 1) {

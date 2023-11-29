@@ -114,63 +114,74 @@ public class Destinee extends Card {
             );
         }
 
-        System.out.println("•1ere carte de la Source: " + partie.getSource().getCartes().get(0));
-        System.out.println("•2eme carte de la Source: " + partie.getSource().getCartes().get(1));
-        System.out.println("•3eme carte de la Source: " + partie.getSource().getCartes().get(2));
+        if (partie.getSource().getCartes().size() >= 3) {
 
-        System.out.println("\nCombien de ces cartes souhaitez vous ajouter a votre Vie Future? (" +
-                "02 maximum)");
+            System.out.println("•1ere carte de la Source: " + partie.getSource().getCartes().get(0));
+            System.out.println("•2eme carte de la Source: " + partie.getSource().getCartes().get(1));
+            System.out.println("•3eme carte de la Source: " + partie.getSource().getCartes().get(2));
 
-        Random random = new Random();
-        int nbreDeCarte = random.nextInt(0, 3);
-        System.out.println(nbreDeCarte);
+            System.out.println("\nCombien de ces cartes souhaitez vous ajouter a votre Vie Future? (" +
+                    "02 maximum)");
 
-        if (nbreDeCarte == 2) {
-            System.out.println("\nEntrez l'index de la 1ere carte a ajouter: (Le plus grand index) ");
-            int index1 = random.nextInt(0, 3);
-            System.out.println("\nEntrez l'index de la 2eme carte a ajouter: (Le plus petit index) ");
-            int index2 = random.nextInt(0, 3);
+            Random random = new Random();
+            int nbreDeCarte = random.nextInt(0, 3);
+            System.out.println(nbreDeCarte);
 
-            if (index1 == index2)
-                index2 -= 1;
+            if (nbreDeCarte == 2) {
+                System.out.println("\nEntrez l'index de la 1ere carte a ajouter: (Le plus grand index) ");
+                int index1 = random.nextInt(0, 3);
+                System.out.println("\nEntrez l'index de la 2eme carte a ajouter: (Le plus petit index) ");
+                int index2 = random.nextInt(0, 3);
+
+                if (index1 == index2 && index1 == 0)
+                    index2 += 1;
+                else if(index1 == index2 && index1 == 2)
+                    index2 -= 1;
+                else {
+                    index1 = Math.max(index1, index2);
+                }
+
+                Card carte1 = partie.getSource().getCartes().remove(index1);
+                partie.getActivePlayer().getVieFuture().addCard(carte1);
+
+
+                if (index1 == 0) {
+                    Card carte2 = partie.getSource().getCartes().remove(index2 - 1);
+                    partie.getActivePlayer().getVieFuture().addCard(carte2);
+                }
+                else if (index1 == 1 && index2 == 0) {
+                    Card carte2 = partie.getSource().getCartes().remove(index2);
+                    partie.getActivePlayer().getVieFuture().addCard(carte2);
+                }
+                else if(index1 == 1 && index2 == 2) {
+                    Card carte2 = partie.getSource().getCartes().remove(index2 - 1);
+                    partie.getActivePlayer().getVieFuture().addCard(carte2);
+                }
+                else if(index1 == 2) {
+                    Card carte2 = partie.getSource().getCartes().remove(index2);
+                    partie.getActivePlayer().getVieFuture().addCard(carte2);
+                }
+            }
+            else if (nbreDeCarte == 1) {
+                System.out.println("\nEntrez l'index de la carte a ajouter: ");
+                int index = random.nextInt(0, 3);
+                Card carte = partie.getSource().getCartes().remove(index);
+                partie.getActivePlayer().getVieFuture().addCard(carte);
+            }
+            else if (nbreDeCarte == 0) {
+                System.out.println("\nVous avez decider de n'ajoutez aucune carte.");
+            }
             else {
-                index1 = Math.max(index1, index2);
-                index2 = Math.min(index1, index2);
+                System.out.println("\nInvalid nombre de cartes!");
             }
 
-            Card carte1 = partie.getSource().getCartes().remove(index1);
-            partie.getActivePlayer().getVieFuture().addCard(carte1);
+        }
 
-
-            if (index1 == 0) {
-                Card carte2 = partie.getSource().getCartes().remove(index2 - 1);
-                partie.getActivePlayer().getVieFuture().addCard(carte2);
-            }
-            else if (index1 == 1 && index2 == 0) {
-                Card carte2 = partie.getSource().getCartes().remove(index2);
-                partie.getActivePlayer().getVieFuture().addCard(carte2);
-            }
-            else if(index1 == 1 && index2 == 2) {
-                Card carte2 = partie.getSource().getCartes().remove(index2 - 1);
-                partie.getActivePlayer().getVieFuture().addCard(carte2);
-            }
-            else if(index1 == 2) {
-                Card carte2 = partie.getSource().getCartes().remove(index2);
-                partie.getActivePlayer().getVieFuture().addCard(carte2);
-            }
-        }
-        else if (nbreDeCarte == 1) {
-            System.out.println("\nEntrez l'index de la carte a ajouter: ");
-            int index = random.nextInt(0, 3);
-            Card carte = partie.getSource().getCartes().remove(index);
-            partie.getActivePlayer().getVieFuture().addCard(carte);
-        }
-        else if (nbreDeCarte == 0) {
-            System.out.println("\nVous avez decider de n'ajoutez aucune carte.");
-        }
         else {
-            System.out.println("\nInvalid nombre de cartes!");
+            System.out.println("\nIl n'y a pas assez de cartes dans la Source!\n");
         }
+
+
 
 
         System.out.println("\nOPPONENT PLAYER's Oeuvre: " +

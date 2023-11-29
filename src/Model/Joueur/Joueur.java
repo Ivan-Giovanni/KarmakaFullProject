@@ -113,7 +113,6 @@ public abstract class Joueur {
     }
 
 
-
     private void jouerPourSonPouvoir(Card carte, Partie partie) {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SON POUVOIR...\n");
 
@@ -122,7 +121,7 @@ public abstract class Joueur {
 
         try {
 
-            if(partie.getActivePlayer() instanceof JoueurVirtuel) {
+            if (partie.getActivePlayer() instanceof JoueurVirtuel) {
 
                 if (partie.getOpponentPlayer() instanceof JoueurVirtuel) {
 
@@ -132,37 +131,34 @@ public abstract class Joueur {
                         partie.getOpponentPlayer().getVieFuture().addCard(carte);
                         carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
                         partie.getFosse().getCartes().remove(carte);
-                    }
-                    else {
+                    } else {
                         carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
                     }
 
 
                     System.out.println("""
-                    
-                    ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
-                    •0 = Oui
-                    •1 = Non
-                    """);
+                                                
+                            ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
+                            •0 = Oui
+                            •1 = Non
+                            """);
 
                     if (myRandom % 2 == 0) {
                         System.out.println(0);
                         System.out.println("\nAJOUT DE LA CARTE A OPPONENT'S VIE FUTURE...\n");
                         Thread.sleep(1000);
-                    }
-                    else
+                    } else
                         System.out.println(1);
 
-                }
-                else {
+                } else if (partie.getOpponentPlayer() instanceof JoueurReel) {
                     carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
 
                     System.out.println("""
-                    
-                    ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
-                    •0 = Oui
-                    •1 = Non
-                    """);
+                                                
+                            ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
+                            •0 = Oui
+                            •1 = Non
+                            """);
                     int reponse = keyboard.nextInt();
 
                     if (reponse == 0) {
@@ -175,8 +171,7 @@ public abstract class Joueur {
 
                 }
 
-            }
-            else {
+            } else {
 
                 int myRandom = random.nextInt();
 
@@ -184,25 +179,23 @@ public abstract class Joueur {
                     partie.getOpponentPlayer().getVieFuture().addCard(carte);
                     carte.executerCapacite(Partie.getPartie());
                     partie.getFosse().getCartes().remove(carte);
-                }
-                else {
+                } else {
                     carte.executerCapacite(Partie.getPartie());
                 }
 
 
                 System.out.println("""
-                    
-                    ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
-                    •0 = Oui
-                    •1 = Non
-                    """);
+                                            
+                        ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
+                        •0 = Oui
+                        •1 = Non
+                        """);
 
                 if (myRandom % 2 == 0) {
                     System.out.println(0);
                     System.out.println("\nAJOUT DE LA CARTE A OPPONENT PLAYER'S VIE FUTURE...\n");
                     Thread.sleep(1000);
-                }
-                else
+                } else
                     System.out.println(1);
 
             }
@@ -211,9 +204,6 @@ public abstract class Joueur {
             throw new RuntimeException(e);
         }
     }
-
-
-
 
 
     private void jouerPourLaVieFuture(Card carte) {

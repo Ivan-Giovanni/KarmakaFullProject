@@ -79,9 +79,9 @@ public class Crise extends Card {
         }
 
         if (!partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().isEmpty()) {
-            int taille = partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().size() - 1;
+            int taille = partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().size();
             Random random = new Random();
-            int index = random.nextInt(taille);
+            int index = random.nextInt(0, taille);
 
             partie.getFosse().addCard(
                     partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().remove(index)
