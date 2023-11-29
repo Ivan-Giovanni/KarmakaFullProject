@@ -28,12 +28,12 @@ public class Destinee extends Card {
 
     // =========================================== EXECUTER CAPACITE ========================================= //
 
-    // ================== JOUER VIRTUEL ============= //
+    // ================== JOUER REEL ============= //
     @Override
     public void executerCapacite(Partie partie) {
         /* Regardez les 03 premieres cartes de la source. Ajoutez en jusqu'a 02 à votre Vie Future.
          * Replacez le reste dans l'ordre souhaité */
-        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'DERNIER SOUFFLE'...\n");
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'DESTINEE'...\n");
 
         if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
             int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
@@ -105,7 +105,7 @@ public class Destinee extends Card {
     public void executerCapaciteCPU(Partie partie, int strategie) {
         /* Regardez les 03 premieres cartes de la source. Ajoutez en jusqu'a 02 à votre Vie Future.
          * Replacez le reste dans l'ordre souhaité */
-        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'DERNIER SOUFFLE'...\n");
+        System.out.println("EXECUTION DE LA CAPACITE DE LA CARTE 'DESTINEE'...\n");
 
         if (partie.getActivePlayer().getMain().getCartesDeLaMain().contains(this)) {
             int indexOfThis = partie.getActivePlayer().getMain().getCartesDeLaMain().indexOf(this);
@@ -127,12 +127,21 @@ public class Destinee extends Card {
 
         if (nbreDeCarte == 2) {
             System.out.println("\nEntrez l'index de la 1ere carte a ajouter: (Le plus grand index) ");
-            int index1 = keyboard.nextInt();
+            int index1 = random.nextInt(0, 3);
+            System.out.println("\nEntrez l'index de la 2eme carte a ajouter: (Le plus petit index) ");
+            int index2 = random.nextInt(0, 3);
+
+            if (index1 == index2)
+                index2 -= 1;
+            else {
+                index1 = Math.max(index1, index2);
+                index2 = Math.min(index1, index2);
+            }
+
             Card carte1 = partie.getSource().getCartes().remove(index1);
             partie.getActivePlayer().getVieFuture().addCard(carte1);
 
-            System.out.println("\nEntrez l'index de la 2eme carte a ajouter: (Le plus petit index) ");
-            int index2 = keyboard.nextInt();
+
             if (index1 == 0) {
                 Card carte2 = partie.getSource().getCartes().remove(index2 - 1);
                 partie.getActivePlayer().getVieFuture().addCard(carte2);
@@ -152,7 +161,7 @@ public class Destinee extends Card {
         }
         else if (nbreDeCarte == 1) {
             System.out.println("\nEntrez l'index de la carte a ajouter: ");
-            int index = keyboard.nextInt();
+            int index = random.nextInt(0, 3);
             Card carte = partie.getSource().getCartes().remove(index);
             partie.getActivePlayer().getVieFuture().addCard(carte);
         }

@@ -7,6 +7,9 @@ import Model.Joueur.CollectionsDeCartes.Pile;
 import Model.Joueur.CollectionsDeCartes.VieFuture;
 import Model.Partie.Partie;
 
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  * @author giovannizangue
  * <br>
@@ -109,16 +112,109 @@ public abstract class Joueur {
         carte.utiliserPourSesPoints(Partie.getPartie());
     }
 
+
+
     private void jouerPourSonPouvoir(Card carte, Partie partie) {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR SON POUVOIR...\n");
 
-        if(partie.getActivePlayer() instanceof JoueurVirtuel) {
-            carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
-        }
-        else {
-            carte.executerCapacite(Partie.getPartie());
+        Random random = new Random();
+        Scanner keyboard = new Scanner(System.in);
+
+        try {
+
+            if(partie.getActivePlayer() instanceof JoueurVirtuel) {
+
+                if (partie.getOpponentPlayer() instanceof JoueurVirtuel) {
+
+                    int myRandom = random.nextInt();
+
+                    if (myRandom % 2 == 0) {
+                        partie.getOpponentPlayer().getVieFuture().addCard(carte);
+                        carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
+                        partie.getFosse().getCartes().remove(carte);
+                    }
+                    else {
+                        carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
+                    }
+
+
+                    System.out.println("""
+                    
+                    ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
+                    •0 = Oui
+                    •1 = Non
+                    """);
+
+                    if (myRandom % 2 == 0) {
+                        System.out.println(0);
+                        System.out.println("\nAJOUT DE LA CARTE A OPPONENT'S VIE FUTURE...\n");
+                        Thread.sleep(1000);
+                    }
+                    else
+                        System.out.println(1);
+
+                }
+                else {
+                    carte.executerCapaciteCPU(Partie.getPartie(), ((JoueurVirtuel) partie.getActivePlayer()).getStrategie());
+
+                    System.out.println("""
+                    
+                    ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
+                    •0 = Oui
+                    •1 = Non
+                    """);
+                    int reponse = keyboard.nextInt();
+
+                    if (reponse == 0) {
+                        System.out.println("\nAJOUT DE LA CARTE A OPPONENT'S VIE FUTURE...\n");
+                        Thread.sleep(1000);
+
+                        partie.getOpponentPlayer().getVieFuture().addCard(carte);
+                        partie.getFosse().getCartes().remove(carte);
+                    }
+
+                }
+
+            }
+            else {
+
+                int myRandom = random.nextInt();
+
+                if (myRandom % 2 == 0) {
+                    partie.getOpponentPlayer().getVieFuture().addCard(carte);
+                    carte.executerCapacite(Partie.getPartie());
+                    partie.getFosse().getCartes().remove(carte);
+                }
+                else {
+                    carte.executerCapacite(Partie.getPartie());
+                }
+
+
+                System.out.println("""
+                    
+                    ACCEPTEZ VOUS QUE JE VOUS OFFRE CETTE CARTE?
+                    •0 = Oui
+                    •1 = Non
+                    """);
+
+                if (myRandom % 2 == 0) {
+                    System.out.println(0);
+                    System.out.println("\nAJOUT DE LA CARTE A OPPONENT PLAYER'S VIE FUTURE...\n");
+                    Thread.sleep(1000);
+                }
+                else
+                    System.out.println(1);
+
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
+
+
+
+
 
     private void jouerPourLaVieFuture(Card carte) {
         System.out.println("\nLA CARTE EST EN TRAIN D'ETRE JOUEE POUR LA VIE FUTURE...\n");

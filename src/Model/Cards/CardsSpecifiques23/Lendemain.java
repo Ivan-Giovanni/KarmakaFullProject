@@ -119,14 +119,23 @@ public class Lendemain extends Card {
                     •0 = Jouer pour ses points
                     •1 = Jouer pour ses pouvoirs
                     •2 = Jouer pour la vie future""");
-            int index2 = random.nextInt(0, 3);
+
+            int index2;
+
+            if (random.nextInt() % 10 == 0)
+                index2 = 0;
+            else if (random.nextInt() % 12 == 0)
+                index2 = 2;
+            else
+                index2 = 1;
+
             System.out.println(index2);
 
             if (index2 == 0) {
                 partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SES_POINTS);
             } else if (index2 == 1) {
                 partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
-            } else if (index2 == 2) {
+            } else {
                 partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
             }
             OptionDeJeu optionDeJeu = partie.getActivePlayer().getOptionDeJeu();

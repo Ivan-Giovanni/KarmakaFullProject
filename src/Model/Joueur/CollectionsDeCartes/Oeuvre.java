@@ -1,6 +1,7 @@
 package Model.Joueur.CollectionsDeCartes;
 
 import Model.Cards.Card;
+import Model.Cards.Couleur;
 import Model.ReservesDeCartes.Source;
 
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ public class Oeuvre extends CollectionDeCartes{
 
     // =============================================== LES ATTRIBUTS ========================================= //
     private List<Card> cartesDeLOeuvre;
+
+    private int nbreDePointsBleu = 0;
+    private int nbreDePointsVert = 0;
+    private int nbreDePointRouge = 0;
+    private int nbreDePointsMosaique = 0;
 
     // ============================================= LE CONSTRUCTEUR ========================================= //
     public Oeuvre() {
@@ -32,6 +38,15 @@ public class Oeuvre extends CollectionDeCartes{
     @Override
     public void addCard(Card carte) {
         cartesDeLOeuvre.add(carte);
+
+       /* if (carte.getCouleur() == Couleur.BLEU)
+            nbreDePointsBleu += carte.getPoint();
+        if (carte.getCouleur() == Couleur.ROUGE)
+            nbreDePointRouge += carte.getPoint();
+        if (carte.getCouleur() == Couleur.VERT)
+            nbreDePointsVert += carte.getPoint();
+
+        */
     }
 
     @Override
@@ -40,8 +55,21 @@ public class Oeuvre extends CollectionDeCartes{
     }
 
     // ================================= CALCULER NOMBRE DE POINTS ======================================= //
-    public void CalculerNombreDePoints() {
+    public int CalculerNombreDePoints() {
+        int nombreDePoints = 0;
 
+        for (Card carte : getCartesDeLOeuvre()){
+            if (carte.getCouleur() == Couleur.BLEU)
+                nbreDePointsBleu += carte.getPoint();
+            if (carte.getCouleur() == Couleur.ROUGE)
+                nbreDePointRouge += carte.getPoint();
+            if (carte.getCouleur() == Couleur.VERT)
+                nbreDePointsVert += carte.getPoint();
+        }
+
+        nombreDePoints = Math.max(nbreDePointsVert, Math.max(nbreDePointRouge, nbreDePointsBleu));
+
+        return nombreDePoints;
     }
 
 }

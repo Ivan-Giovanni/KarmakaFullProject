@@ -62,14 +62,12 @@ public class Sauvetage extends Card {
 
                     Card carteAajouter = partie.getFosse().getCartes().remove(indexAajouter);
                     partie.getActivePlayer().getMain().addCard(carteAajouter);
-                }
-
-                else {
+                } else {
 
                     System.out.println("\nCartes de la Fosse devoilee: ");
-                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() -1));
-                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() -2));
-                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() -3));
+                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() - 1));
+                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() - 2));
+                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() - 3));
 
                     System.out.println("\nEntrez l'index de la carte que vous souhaitez ajouter a" +
                             " votre main: ");
@@ -78,7 +76,7 @@ public class Sauvetage extends Card {
                     System.out.println("\nAJOUT DE LA CARTE A VOTRE MAIN...");
                     Thread.sleep(1000);
 
-                    Card carteAajouter = partie.getFosse().getCartes().remove(partie.getFosse().getCartes().size() -1 - indexAajouter);
+                    Card carteAajouter = partie.getFosse().getCartes().remove(partie.getFosse().getCartes().size() - 1 - indexAajouter);
                     partie.getActivePlayer().getMain().addCard(carteAajouter);
 
                 }
@@ -130,22 +128,33 @@ public class Sauvetage extends Card {
 
                     System.out.println("\nEntrez l'index de la carte que vous souhaitez ajouter a" +
                             " votre main: ");
-                    int indexAajouter = random.nextInt(0, 4);
-                    System.out.println(indexAajouter);
+
+                    int indexAajouter;
+
+                    if (partie.getFosse().getCartes().size() == 1) {
+                        indexAajouter = 0;
+                        System.out.println(indexAajouter);
+                    }
+                    else if (partie.getFosse().getCartes().size() == 2) {
+                        indexAajouter = random.nextInt(0, 2);
+                        System.out.println(indexAajouter);
+                    }
+                    else {
+                        indexAajouter = random.nextInt(0, 3);
+                        System.out.println(indexAajouter);
+                    }
 
                     System.out.println("\nAJOUT DE LA CARTE A VOTRE MAIN...");
                     Thread.sleep(1000);
 
                     Card carteAajouter = partie.getFosse().getCartes().remove(indexAajouter);
                     partie.getActivePlayer().getMain().addCard(carteAajouter);
-                }
-
-                else {
+                } else {
 
                     System.out.println("\nCartes de la Fosse devoilee: ");
-                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() -1));
-                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() -2));
-                    System.out.println(partie.getSource().getCartes().get(partie.getFosse().getCartes().size() -3));
+                    System.out.println(partie.getFosse().getCartes().get(partie.getFosse().getCartes().size() - 1));
+                    System.out.println(partie.getFosse().getCartes().get(partie.getFosse().getCartes().size() - 2));
+                    System.out.println(partie.getFosse().getCartes().get(partie.getFosse().getCartes().size() - 3));
 
                     System.out.println("\nEntrez l'index de la carte que vous souhaitez ajouter a" +
                             " votre main: ");
@@ -155,7 +164,7 @@ public class Sauvetage extends Card {
                     System.out.println("\nAJOUT DE LA CARTE A VOTRE MAIN...");
                     Thread.sleep(1000);
 
-                    Card carteAajouter = partie.getFosse().getCartes().remove(partie.getFosse().getCartes().size() - indexAajouter);
+                    Card carteAajouter = partie.getFosse().getCartes().remove(partie.getFosse().getCartes().size() - indexAajouter -1);
                     partie.getActivePlayer().getMain().addCard(carteAajouter);
 
                 }

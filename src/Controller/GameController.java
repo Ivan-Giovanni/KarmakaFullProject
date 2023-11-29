@@ -1,11 +1,11 @@
 package Controller;
 
+import Model.Cards.AnneauKarmique;
 import Model.Cards.Card;
+import Model.Cards.CardsSpecifiques23.Incarnation;
+import Model.Cards.CardsSpecifiques23.Mimetisme;
 import Model.Cards.CardsSpecifiques23.Sauvetage;
-import Model.Joueur.Joueur;
-import Model.Joueur.JoueurReel;
-import Model.Joueur.JoueurVirtuel;
-import Model.Joueur.OptionDeJeu;
+import Model.Joueur.*;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;
 import Model.Partie.TypeDePartie;
@@ -73,12 +73,19 @@ public class GameController {
                     int reponse = keyboard.nextInt();
                     if (reponse == 0) {
                         jouer();
+                        compterLesPoints();
                         endTurn();
                     }
-                    else if(reponse == 1)
+                    else if(reponse == 1) {
+                        compterLesPoints();
                         endTurn();
+                    }
+
                     else
                         System.out.println("Invalid Entry");
+
+
+                    verifierCartesDeLASource();
 
                 }
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
@@ -93,10 +100,13 @@ public class GameController {
                     int reponse = random.nextInt();
                     if (reponse % 5 != 0) {
                         jouerCPU();
+                        compterLesPoints();
                         endTurn();
                     }
-                    else
+                    else {
+                        compterLesPoints();
                         endTurn();
+                    }
 
                 }
 
@@ -136,10 +146,13 @@ public class GameController {
                     int reponse = random.nextInt();
                     if (reponse % 5 != 0) {
                         jouerCPU();
+                        compterLesPoints();
                         endTurn();
                     }
-                    else
+                    else {
+                        compterLesPoints();
                         endTurn();
+                    }
 
                 }
                 while (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
@@ -154,10 +167,15 @@ public class GameController {
                     int reponse = random.nextInt();
                     if (reponse % 5 != 0) {
                         jouerCPU();
+                        compterLesPoints();
                         endTurn();
                     }
-                    else
+                    else {
+                        compterLesPoints();
                         endTurn();
+                    }
+
+                    verifierCartesDeLASource();
 
                 }
 
@@ -396,7 +414,15 @@ public class GameController {
                     •1 = Jouer pour ses pouvoirs
                     •2 = Jouer pour la vie future""");
 
-            int index2 = random.nextInt(0, 3);
+            int index2;
+
+            if (random.nextInt() % 10 == 0)
+                index2 = 0;
+            else if (random.nextInt() % 12 == 0)
+                index2 = 2;
+            else
+                index2 = 1;
+
             System.out.println(index2);
 
             setOptionDeJeu(index2);
@@ -424,6 +450,100 @@ public class GameController {
             partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_SON_POUVOIR);
         } else if (index == 2) {
             partie.getActivePlayer().setOptionDeJeu(OptionDeJeu.POUR_LA_VIE_FUTURE);
+        }
+    }
+
+
+    // ==================================== COMPTER LES POINTS ==================================== //
+    public void compterLesPoints() {
+        try {
+
+            if (partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty()) {
+                int nombreDePointsTotal = partie.getActivePlayer().getOeuvre().CalculerNombreDePoints();
+                int nbreDePointsMosaique = 0;
+                int nombreDAnneauxKarmiques = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
+
+                for (Card carte : partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre()) {
+                   if (carte instanceof Incarnation || carte instanceof Mimetisme) {
+                       nbreDePointsMosaique += carte.getPoint();
+                   }
+                }
+
+                if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 4 &&
+                partie.getActivePlayer().getNiveau() == Niveau.BOUSIER) {
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN SERPENT 🥳🥳🥳🥳🥳🥳🥳\n");
+                    partie.getActivePlayer().setNiveau(Niveau.SERPENT);
+
+                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                        partie.getActivePlayer().getOeuvre().removeCard();
+                    }
+
+                }
+                else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 5 &&
+                        partie.getActivePlayer().getNiveau() == Niveau.SERPENT) {
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN LOUP 🥳🥳🥳🥳🥳🥳🥳\n");
+                    partie.getActivePlayer().setNiveau(Niveau.LOUP);
+
+                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                        partie.getActivePlayer().getOeuvre().removeCard();
+                    }
+
+                }
+                else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 6 &&
+                        partie.getActivePlayer().getNiveau() == Niveau.LOUP) {
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN PRIMATE 🥳🥳🥳🥳🥳🥳🥳\n");
+                    partie.getActivePlayer().setNiveau(Niveau.PRIMATE);
+
+                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                        partie.getActivePlayer().getOeuvre().removeCard();
+                    }
+
+                }
+                else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 7 &&
+                        partie.getActivePlayer().getNiveau() == Niveau.PRIMATE) {
+                    System.out.println("\n🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS AVEZ ATTEINT LA TRANSCENDANCE 🥳🥳🥳🥳🥳🥳🥳\n");
+                    partie.getActivePlayer().setNiveau(Niveau.TRANSCENDANCE);
+
+                    for (int i=0; i<partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size(); i++) {
+                        partie.getActivePlayer().getOeuvre().removeCard();
+                    }
+
+                    System.out.println("\n🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆 VOUS AVEZ GAGNE 🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n");
+                    partie.setEtatDeLaPartie(EtatDeLaPartie.FINISHED);
+
+                }
+                else {
+                    partie.getActivePlayer().getReserveDAnneauxKarmique().addAnneauKarmique(new AnneauKarmique());
+                }
+
+
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    // ==================================== VERIFIER CARTES DE LA SOURCE ==================================== //
+    public void verifierCartesDeLASource() {
+        try {
+
+            if(partie.getSource().getCartes().size() <= 3) {
+                System.out.println("\nRESHUFFLING LA SOURCE...\n");
+                Thread.sleep(1500);
+
+                int tailleDeLaFosse = partie.getFosse().getCartes().size();
+
+                for (int i=0; i<tailleDeLaFosse; i++) {
+                    partie.getSource().addCard(partie.getFosse().getCartes().remove(0));
+                }
+
+                partie.getSource().melanger();
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

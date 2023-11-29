@@ -95,7 +95,7 @@ public class Incarnation extends Card {
                     partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre());
 
             System.out.println("\nChoisissez l'index de la carte a copier: ");
-            int indexACopier = random.nextInt(0, partie.getOpponentPlayer().getOeuvre().getCartesDeLOeuvre().size());
+            int indexACopier = random.nextInt(0, partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size());
             System.out.println(indexACopier);
 
             Card carteACopier = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().remove(indexACopier);

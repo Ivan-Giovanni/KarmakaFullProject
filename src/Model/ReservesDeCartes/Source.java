@@ -129,7 +129,7 @@ public class Source extends ReserveDeCartes {
 
     // =========================================== ADD_CARD ========================================= //
     public void addCard(Card card) {
-
+        reserve.add(card);
     }
 
     // =========================================== REMOVE_CARD ========================================= //
