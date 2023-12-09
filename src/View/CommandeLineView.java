@@ -3,6 +3,7 @@ package View;
 import Controller.GameController;
 import Model.Partie.Partie;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CommandeLineView implements GameViewable {
@@ -51,8 +52,7 @@ public class CommandeLineView implements GameViewable {
         if (typeDePartie != 0 && typeDePartie != 1) {
             System.out.println("\nCE TYPE DE PARTIE N'EST PAS VALIDE. VEUILLEZ REESAYER ! ");
             promptForTypeDePartie();
-        }
-        else {
+        } else {
             controller.setTypeDePartie(typeDePartie);
         }
     }
@@ -73,6 +73,30 @@ public class CommandeLineView implements GameViewable {
                 •1 = Jouer pour ses pouvoirs
                 •2 = Jouer pour la vie future""");
         return keyboard.nextInt();
+    }
+
+    // ========================================== PROMPT_FOR_OPTION_DE_JEU ================================== //
+    @Override
+    public int promptForVoulezVousJouezOuPasser() {
+        int choice = -1;
+
+        while (choice < 0 || choice > 1) {
+            System.out.println("""
+                                            
+                    VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
+                    •0 = Jouer
+                    •1 = Passer""");
+
+            try {
+                choice = keyboard.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("\nInvalid Entry\n" + e.getMessage() + "\n");
+                // Consume the invalid input to avoid an infinite loop
+                keyboard.nextLine();
+            }
+        }
+
+        return choice;
     }
 
     @Override
