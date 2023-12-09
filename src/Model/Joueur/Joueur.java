@@ -125,7 +125,7 @@ public abstract class Joueur {
 
                 if (partie.getOpponentPlayer() instanceof JoueurVirtuel) {
 
-                    int myRandom = random.nextInt();
+                    int myRandom = Math.abs(random.nextInt());
 
                     if (myRandom % 2 == 0) {
                         partie.getOpponentPlayer().getVieFuture().addCard(carte);
@@ -173,7 +173,7 @@ public abstract class Joueur {
 
             } else {
 
-                int myRandom = random.nextInt();
+                int myRandom = Math.abs(random.nextInt());
 
                 if (myRandom % 2 == 0) {
                     partie.getOpponentPlayer().getVieFuture().addCard(carte);

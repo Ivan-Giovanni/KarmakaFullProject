@@ -13,11 +13,13 @@ import Model.Joueur.CollectionsDeCartes.VieFuture;
 public class JoueurVirtuel extends Joueur{
 
     private int strategie;
+    private String nom;
 
     // ====================================== LE CONSTRUCTEUR ============================================ //
-    public JoueurVirtuel(int strategie) {
+    public JoueurVirtuel(int strategie, String nom) {
         super.setNiveau(Niveau.BOUSIER);
         this.strategie = strategie;
+        super.setPseudo(nom);
     }
 
     // ===================================== GETTERS & SETTERS ======================================= //
@@ -35,7 +37,7 @@ public class JoueurVirtuel extends Joueur{
     @Override
     public String toString() {
         return "JoueurVirtuel{" +
-                "•Pseudo = " + "CPU"+
+                "•Pseudo = " + super.getPseudo()+
                 "  •Niveau = " + super.getNiveau() +
                 "  •Main = " + super.getMain().getCartesDeLaMain() +
                 "  •Oeuvre = " + super.getOeuvre().getCartesDeLOeuvre() +

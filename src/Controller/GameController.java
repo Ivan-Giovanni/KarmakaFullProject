@@ -72,7 +72,8 @@ public class GameController {
                             •0 = Jouer
                             •1 = Passer""");
                     int reponse = keyboard.nextInt();
-                    if (reponse == 0) {
+                    System.out.println(reponse);
+                    if (reponse  == 0) {
                         jouer();
                         endTurn();
                     }
@@ -97,8 +98,9 @@ public class GameController {
                             •0 = Jouer
                             •1 = Passer""");
 
-                    int reponse = random.nextInt();
-                    if (reponse % 5 != 0) {
+                    int reponse = Math.abs(random.nextInt());
+                    System.out.println(reponse);
+                    if (reponse % 2 == 0) {
                         jouerCPU();
                         endTurn();
                     }
@@ -142,8 +144,9 @@ public class GameController {
                             •0 = Jouer
                             •1 = Passer""");
 
-                    int reponse = random.nextInt();
-                    if (reponse % 5 != 0) {
+                    int reponse = Math.abs(random.nextInt());
+                    System.out.println(reponse % 2);
+                    if (reponse % 2 == 0) {
                         jouerCPU();
                         endTurn();
                     }
@@ -162,8 +165,9 @@ public class GameController {
                             •0 = Jouer
                             •1 = Passer""");
 
-                    int reponse = random.nextInt();
-                    if (reponse % 5 != 0) {
+                    int reponse = Math.abs(random.nextInt());
+                    System.out.println(reponse % 2);
+                    if (reponse % 2 == 0) {
                         jouerCPU();
                         endTurn();
                     }
@@ -313,12 +317,12 @@ public class GameController {
             else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
                 if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_2_PLAYING);
-                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_2 DE JOUER! " +
+                    System.out.println("\n****************************** C'EST AU TOUR DU L'AUTRE CPU DE JOUER! " +
                             "******************************\n");
                     Thread.sleep(3000);
                 } else if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_2_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
-                    System.out.println("\n****************************** C'EST AU TOUR DU CPU_1 DE JOUER! " +
+                    System.out.println("\n****************************** C'EST AU TOUR DU L'AUTRE CPU DE JOUER! " +
                             "******************************\n");
                     Thread.sleep(3000);
                 }

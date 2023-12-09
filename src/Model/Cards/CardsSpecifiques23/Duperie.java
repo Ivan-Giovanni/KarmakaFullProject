@@ -173,7 +173,15 @@ public class Duperie extends Card {
 
             System.out.println("\nParmi les cartes devoilee, entrez l'index de la carte que vous" +
                     " souhaitez ajouter a votre main (parmi les index de l'etape precedente): ");
-            int indexAajouter = random.nextInt(0, Math.max(index3,Math.max(index1, index2)));
+
+            int indexAajouter;
+
+            if (Math.max(index3,Math.max(index1, index2)) == 0)
+                 indexAajouter = 0;
+            else {
+                indexAajouter = random.nextInt(0, Math.max(index3,Math.max(index1, index2)));
+            }
+
             System.out.println(indexAajouter);
 
             System.out.println("\nAJOUT DE LA CARTE A VOTRE MAIN...");

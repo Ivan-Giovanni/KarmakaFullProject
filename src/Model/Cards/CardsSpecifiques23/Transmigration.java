@@ -107,6 +107,7 @@ public class Transmigration extends Card {
 
                 System.out.println("\nEntrez l'index de la carte que vous souhaitez ajouter a votre Main: ");
                 int indexAajouter = random.nextInt(0, partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size());
+                System.out.println(indexAajouter);
 
                 Card carteAajouter = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().get(indexAajouter);
 
