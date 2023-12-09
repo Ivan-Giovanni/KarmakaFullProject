@@ -19,6 +19,11 @@ public class GUIview implements GameViewable{
     }
 
     @Override
+    public int promptForVoulezVousJouezOuPasser() {
+        return 0;
+    }
+
+    @Override
     public void doSomething() {
 
     }

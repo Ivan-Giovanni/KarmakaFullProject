@@ -6,6 +6,10 @@ public interface GameViewable {
 
     public void setController(GameController gameController);
     public void promptForTypeDePartie();
+
+    // ========================================== PROMPT_FOR_OPTION_DE_JEU ================================== //
+    int promptForVoulezVousJouezOuPasser();
+
     public void doSomething();
     public void promptForNouvellePartie();
     public void promptForNomDuJoueur();

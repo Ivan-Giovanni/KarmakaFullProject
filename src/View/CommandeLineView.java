@@ -3,6 +3,7 @@ package View;
 import Controller.GameController;
 import Model.Partie.Partie;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CommandeLineView implements GameViewable {
@@ -46,14 +47,23 @@ public class CommandeLineView implements GameViewable {
         System.out.println("\n*********************** BIENVENUE DANS LE JEU KARMAKA ***********************\n");
         System.out.println("Choisissez le type de partie:\n0 = Joueur reel VS CPU\n1 = CPU vs CPU");
 
-        int typeDePartie = keyboard.nextInt();
+        int typeDePartie = -1;
 
-        if (typeDePartie != 0 && typeDePartie != 1) {
-            System.out.println("\nCE TYPE DE PARTIE N'EST PAS VALIDE. VEUILLEZ REESAYER ! ");
-            promptForTypeDePartie();
-        }
-        else {
-            controller.setTypeDePartie(typeDePartie);
+        while(typeDePartie < 0 || typeDePartie > 1) {
+            try {
+                typeDePartie = keyboard.nextInt();
+
+                if (typeDePartie != 0 && typeDePartie != 1) {
+                    System.out.println("\nInvalid Entry\n");
+                }
+                else {
+                    controller.setTypeDePartie(typeDePartie);
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("\nInvalid Entry\n" + e.getMessage() + "\n");
+                keyboard.nextLine();
+            }
         }
     }
 
@@ -73,6 +83,29 @@ public class CommandeLineView implements GameViewable {
                 •1 = Jouer pour ses pouvoirs
                 •2 = Jouer pour la vie future""");
         return keyboard.nextInt();
+    }
+
+    // ========================================== PROMPT_FOR_OPTION_DE_JEU ================================== //
+    @Override
+    public int promptForVoulezVousJouezOuPasser() {
+        int choice = -1;
+
+        while (choice < 0 || choice > 1) {
+            System.out.println("""
+                                            
+                    VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
+                    •0 = Jouer
+                    •1 = Passer""");
+
+            try {
+                choice = keyboard.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("\nInvalid Entry\n" + e.getMessage() + "\n");
+                keyboard.nextLine();
+            }
+        }
+
+        return choice;
     }
 
     @Override

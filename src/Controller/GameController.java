@@ -65,24 +65,7 @@ public class GameController {
                     compterLesPoints();
                     piocher();
 
-                    System.out.println("""
-                            
-                            VOULEZ VOUS JOUER OU BIEN PASSER VOTRE TOUR?
-                            •0 = Jouer
-                            •1 = Passer""");
-                    int reponse = keyboard.nextInt();
-                    System.out.println(reponse);
-                    if (reponse  == 0) {
-                        jouer();
-                        endTurn();
-                    }
-                    else if(reponse == 1) {
-                        endTurn();
-                    }
-
-                    else
-                        System.out.println("Invalid Entry");
-
+                    voulezVousJouerOuPasser();
 
                     verifierCartesDeLASource();
 
@@ -98,12 +81,11 @@ public class GameController {
                             •1 = Passer""");
 
                     int reponse = Math.abs(random.nextInt());
-                    System.out.println(reponse);
+                    System.out.println(reponse % 2);
                     if (reponse % 2 == 0) {
                         jouerCPU();
                         endTurn();
-                    }
-                    else {
+                    } else {
                         endTurn();
                     }
 
@@ -148,8 +130,7 @@ public class GameController {
                     if (reponse % 2 == 0) {
                         jouerCPU();
                         endTurn();
-                    }
-                    else {
+                    } else {
                         endTurn();
                     }
 
@@ -169,8 +150,7 @@ public class GameController {
                     if (reponse % 2 == 0) {
                         jouerCPU();
                         endTurn();
-                    }
-                    else {
+                    } else {
                         endTurn();
                     }
 
@@ -208,11 +188,28 @@ public class GameController {
                 }
             }
 
-        }
-       else {
+        } else {
             partie.ajouterJoueurCPUvsCPU();
         }
     }
+
+    // ==================================== VOULEZ_VOUS_JOUER_OU_PASSER ====================================== //
+    public void voulezVousJouerOuPasser() {
+        int reponse;
+        reponse = view.promptForVoulezVousJouezOuPasser();
+
+        System.out.println(reponse);
+        if (reponse == 0) {
+            jouer();
+            endTurn();
+        } else if (reponse == 1) {
+            endTurn();
+        } else {
+            System.out.println("\nInvalid Entry");
+            voulezVousJouerOuPasser();
+        }
+    }
+
 
     // ======================================== SET_TYPE_PARTIE ======================================== //
     public void setTypeDePartie(int typeDePartie) {
@@ -283,7 +280,7 @@ public class GameController {
 
             if (partie.getActivePlayer() instanceof JoueurReel)
                 partie.setEtatDeLaPartie(EtatDeLaPartie.JOUEUR_REEL_PLAYING);
-            else if(partie.getActivePlayer() instanceof JoueurVirtuel)
+            else if (partie.getActivePlayer() instanceof JoueurVirtuel)
                 partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_1_PLAYING);
 
         } catch (InterruptedException e) {
@@ -312,8 +309,7 @@ public class GameController {
                             "******************************\n");
                     Thread.sleep(3000);
                 }
-            }
-            else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
+            } else if (partie.getTypeDePartie() == TypeDePartie.CPU_VS_CPU) {
                 if (partie.getEtatDeLaPartie() == EtatDeLaPartie.CPU_1_PLAYING) {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.CPU_2_PLAYING);
                     System.out.println("\n****************************** C'EST AU TOUR DU L'AUTRE CPU DE JOUER! " +
@@ -326,7 +322,6 @@ public class GameController {
                     Thread.sleep(3000);
                 }
             }
-
 
 
         } catch (Exception e) {
@@ -344,8 +339,7 @@ public class GameController {
             if (partie.getActivePlayer().getPile().getCartesDeLaPile().isEmpty()) {
                 System.out.println("\nVOUS N'AVEZ AUCUNE CARTE DANS VOTRE PILE");
                 Thread.sleep(500);
-            }
-            else {
+            } else {
                 System.out.println("\nACTIVE PLAYER PIOCHE UNE CARTE...\n");
                 Thread.sleep(1500);
                 partie.getActivePlayer().getMain().getCartesDeLaMain().add(
@@ -361,6 +355,22 @@ public class GameController {
 
     // ====================================== JOUER ============================================ //
 
+    // ======================== SELECTIONNER_LA_CARTE_A_JOUER ======================= //
+    public Card selectionnerLaCarteAJouer(int index) {
+        Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(0);
+
+        try {
+            carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\nIndex Invalide !\n" + e.getMessage() + "\n");
+            int newIndex = view.promptForIndexDeLaCarteDeLaMainAJouer();
+            selectionnerLaCarteAJouer(newIndex);
+        }
+
+        return carteAJouer;
+    }
+
+
     // ======================== JOUEUR_REEL ======================= //
     public void jouer() {
         // Le joueur peut decider de jouer une carte, ou bien de passer son tour
@@ -374,7 +384,8 @@ public class GameController {
             System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
 
             int index = view.promptForIndexDeLaCarteDeLaMainAJouer();
-            Card carteAJouer = partie.getActivePlayer().getMain().getCartesDeLaMain().get(index);
+
+            Card carteAJouer = selectionnerLaCarteAJouer(index);
 
             Thread.sleep(1500);
 
@@ -403,7 +414,7 @@ public class GameController {
 
             System.out.println(partie.getActivePlayer().getMain().getCartesDeLaMain() + "\n");
 
-            if(partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty())
+            if (partie.getActivePlayer().getMain().getCartesDeLaMain().isEmpty())
                 System.out.println("\nVous n'avez plus aucune carte dans votre Main\n");
 
             else {
@@ -420,10 +431,10 @@ public class GameController {
                 Thread.sleep(1500);
 
                 System.out.println("""
-                    Choisir l'option de jeu:\s
-                    •0 = Jouer pour ses points
-                    •1 = Jouer pour ses pouvoirs
-                    •2 = Jouer pour la vie future""");
+                        Choisir l'option de jeu:\s
+                        •0 = Jouer pour ses points
+                        •1 = Jouer pour ses pouvoirs
+                        •2 = Jouer pour la vie future""");
 
                 int index2 = random.nextInt(0, 3);
 
@@ -450,7 +461,6 @@ public class GameController {
     }
 
 
-
     // ==================================== SET_OPTION_DE_JEU ==================================== //
     public void setOptionDeJeu(int index) {
         if (index == 0) {
@@ -474,48 +484,47 @@ public class GameController {
                 int nombreDAnneauxKarmiques = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
 
                 for (Card carte : partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre()) {
-                   if (carte instanceof Incarnation || carte instanceof Mimetisme) {
-                       nbreDePointsMosaique += carte.getPoint();
-                   }
+                    if (carte instanceof Incarnation || carte instanceof Mimetisme) {
+                        nbreDePointsMosaique += carte.getPoint();
+                    }
                 }
 
                 if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 4 &&
-                partie.getActivePlayer().getNiveau() == Niveau.BOUSIER) {
+                        partie.getActivePlayer().getNiveau() == Niveau.BOUSIER) {
                     System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN SERPENT " +
                             "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
                     partie.getActivePlayer().setNiveau(Niveau.SERPENT);
 
                     // On defausse les Oeuvres
                     int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
-                    for (int i=0; i<tailleDeLOeuvre; i++) {
+                    for (int i = 0; i < tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
 
                     // Vider la reserve d'anneaux karmique
                     int tailleDeLaReserve = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
-                    for (int i=0; i<tailleDeLaReserve; i++) {
+                    for (int i = 0; i < tailleDeLaReserve; i++) {
                         partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().remove(0);
                     }
 
                     // On prend toutes les cartes de la Vie Future pour composer une nouvelle main
                     int tailleDeLaVieFuture = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size();
-                    for(int i=0; i<tailleDeLaVieFuture; i++) {
+                    for (int i = 0; i < tailleDeLaVieFuture; i++) {
                         partie.getActivePlayer().getMain().addCard(partie.getActivePlayer().getVieFuture().removeCard());
                     }
 
                     // Creer une nouvelle Pile
                     int tailleDeLaMain = partie.getActivePlayer().getMain().getCartesDeLaMain().size();
-                    if (tailleDeLaMain <= 6 ) {
+                    if (tailleDeLaMain <= 6) {
                         while (partie.getActivePlayer().getMain().getCartesDeLaMain().size() +
-                        partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
+                                partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
                             partie.getActivePlayer().getPile().addCard(partie.getSource().removeCard());
                         }
                     }
 
                     endTurn();
 
-                }
-                else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 5 &&
+                } else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 5 &&
                         partie.getActivePlayer().getNiveau() == Niveau.SERPENT) {
                     System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN LOUP" +
                             " 🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
@@ -523,25 +532,25 @@ public class GameController {
 
                     // On defausse les Oeuvres
                     int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
-                    for (int i=0; i<tailleDeLOeuvre; i++) {
+                    for (int i = 0; i < tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
 
                     // Vider la reserve d'anneaux karmique
                     int tailleDeLaReserve = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
-                    for (int i=0; i<tailleDeLaReserve; i++) {
+                    for (int i = 0; i < tailleDeLaReserve; i++) {
                         partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().remove(0);
                     }
 
                     // On prend toutes les cartes de la Vie Future pour composer une nouvelle main
                     int tailleDeLaVieFuture = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size();
-                    for(int i=0; i<tailleDeLaVieFuture; i++) {
+                    for (int i = 0; i < tailleDeLaVieFuture; i++) {
                         partie.getActivePlayer().getMain().addCard(partie.getActivePlayer().getVieFuture().removeCard());
                     }
 
                     // Creer une nouvelle Pile
                     int tailleDeLaMain = partie.getActivePlayer().getMain().getCartesDeLaMain().size();
-                    if (tailleDeLaMain <= 6 ) {
+                    if (tailleDeLaMain <= 6) {
                         while (partie.getActivePlayer().getMain().getCartesDeLaMain().size() +
                                 partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
                             partie.getActivePlayer().getPile().addCard(partie.getSource().removeCard());
@@ -550,8 +559,7 @@ public class GameController {
 
                     endTurn();
 
-                }
-                else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 6 &&
+                } else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 6 &&
                         partie.getActivePlayer().getNiveau() == Niveau.LOUP) {
                     System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS ETES MAINTENANT UN PRIMATE " +
                             "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
@@ -559,25 +567,25 @@ public class GameController {
 
                     // On defausse les Oeuvres
                     int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
-                    for (int i=0; i<tailleDeLOeuvre; i++) {
+                    for (int i = 0; i < tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
 
                     // Vider la reserve d'anneaux karmique
                     int tailleDeLaReserve = partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().size();
-                    for (int i=0; i<tailleDeLaReserve; i++) {
+                    for (int i = 0; i < tailleDeLaReserve; i++) {
                         partie.getActivePlayer().getReserveDAnneauxKarmique().getReserveDAnneaux().remove(0);
                     }
 
                     // On prend toutes les cartes de la Vie Future pour composer une nouvelle main
                     int tailleDeLaVieFuture = partie.getActivePlayer().getVieFuture().getCartesDeLaVieFuture().size();
-                    for(int i=0; i<tailleDeLaVieFuture; i++) {
+                    for (int i = 0; i < tailleDeLaVieFuture; i++) {
                         partie.getActivePlayer().getMain().addCard(partie.getActivePlayer().getVieFuture().removeCard());
                     }
 
                     // Creer une nouvelle Pile
                     int tailleDeLaMain = partie.getActivePlayer().getMain().getCartesDeLaMain().size();
-                    if (tailleDeLaMain <= 6 ) {
+                    if (tailleDeLaMain <= 6) {
                         while (partie.getActivePlayer().getMain().getCartesDeLaMain().size() +
                                 partie.getActivePlayer().getPile().getCartesDeLaPile().size() <= 6) {
                             partie.getActivePlayer().getPile().addCard(partie.getSource().removeCard());
@@ -586,15 +594,14 @@ public class GameController {
 
                     endTurn();
 
-                }
-                else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 7 &&
+                } else if (nombreDePointsTotal + nbreDePointsMosaique + nombreDAnneauxKarmiques >= 7 &&
                         partie.getActivePlayer().getNiveau() == Niveau.PRIMATE) {
                     System.out.println("\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳 FELICITATION, VOUS AVEZ ATTEINT LA TRANSCENDANCE " +
                             "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n");
                     partie.getActivePlayer().setNiveau(Niveau.TRANSCENDANCE);
 
                     int tailleDeLOeuvre = partie.getActivePlayer().getOeuvre().getCartesDeLOeuvre().size();
-                    for (int i=0; i<tailleDeLOeuvre; i++) {
+                    for (int i = 0; i < tailleDeLOeuvre; i++) {
                         partie.getActivePlayer().getOeuvre().removeCard();
                     }
 
@@ -603,8 +610,7 @@ public class GameController {
                     partie.setEtatDeLaPartie(EtatDeLaPartie.FINISHED);
                     System.exit(0);
 
-                }
-                else {
+                } else {
                     partie.getActivePlayer().getReserveDAnneauxKarmique().addAnneauKarmique(new AnneauKarmique());
                     partie.getActivePlayer().getMain().addCard(partie.getSource().removeCard());
                 }
@@ -622,13 +628,13 @@ public class GameController {
     public void verifierCartesDeLASource() {
         try {
 
-            if(partie.getSource().getCartes().size() <= 3) {
+            if (partie.getSource().getCartes().size() <= 3) {
                 System.out.println("\nRESHUFFLING LA SOURCE...\n");
                 Thread.sleep(1500);
 
                 int tailleDeLaFosse = partie.getFosse().getCartes().size();
 
-                for (int i=0; i<tailleDeLaFosse; i++) {
+                for (int i = 0; i < tailleDeLaFosse; i++) {
                     partie.getSource().getCartes().add(partie.getFosse().getCartes().remove(0));
                 }
 
@@ -639,7 +645,6 @@ public class GameController {
             throw new RuntimeException(e);
         }
     }
-
 
 
     public void determinerLeGagnant() {
