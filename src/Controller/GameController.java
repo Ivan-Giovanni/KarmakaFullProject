@@ -4,7 +4,6 @@ import Model.Cards.AnneauKarmique;
 import Model.Cards.Card;
 import Model.Cards.CardsSpecifiques23.Incarnation;
 import Model.Cards.CardsSpecifiques23.Mimetisme;
-import Model.Cards.CardsSpecifiques23.Sauvetage;
 import Model.Joueur.*;
 import Model.Partie.EtatDeLaPartie;
 import Model.Partie.Partie;

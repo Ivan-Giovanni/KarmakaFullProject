@@ -20,8 +20,8 @@ public class CommandeLineView implements GameViewable {
         //views.addViewable(myView);
 
         GameController gameController = new GameController(myView, Partie.getPartie());
-        gameController.run();
 
+        gameController.run();
     }
 
     // ==================================== SET_CONTROLLER ============================================ //
@@ -45,8 +45,16 @@ public class CommandeLineView implements GameViewable {
     public void promptForTypeDePartie() {
         System.out.println("\n*********************** BIENVENUE DANS LE JEU KARMAKA ***********************\n");
         System.out.println("Choisissez le type de partie:\n0 = Joueur reel VS CPU\n1 = CPU vs CPU");
+
         int typeDePartie = keyboard.nextInt();
-        controller.setTypeDePartie(typeDePartie);
+
+        if (typeDePartie != 0 && typeDePartie != 1) {
+            System.out.println("\nCE TYPE DE PARTIE N'EST PAS VALIDE. VEUILLEZ REESAYER ! ");
+            promptForTypeDePartie();
+        }
+        else {
+            controller.setTypeDePartie(typeDePartie);
+        }
     }
 
     // ============================ PROMPT_FOR_INDEX_DE_CARTE_DE_LA_MAIN_A_JOUER ============================= //

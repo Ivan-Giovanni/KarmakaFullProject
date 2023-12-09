@@ -1,7 +1,5 @@
 package Model.Cards;
 
-import Exceptions.MaximumAnneauKarmiqueException;
-
 /**
  * @author giovannizangue
  * <br>
@@ -16,10 +14,7 @@ public class AnneauKarmique  {
 
 
     // ============================================ LE CONSTRUCTEUR ========================================= //
-    public AnneauKarmique() throws MaximumAnneauKarmiqueException {
-        if (nombreDAnneaux == LIMITE_MAXIMALE) {
-            throw new MaximumAnneauKarmiqueException("IMPOSSIBLE DE CREER PLUS DE 12 ANNEAUX KARMIQUE\n");
-        }
+    public AnneauKarmique() {
         nombreDAnneaux ++;
     }
 
