@@ -61,7 +61,7 @@ public class CommandeLineView implements GameViewable {
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("\nInvalid Entry\n" + e.getMessage() + "\n");
+                System.out.println("\nInvalid Entry \n" + e.getMessage() + "\n");
                 keyboard.nextLine();
             }
         }
